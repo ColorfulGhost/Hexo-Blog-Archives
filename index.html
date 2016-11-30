@@ -356,7 +356,12 @@
 <h2 id="部署到哪里呢？"><a href="#部署到哪里呢？" class="headerlink" title="部署到哪里呢？"></a>部署到哪里呢？</h2><blockquote>
 <p>被墙的感觉真难受啊。</p>
 </blockquote>
-<p>GitHub国内访问犹如便秘一般，我在这里推荐一个访问比较快的国内Git远程仓库<a href="https://coding.net/" target="_blank" rel="external">Coding</a>，不要吐槽和我的域名很像2333。关于Git的教程网上很多，在创建coding-pages服务生成分支后，可以在分支选项卡里切换coding-pages分支为主分支，然后删除master分支[避免强迫症发作]，然后把hexo d 推送到coding-pages远程仓库上。</p>
+<p>GitHub国内访问犹如便秘一般，我在这里推荐一个访问比较快的国内Git远程仓库<a href="https://coding.net/" target="_blank" rel="external">Coding</a>，不要吐槽和我的域名很像2333。关于Git的教程网上很多，在创建coding-pages服务生成分支后，可以在分支选项卡里切换coding-pages分支为主分支，然后删除master分支[避免强迫症发作]。</p>
+<blockquote>
+<p>_config.yml文件修改</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repo: https://git.coding.net/&lt;Username&gt;/Hexo-Blog.git</div><div class="line">  branch: coding-pages</div></pre></td></tr></table></figure>
+<p>然后把hexo d 推送到coding-pages远程仓库上。</p>
 <h2 id="友情链接"><a href="#友情链接" class="headerlink" title="友情链接"></a>友情链接</h2><p>欢迎各位大佬和本鸟互换友链，本站的主页<a href="http://codinger.cn/" target="_blank" rel="external">http://codinger.cn/</a></p>
 
           

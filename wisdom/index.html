@@ -27,6 +27,9 @@
 
 
 
+
+
+
   
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
@@ -68,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="教程,编程,Codinger" />
+  <meta name="keywords" content="Codinger" />
 
 
 
@@ -85,18 +88,21 @@
 
 
 <meta name="description" content="在我看来，人生无非就是灌满情感的水瓶和对世界的理解加创造才会更有意义。——2016.12.26
-好不容易把自己打磨出的钝感，又因杂碎琐事把钝感给磨平了。——2016.12.30">
+好不容易把自己打磨出的钝感，又因杂碎琐事把钝感给磨平了。——2016.12.30
+社会就像味增汤，而你就是调味料，至于汤是什么味······ ——2017.4.4">
 <meta property="og:type" content="website">
 <meta property="og:title" content="随笔">
 <meta property="og:url" content="http://blog.codinger.cn/wisdom/index.html">
 <meta property="og:site_name" content="Codinger">
 <meta property="og:description" content="在我看来，人生无非就是灌满情感的水瓶和对世界的理解加创造才会更有意义。——2016.12.26
-好不容易把自己打磨出的钝感，又因杂碎琐事把钝感给磨平了。——2016.12.30">
-<meta property="og:updated_time" content="2016-12-30T02:01:17.947Z">
+好不容易把自己打磨出的钝感，又因杂碎琐事把钝感给磨平了。——2016.12.30
+社会就像味增汤，而你就是调味料，至于汤是什么味······ ——2017.4.4">
+<meta property="og:updated_time" content="2017-04-05T06:17:27.800Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="随笔">
 <meta name="twitter:description" content="在我看来，人生无非就是灌满情感的水瓶和对世界的理解加创造才会更有意义。——2016.12.26
-好不容易把自己打磨出的钝感，又因杂碎琐事把钝感给磨平了。——2016.12.30">
+好不容易把自己打磨出的钝感，又因杂碎琐事把钝感给磨平了。——2016.12.30
+社会就像味增汤，而你就是调味料，至于汤是什么味······ ——2017.4.4">
 
 
 
@@ -105,12 +111,12 @@
   var CONFIG = {
     root: '/',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
       userId: 'Colorful_Ghost',
-      author: 'Colorful_Ghost'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -152,34 +158,42 @@
 
 
 
+
+
+
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Codinger</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Codinger</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ghost's Blog</p>
+      
   </div>
-  <p class="site-subtitle">Ghost's Blog</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -260,7 +274,7 @@
   <div id="posts" class="posts-expand">
   <header class="post-header">
 
-	<h2 class="post-title" itemprop="name headline">随笔</h2>
+	<h1 class="post-title" itemprop="name headline">随笔</h1>
 
 
 
@@ -271,6 +285,7 @@
       <blockquote>
 <p>在我看来，人生无非就是灌满情感的水瓶和对世界的理解加创造才会更有意义。——2016.12.26</p>
 <p>好不容易把自己打磨出的钝感，又因杂碎琐事把钝感给磨平了。——2016.12.30</p>
+<p>社会就像味增汤，而你就是调味料，至于汤是什么味······ ——2017.4.4</p>
 </blockquote>
 
     
@@ -316,17 +331,24 @@
                src="/images/avatar.gif"
                alt="Colorful_Ghost" />
           <p class="site-author-name" itemprop="name">Colorful_Ghost</p>
-          <p class="site-description motion-element" itemprop="description">Colorful_Ghost,Codinger,教程</p>
+           
+              <p class="site-description motion-element" itemprop="description">Colorful_Ghost,Codinger,教程</p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">3</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
               
                 <span class="site-state-item-count">1</span>
@@ -336,9 +358,11 @@
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">3</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -394,6 +418,8 @@
 
       
 
+      
+
     </div>
   </aside>
 
@@ -433,9 +459,13 @@
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -455,6 +485,9 @@
 
 
   
+
+
+
 
 
 
@@ -535,8 +568,19 @@
 
 
 
+
+
+
+
+
+
+
+
   
-  
+
+
+
+
 
   
 
@@ -545,7 +589,6 @@
   
 
   
-
 
 </body>
 </html>

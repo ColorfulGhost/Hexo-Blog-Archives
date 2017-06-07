@@ -387,8 +387,9 @@ PHP fileinfo 拓展 素材管理模块需要用到（微信公众号权限不够
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/05/22/Laravel微信公众号开发/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                <a href="/2017/05/22/Laravel微信公众号开发/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/22/Laravel微信公众号开发/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -561,7 +562,12 @@ PHP fileinfo 拓展 素材管理模块需要用到（微信公众号权限不够
           
   <div class="comments" id="comments">
     
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -825,6 +831,26 @@ PHP fileinfo 拓展 素材管理模块需要用到（微信公众号权限不够
 
   
 
+    
+      <script id="dsq-count-scr" src="https://codinger-1.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://blog.codinger.cn/2017/05/22/Laravel微信公众号开发/';
+          this.page.identifier = '2017/05/22/Laravel微信公众号开发/';
+          this.page.title = 'Laravel微信公众号游戏查询';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://codinger-1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -835,21 +861,18 @@ PHP fileinfo 拓展 素材管理模块需要用到（微信公众号权限不够
 
 
   
-    
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "338edc2f29b64ddb9686b7ee2925747b",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
   
 
 
 
 
+
+  
 
 
 

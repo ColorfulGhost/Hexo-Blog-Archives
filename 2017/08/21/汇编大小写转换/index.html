@@ -93,10 +93,12 @@
 <meta property="og:url" content="http://blog.codinger.cn/2017/08/21/汇编大小写转换/index.html">
 <meta property="og:site_name" content="Codinger">
 <meta property="og:description" content="12345678910111213141516171819202122232425262728assume cs:code,ds:datadata segmentdb &apos;BaSiC&apos; ;把这个字符串全部变为大写db &apos;iNfOrMaTiOn&apos; ;把这个字符串全部变为小写data endscode segmentstart:  mov ax,data	 ;获取数据代码段地址		mov ds,ax">
-<meta property="og:updated_time" content="2017-08-21T04:09:48.829Z">
+<meta property="og:image" content="http://oqca0721d.bkt.clouddn.com/wwtpxy1503303934.png">
+<meta property="og:updated_time" content="2017-08-21T08:28:58.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="汇编大小写转换">
 <meta name="twitter:description" content="12345678910111213141516171819202122232425262728assume cs:code,ds:datadata segmentdb &apos;BaSiC&apos; ;把这个字符串全部变为大写db &apos;iNfOrMaTiOn&apos; ;把这个字符串全部变为小写data endscode segmentstart:  mov ax,data	 ;获取数据代码段地址		mov ds,ax">
+<meta name="twitter:image" content="http://oqca0721d.bkt.clouddn.com/wwtpxy1503303934.png">
 
 
 
@@ -395,6 +397,7 @@
 
       
         <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">assume cs:code,ds:data</div><div class="line">data segment</div><div class="line">db 'BaSiC' ;把这个字符串全部变为大写</div><div class="line">db 'iNfOrMaTiOn' ;把这个字符串全部变为小写</div><div class="line">data ends</div><div class="line">code segment</div><div class="line">start:  mov ax,data	 ;获取数据代码段地址</div><div class="line">		mov ds,ax 	 ;把代码段地址传送到数据寄存器</div><div class="line">		mov bx,0	 ;初始化基地址寄存器  笔记（ds与bx配合，es与dx配合，cx作为计数器）</div><div class="line">		mov cx,5</div><div class="line">s: 		mov al,[bx]  ;循环体</div><div class="line">		and al,11011111b ;b是二进制 对al的值进行位与运算取反</div><div class="line">		mov [bx],al</div><div class="line">		inc bx</div><div class="line">		loop s</div><div class="line">		</div><div class="line">		mov bx,5	;指向下一个字符串</div><div class="line">		mov cx,11	;循环11次</div><div class="line">		</div><div class="line">s1:		mov al,[bx]</div><div class="line">		or al,00100000b	;对al的值进行位或运算取反 </div><div class="line">		mov [bx],al</div><div class="line">		inc bx</div><div class="line">		loop s1</div><div class="line">		mov ax,4c00h</div><div class="line">		int 21</div><div class="line">code ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+<p><img src="http://oqca0721d.bkt.clouddn.com/wwtpxy1503303934.png" alt="结果"></p>
 
       
     </div>

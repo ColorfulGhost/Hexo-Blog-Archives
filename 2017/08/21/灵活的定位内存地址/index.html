@@ -1,0 +1,918 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="笔记,汇编," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="更灵活的定位内存地址的方法汇编大小写转换12345678910111213141516171819202122232425262728assume cs:code,ds:datadata segmentdb &apos;BaSiC&apos; ;把这个字符串全部变为大写db &apos;iNfOrMaTiOn&apos; ;把这个字符串全部变为小写data endscode segmentstart:  mov ax,data	 ;获取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="更灵活的定位内存地址的方法">
+<meta property="og:url" content="http://blog.codinger.cn/2017/08/21/灵活的定位内存地址/index.html">
+<meta property="og:site_name" content="Codinger">
+<meta property="og:description" content="更灵活的定位内存地址的方法汇编大小写转换12345678910111213141516171819202122232425262728assume cs:code,ds:datadata segmentdb &apos;BaSiC&apos; ;把这个字符串全部变为大写db &apos;iNfOrMaTiOn&apos; ;把这个字符串全部变为小写data endscode segmentstart:  mov ax,data	 ;获取">
+<meta property="og:image" content="http://oqca0721d.bkt.clouddn.com/wwtpxy1503303934.png">
+<meta property="og:image" content="http://oqca0721d.bkt.clouddn.com/bj264i1503359790.png">
+<meta property="og:image" content="http://oqca0721d.bkt.clouddn.com/sjl4nu1503451008.png">
+<meta property="og:updated_time" content="2017-08-23T01:17:39.916Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="更灵活的定位内存地址的方法">
+<meta name="twitter:description" content="更灵活的定位内存地址的方法汇编大小写转换12345678910111213141516171819202122232425262728assume cs:code,ds:datadata segmentdb &apos;BaSiC&apos; ;把这个字符串全部变为大写db &apos;iNfOrMaTiOn&apos; ;把这个字符串全部变为小写data endscode segmentstart:  mov ax,data	 ;获取">
+<meta name="twitter:image" content="http://oqca0721d.bkt.clouddn.com/wwtpxy1503303934.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.codinger.cn/2017/08/21/灵活的定位内存地址/"/>
+
+
+
+
+
+  <title> 更灵活的定位内存地址的方法 | Codinger </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ac9533e5100bee8b75e87a8bb5e51c10";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Codinger</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Ghost's Blog</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wisdom">
+          <a href="/wisdom" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-support">
+          <a href="/support" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-support"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.codinger.cn/2017/08/21/灵活的定位内存地址/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Codinger">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                更灵活的定位内存地址的方法
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T12:01:00+08:00">
+                2017-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/汇编/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/21/灵活的定位内存地址/" class="leancloud_visitors" data-flag-title="更灵活的定位内存地址的方法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="更灵活的定位内存地址的方法"><a href="#更灵活的定位内存地址的方法" class="headerlink" title="更灵活的定位内存地址的方法"></a>更灵活的定位内存地址的方法</h2><h3 id="汇编大小写转换"><a href="#汇编大小写转换" class="headerlink" title="汇编大小写转换"></a>汇编大小写转换</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">assume cs:code,ds:data</div><div class="line">data segment</div><div class="line">db 'BaSiC' ;把这个字符串全部变为大写</div><div class="line">db 'iNfOrMaTiOn' ;把这个字符串全部变为小写</div><div class="line">data ends</div><div class="line">code segment</div><div class="line">start:  mov ax,data	 ;获取数据代码段地址</div><div class="line">		mov ds,ax 	 ;把代码段地址传送到数据寄存器</div><div class="line">		mov bx,0	 ;初始化基地址寄存器  笔记（ds与bx配合，es与dx配合，cx作为计数器）</div><div class="line">		mov cx,5</div><div class="line">s: 		mov al,[bx]  ;循环体</div><div class="line">		and al,11011111b ;b是二进制 对al的值进行位与运算取反</div><div class="line">		mov [bx],al</div><div class="line">		inc bx</div><div class="line">		loop s</div><div class="line">		</div><div class="line">		mov bx,5	;指向下一个字符串</div><div class="line">		mov cx,11	;循环11次</div><div class="line">		</div><div class="line">s1:		mov al,[bx]</div><div class="line">		or al,00100000b	;对al的值进行位或运算取反 </div><div class="line">		mov [bx],al</div><div class="line">		inc bx</div><div class="line">		loop s1</div><div class="line">		mov ax,4c00h</div><div class="line">		int 21</div><div class="line">code ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+<h3 id="使用-bx-idata-的方法优化程序"><a href="#使用-bx-idata-的方法优化程序" class="headerlink" title="使用[bx+idata]的方法优化程序"></a>使用[bx+idata]的方法优化程序</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">assume cs:code,ds:data</div><div class="line">data segment</div><div class="line">db 'BaSiC'</div><div class="line">db 'MinIX'</div><div class="line">data ends</div><div class="line">code segment</div><div class="line">start: mov ax,data</div><div class="line">	mov ds,ax</div><div class="line">	mov bx,0</div><div class="line">	mov cx,5</div><div class="line">	s: mov al,[bx]</div><div class="line">	and al,11011111b</div><div class="line">	mov [bx],al</div><div class="line">	</div><div class="line">	mov al,[5+bx]</div><div class="line">	or al,00100000b</div><div class="line">	mov [5+bx],al</div><div class="line">	inc bx</div><div class="line">	loop s</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">code ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+<p><img src="http://oqca0721d.bkt.clouddn.com/wwtpxy1503303934.png" alt="结果"></p>
+<h3 id="SI-AND-DI"><a href="#SI-AND-DI" class="headerlink" title="SI AND DI"></a>SI AND DI</h3><p>si和di不能分成2个8位寄存器，也就是不能进行<code>mov al,[si]</code> ,<code>mov al,[di]</code>这样的操作，下面写一个栗子~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">assume cs:codesm,ds:datasg</div><div class="line">datasg segment</div><div class="line">db &apos;welcome to masm!&apos;</div><div class="line">db &apos;................&apos;</div><div class="line">datasg ends</div><div class="line"></div><div class="line">codesm segment</div><div class="line">start: mov ax,datasg</div><div class="line">	mov ds,ax</div><div class="line">	mov si,0</div><div class="line">	mov di,16	</div><div class="line">	mov cx,8</div><div class="line">	</div><div class="line">s:	mov ax,[si]</div><div class="line">	mov [di],ax</div><div class="line">	add si,2</div><div class="line">	add di,2</div><div class="line">	loop s</div><div class="line">	</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">	</div><div class="line">codesm ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+<p>上面的代码可以看出si,di递增为2 ，循环次数也缩短了一倍，用16位寄存器进行内存单元之间的数据传送一次复制2 个字节，一共循环八次。</p>
+<p>再次优化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">assume cs:codesm,ds:datasg</div><div class="line">datasg segment</div><div class="line">db &apos;welcome to masm!&apos;</div><div class="line">db &apos;................&apos;</div><div class="line">datasg ends</div><div class="line"></div><div class="line">codesm segment</div><div class="line">start: mov ax,datasg</div><div class="line">	mov ds,ax</div><div class="line">	mov si,0</div><div class="line">	mov cx,8</div><div class="line">	</div><div class="line">s:	mov ax,[si]</div><div class="line">	mov [si+16],ax</div><div class="line">	inc si,2</div><div class="line">	loop s</div><div class="line">	</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">	</div><div class="line">codesm ends</div><div class="line">end start</div></pre></td></tr></table></figure></p>
+<h3 id="将字符串头一个字母改为大写"><a href="#将字符串头一个字母改为大写" class="headerlink" title="将字符串头一个字母改为大写"></a>将字符串头一个字母改为大写</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">assume cs:codesg,ds:datasg</div><div class="line">datasg segment</div><div class="line">db &apos;1. file         &apos;</div><div class="line">db &apos;2. edit         &apos;</div><div class="line">db &apos;3. search       &apos;</div><div class="line">db &apos;4. view         &apos;</div><div class="line">db &apos;5. options      &apos;</div><div class="line">db &apos;6. help         &apos;</div><div class="line">datasg ends</div><div class="line"></div><div class="line">codesg segment</div><div class="line">start: mov ax,datasg</div><div class="line">	mov ds,ax</div><div class="line">	mov bx,0</div><div class="line">	mov cx,6</div><div class="line">	mov si,3</div><div class="line"></div><div class="line">s:	mov al,[bx][si]</div><div class="line">	and al,11011111b</div><div class="line">	mov [bx][si],al</div><div class="line">	add bx,16</div><div class="line">	</div><div class="line">	loop s</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">codesg ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+<p><img src="http://oqca0721d.bkt.clouddn.com/bj264i1503359790.png" alt="结果"></p>
+<h3 id="嵌套循环-把datasg每个单词改为大写"><a href="#嵌套循环-把datasg每个单词改为大写" class="headerlink" title="嵌套循环(把datasg每个单词改为大写)"></a>嵌套循环(把datasg每个单词改为大写)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">assume cs:codesg,ds:datasg</div><div class="line">datasg segment</div><div class="line">db &apos;ibm             &apos;</div><div class="line">db &apos;dec             &apos;</div><div class="line">db &apos;dos             &apos;</div><div class="line">db &apos;vax             &apos;</div><div class="line">datasg ends</div><div class="line"></div><div class="line">codesg segment</div><div class="line">start: mov ax,datasg</div><div class="line">	mov ds,ax</div><div class="line">	mov bx,0</div><div class="line">	mov cx,4	;外层循环4次</div><div class="line">s:	mov dx,cx	;因为进行下一次循环不能保存CX利用dx暂存</div><div class="line">	mov si,0</div><div class="line">	mov cx,3	;内层循环3次</div><div class="line">s0:	mov al,[bx][si]	</div><div class="line">	and al,11011111b</div><div class="line">	mov [bx][si],al</div><div class="line">	inc si</div><div class="line">loop s0</div><div class="line">	add bx,16	;每次内循环完成偏移到下一段字符串</div><div class="line">	mov cx,dx</div><div class="line">loop s</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">	</div><div class="line">codesg ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+<p>讲道理汇编的嵌套循环有点不习惯….<br>这只是2层嵌套 如果更多嵌套则寄存器不够用，这时候我们就不能用寄存器来暂存CX了</p>
+<h3 id="用栈来处理cx缓存问题"><a href="#用栈来处理cx缓存问题" class="headerlink" title="用栈来处理cx缓存问题"></a>用栈来处理cx缓存问题</h3><p>将datasg数据段每个单词前4个字幕改为大写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">assume cs:codesg,ds:datasg,ss:stacksg</div><div class="line">datasg segment</div><div class="line">db &apos;1. display      &apos;</div><div class="line">db &apos;2. brows        &apos;</div><div class="line">db &apos;3. replace      &apos;</div><div class="line">db &apos;4. modify       &apos;</div><div class="line">datasg ends</div><div class="line"></div><div class="line">stacksg segment</div><div class="line">dw 0,0,0,0,0,0,0,0</div><div class="line">stacksg ends</div><div class="line"></div><div class="line">codesg segment</div><div class="line">start: mov ax,datasg</div><div class="line">	mov ds,ax</div><div class="line">	mov bx,0</div><div class="line">	mov cx,4</div><div class="line">	</div><div class="line">i0: mov ax,[bx]</div><div class="line">	push cx				;保存外层循环次数</div><div class="line">	mov cx,2			;初始化内层循环次数</div><div class="line">	mov di,0</div><div class="line">i1:	mov ax,[bx][3][di]	; (ax)=(bx)+(di)+3</div><div class="line">	and al,11011111b	; 因为di是16位寄存器所以要利用把ax拆开与运算</div><div class="line">	and ah,11011111b	;这样做的目的是为了减少循环次数</div><div class="line">	mov [bx][3][di],ax	;把处理后的ax传送到原来的位置</div><div class="line">	add di,2			;(di)=(di)+2  di地址偏移2个字单元</div><div class="line">	loop i1</div><div class="line"></div><div class="line">	add bx,16			;把基地址便宜到下一行字符串</div><div class="line">	pop cx				;把刚才push的cx出栈</div><div class="line">	</div><div class="line">	loop i0</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">	</div><div class="line">codesg ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+<p><img src="http://oqca0721d.bkt.clouddn.com/sjl4nu1503451008.png" alt="实验6"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/汇编/" rel="tag"># 汇编</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/17/汇编Loop和-bx-的联合应用/" rel="next" title="汇编Loop和[bx]的联合应用">
+                <i class="fa fa-chevron-left"></i> 汇编Loop和[bx]的联合应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTUyMy82MDkx"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Colorful_Ghost" />
+          <p class="site-author-name" itemprop="name">Colorful_Ghost</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.net/u/Colorful_Ghost" target="_blank" title="Coding">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  Coding
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://steamcommunity.com/id/233000/" target="_blank" title="Steam">
+                  
+                    <i class="fa fa-fw fa-steam"></i>
+                  
+                  Steam
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://wpa.qq.com/msgrd?v=3&uin=815666528&site=qq&menu=yes" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                  QQ
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#更灵活的定位内存地址的方法"><span class="nav-number">1.</span> <span class="nav-text">更灵活的定位内存地址的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编大小写转换"><span class="nav-number">1.1.</span> <span class="nav-text">汇编大小写转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-bx-idata-的方法优化程序"><span class="nav-number">1.2.</span> <span class="nav-text">使用[bx+idata]的方法优化程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SI-AND-DI"><span class="nav-number">1.3.</span> <span class="nav-text">SI AND DI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将字符串头一个字母改为大写"><span class="nav-number">1.4.</span> <span class="nav-text">将字符串头一个字母改为大写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌套循环-把datasg每个单词改为大写"><span class="nav-number">1.5.</span> <span class="nav-text">嵌套循环(把datasg每个单词改为大写)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用栈来处理cx缓存问题"><span class="nav-number">1.6.</span> <span class="nav-text">用栈来处理cx缓存问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Colorful_Ghost</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("CMy8p0IKabFrLoxquEPHCG78-gzGzoHsz", "G56Llot2xxWkY6wGYx0pmkpt");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

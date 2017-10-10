@@ -291,6 +291,363 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://mcat.im/2016/12/28/Laravel-5-3-学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mcat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/28/Laravel-5-3-学习笔记/" itemprop="url">
+                  Laravel 5.3 学习笔记
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-28T09:47:11+08:00">
+                2016-12-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/12/28/Laravel-5-3-学习笔记/" class="leancloud_visitors" data-flag-title="Laravel 5.3 学习笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="关于部署"><a href="#关于部署" class="headerlink" title="关于部署"></a>关于部署</h2><p>在这里写部署流程，也是对自己写的东西做一个笔记。</p>
+<p>项目是直接部署在WampServer环境里，默认访问链接<a href="http://localhost/Laravel-BBS/public" target="_blank" rel="external">http://localhost/Laravel-BBS/public</a><br>编辑器使用的PhpStorm，因为这个编辑器专门对Laravel框架做过优化…</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer create-project laravel/laravel bbs --prefer-dist</div></pre></td></tr></table></figure>
+<p>用composer包管理器，创建一个Laravel项目 命名为bbs。</p>
+<p>composer的<a href="http://docs.phpcomposer.com/00-intro.html" target="_blank" rel="external">中文文档</a>，由于国内GFW原因，推荐使用镜像或者VPN。</p>
+<p><a href="http://laravelacademy.org/post/5762.html" target="_blank" rel="external">Laravel5.3目录结构</a></p>
+<h3 id="部署数据库"><a href="#部署数据库" class="headerlink" title="部署数据库"></a>部署数据库</h3><p>修改<strong>.env</strong>文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">DB_CONNECTION=mysql</div><div class="line">DB_HOST=<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></div><div class="line">DB_PORT=<span class="number">3306</span></div><div class="line">DB_DATABASE=bbs</div><div class="line">DB_USERNAME=root</div><div class="line">DB_PASSWORD=</div></pre></td></tr></table></figure>
+<h2 id="默认认证"><a href="#默认认证" class="headerlink" title="默认认证"></a>默认认证</h2><p>首先我们使用Laravel 5.3提供的开箱即用的认证：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:auth</div></pre></td></tr></table></figure>
+<p>详细教程用户登录注册→<a href="http://laravelacademy.org/post/5925.html" target="_blank" rel="external">教程</a></p>
+<p>如果Login/Register视图静态资源文件出现问题请修改app.blade.php的app.js和app.css的路径。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;link href=<span class="string">"**&#123;&#123; url('css/app.css') &#125;&#125;**"</span> rel=<span class="string">"stylesheet"</span>&gt;</div><div class="line">&lt;script src=<span class="string">"**&#123;&#123; url('js/app.js') &#125;&#125;**"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>关于Laravel静态资源和路径获取方法：<a href="http://blog.csdn.net/qq_28666081/article/details/51208492" target="_blank" rel="external">教程</a>，到这里一个非常基础的登录注册就完成了！</p>
+<h2 id="验证码扩展包"><a href="#验证码扩展包" class="headerlink" title="验证码扩展包"></a>验证码扩展包</h2><p><a href="https://packagist.org/packages/mews/captcha" target="_blank" rel="external">Composer验证码包简介：https://packagist.org/packages/mews/captcha</a></p>
+<p>也用中文验证码包：<a href="https://packagist.org/packages/kangkang66/captcha" target="_blank" rel="external">https://packagist.org/packages/kangkang66/captcha</a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require mews/captcha</div></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>使用Captcha服务提供者之前还需要在config/app.php中注册服务提供者：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">'providers'</span> =&gt; [</div><div class="line">    <span class="comment">// ...</span></div><div class="line">    Mews\Captcha\CaptchaServiceProvider::class,</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>同时注册下相应门面：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">'aliases'</span> =&gt; [</div><div class="line">    <span class="comment">// ...</span></div><div class="line">    <span class="string">'Captcha'</span> =&gt; Mews\Captcha\Facades\Captcha::class,</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>如果要使用自定义的配置，还可以发布配置文件到config目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan vendor:publish</div></pre></td></tr></table></figure>
+<p>编辑新生成的Captcha.php</p>
+<h3 id="重写默认登录注册验证方法"><a href="#重写默认登录注册验证方法" class="headerlink" title="重写默认登录注册验证方法"></a>重写默认登录注册验证方法</h3><p>找到：H:\wamp64\www\Laravel-BBS\app\Http\Controllers\Auth\LoginController.php<br>进入AuthenticatesUsers找到validateLogin方法，修改验证方法代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">validateLogin</span><span class="params">(Request $request)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;validate($request, [</div><div class="line">            <span class="keyword">$this</span>-&gt;username() =&gt; <span class="string">'required'</span>,</div><div class="line">            <span class="string">'password'</span> =&gt; <span class="string">'required'</span>,</div><div class="line">            <span class="string">'captcha'</span>=&gt;<span class="string">'required|captcha|max:5'</span></div><div class="line">        ],[</div><div class="line">            <span class="string">'captcha.captcha'</span>=&gt;trans(<span class="string">'验证码错误！'</span>),</div><div class="line">            <span class="string">'captcha.required'</span>=&gt;trans(<span class="string">'验证码为必须！'</span>),</div><div class="line">        ]);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>同理，也可以在注册也添加上验证码：<br>找到H:\wamp64\www\Laravel-BBS\app\Http\Controllers\Auth\RegisterController.php<br>修改验证：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">validator</span><span class="params">(array $data)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> Validator::make($data, [</div><div class="line">        <span class="string">'name'</span> =&gt; <span class="string">'required|max:255'</span>,</div><div class="line">        <span class="string">'email'</span> =&gt; <span class="string">'required|email|max:255|unique:users'</span>,</div><div class="line">        <span class="string">'password'</span> =&gt; <span class="string">'required|min:6|confirmed'</span>,</div><div class="line">        <span class="string">'captcha'</span>=&gt;<span class="string">'required|max:5|captcha'</span></div><div class="line">    ],[</div><div class="line">        <span class="string">'captcha.captcha'</span>=&gt;trans(<span class="string">'验证码错误！'</span>),</div><div class="line">        <span class="string">'captcha.required'</span>=&gt;trans(<span class="string">'验证码为空！'</span>)</div><div class="line">    ]);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="对视图文件的修改"><a href="#对视图文件的修改" class="headerlink" title="对视图文件的修改"></a>对视图文件的修改</h3><blockquote>
+<p>添加验证码图片+验证</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group&#123;&#123; $errors-&gt;has('captcha') ? ' has-error' : '' &#125;&#125;"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"col-md-4 control-label"</span>&gt;</span>验证码<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-6"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"text"</span> <span class="attr">type</span>=<span class="string">"captcha"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">name</span>=<span class="string">"captcha"</span> <span class="attr">required</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"input-group-btn"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">style</span>=<span class="string">""</span> <span class="attr">src</span>=<span class="string">"&#123;&#123;captcha_src()&#125;&#125;"</span></span></div><div class="line">                 <span class="attr">onclick</span>=<span class="string">"this.src='&#123;&#123;captcha_src()&#125;&#125;' + Math.random()"</span>&gt;</div><div class="line">        <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        @if ($errors-&gt;has('captcha'))</div><div class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"help-block"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">strong</span>&gt;</span>&#123;&#123; $errors-&gt;first('captcha') &#125;&#125;<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        @endif</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="安装Laravel语言包"><a href="#安装Laravel语言包" class="headerlink" title="安装Laravel语言包"></a>安装Laravel语言包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require &quot;overtrue/laravel-lang:~3.0&quot;</div></pre></td></tr></table></figure>
+<h4 id="Laraval-5"><a href="#Laraval-5" class="headerlink" title="Laraval 5.*"></a>Laraval 5.*</h4><p>完成上面的操作后，将项目文件 <code>config/app.php</code> 中的下一行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Illuminate\Translation\TranslationServiceProvider::class,</div></pre></td></tr></table></figure>
+<p>替换为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Overtrue\LaravelLang\TranslationServiceProvider::class,</div></pre></td></tr></table></figure>
+<p>修改项目语言 <code>config/app.php</code>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'locale'</span> =&gt; <span class="string">'zh-CN'</span>,</div></pre></td></tr></table></figure>
+<p>未完待续。。。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://mcat.im/2016/12/20/Chrome浏览器出现Flash已过期/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mcat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/20/Chrome浏览器出现Flash已过期/" itemprop="url">
+                  Chrome浏览器出现Flash已过期
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-20T09:04:29+08:00">
+                2016-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/12/20/Chrome浏览器出现Flash已过期/" class="leancloud_visitors" data-flag-title="Chrome浏览器出现Flash已过期">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="强迫症犯了？"><a href="#强迫症犯了？" class="headerlink" title="强迫症犯了？"></a>强迫症犯了？</h2><blockquote>
+<p>为什么要更新的最新的Chrome呢！</p>
+</blockquote>
+<p>在我身边包括我，在使用Chrome浏览器的时候总会”不自觉”的去更新它，然后会导致Chrome提示 Adobe Flash Player 已过期，网上也有很多解决方案，来修复这个问题，但是我这个解决方案有可能是最完美的解决方案啦！</p>
+<h2 id="也许你是GWF受害者"><a href="#也许你是GWF受害者" class="headerlink" title="也许你是GWF受害者"></a>也许你是GWF受害者</h2><blockquote>
+<p>无意中发现的细节</p>
+</blockquote>
+<p>某天，我正好更新Chrome浏览器，打开视频播放网站也是提示 Adobe Flash Player 已过期。正是在出现这种问题的情况下，我无意中使用了VPN在浏览bilibili的时候 显示 Adobe Flash Player 已过期的提示已经变成 Adobe Flash Player正在下载，等了一会尽然可以正常加载视频了！在这种情况下，我突然想到，也许并不是Chrome浏览器的错，只是国内的GWF阻止了你的Chrome访问某个服务器下载Adobe Flash Player 。</p>
+<h2 id="那么如何解决呢！"><a href="#那么如何解决呢！" class="headerlink" title="那么如何解决呢！"></a>那么如何解决呢！</h2><p>一般情况下 使用VPN和SS都是要去服务商去购买租用，很是不划算（如果不想花钱系列）。在这里我向大家推荐一个GitHub的开源Hosts ：<br>如果你安装了git工具可以直接使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone --depth=1 https://github.com/racaljk/hosts.git</div></pre></td></tr></table></figure></p>
+<p>你也可以直接访问 <a href="https://github.com/racaljk/hosts.git" target="_blank" rel="external">https://github.com/racaljk/hosts.git</a><br>download文件。</p>
+<p>然后把Hosts文件替换到：C:\Windows\System32\drivers\etc 目录下即可。</p>
+<p>这样既可以修复谷歌不能访问服务器下载Adobe Flash Player的问题，以后还能正常使用Google的服务。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://mcat.im/2016/11/30/如何在Coding上部署Hexo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -502,7 +859,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

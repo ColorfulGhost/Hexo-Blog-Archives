@@ -291,6 +291,327 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://mcat.im/2017/09/09/检测比较结果条件转移指令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mcat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/09/检测比较结果条件转移指令/" itemprop="url">
+                  检测比较结果条件转移指令
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-09T16:34:08+08:00">
+                2017-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/汇编/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/09/09/检测比较结果条件转移指令/" class="leancloud_visitors" data-flag-title="检测比较结果条件转移指令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if(ah==ah)&#123;</div><div class="line">  ah=+ah;</div><div class="line">&#125;else&#123;</div><div class="line">  ah=+bh;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对应的汇编命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">assume cs:code</div><div class="line"></div><div class="line">code segment</div><div class="line">start:	mov ah,1h</div><div class="line">		mov bh,1h</div><div class="line">		</div><div class="line">		cmp ah,bh</div><div class="line">		je s</div><div class="line">		add ah,bh</div><div class="line">		jmp ok  </div><div class="line"></div><div class="line">	s:	add ah,ah</div><div class="line">	ok:	mov ax,4c00h</div><div class="line">		int 21</div><div class="line">	</div><div class="line">code ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+<p>2）统计data段中的数值为8的字节个数，用ax保存统计结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">assume cs:code</div><div class="line">data segment</div><div class="line">db 8,11,8,1,8,5,63,38</div><div class="line">data ends</div><div class="line">code segment</div><div class="line">start: mov ax,data</div><div class="line">	   mov ds,ax</div><div class="line">	   mov ax,0</div><div class="line">	   mov bx,0</div><div class="line">	   mov cx,8</div><div class="line">	   </div><div class="line">	 s: cmp byte ptr [bx],8</div><div class="line">		jne next</div><div class="line">		inc ax</div><div class="line">  next: inc bx</div><div class="line">		loop s</div><div class="line">	</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">code ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+<p>方法二：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">	assume cs:code</div><div class="line">data segment</div><div class="line">db 8,11,8,1,8,5,63,38</div><div class="line">data ends</div><div class="line">code segment</div><div class="line">start: mov ax,data</div><div class="line">	   mov ds,ax</div><div class="line">	   mov ax,0</div><div class="line">	   mov bx,0</div><div class="line">	   mov cx,8</div><div class="line">	   </div><div class="line">	 s: cmp byte ptr [bx],8</div><div class="line">		je ok</div><div class="line">		jmp short next</div><div class="line">    ok: inc ax</div><div class="line">  next: inc bx</div><div class="line">		loop s</div><div class="line">	</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">code ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+<p>3）统计data段中数值大于8的字节的个数，用ax保存统计结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">assume cs:code</div><div class="line">data segment</div><div class="line">db 8,11,8,1,8,5,63,38</div><div class="line">data ends</div><div class="line">code segment</div><div class="line">start: mov ax,data</div><div class="line">	   mov ds,ax</div><div class="line">	   mov ax,0</div><div class="line">	   mov bx,0</div><div class="line">	   mov cx,8</div><div class="line">	   </div><div class="line">	 s: cmp byte ptr [bx],8</div><div class="line">		ja ok</div><div class="line">		jmp short next</div><div class="line">    ok: inc ax</div><div class="line">  next: inc bx</div><div class="line">		loop s</div><div class="line">	</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">code ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+<p>方法二：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">assume cs:code</div><div class="line">data segment</div><div class="line">db 8,11,8,1,8,5,63,38</div><div class="line">data ends</div><div class="line">code segment</div><div class="line">start: mov ax,data</div><div class="line">	   mov ds,ax</div><div class="line">	   mov ax,0</div><div class="line">	   mov bx,0</div><div class="line">	   mov cx,8</div><div class="line">	   </div><div class="line">	 s: cmp byte ptr [bx],8</div><div class="line">		jna next</div><div class="line">		inc ax</div><div class="line">  next: inc bx</div><div class="line">		loop s</div><div class="line">	</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">code ends</div><div class="line">end start</div></pre></td></tr></table></figure></p>
+<p>4）统计data段中数值小于8的字节个数，用ax保存统计结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">assume cs:code</div><div class="line">data segment</div><div class="line">db 8,11,8,1,8,5,63,38</div><div class="line">data ends</div><div class="line">code segment</div><div class="line">start: mov ax,data</div><div class="line">	   mov ds,ax</div><div class="line">	   mov ax,0</div><div class="line">	   mov bx,0</div><div class="line">	   mov cx,8</div><div class="line">	   </div><div class="line">	 s: cmp byte ptr [bx],8</div><div class="line">		jnb next</div><div class="line">		inc ax</div><div class="line">  next: inc bx</div><div class="line">		loop s</div><div class="line">	</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">code ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://mcat.im/2017/08/27/寻址方式在结构化数据访问/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mcat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/27/寻址方式在结构化数据访问/" itemprop="url">
+                  寻址方式在结构化数据访问
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-27T23:13:24+08:00">
+                2017-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/汇编/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/27/寻址方式在结构化数据访问/" class="leancloud_visitors" data-flag-title="寻址方式在结构化数据访问">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="寻址方式在结构化数据访问"><a href="#寻址方式在结构化数据访问" class="headerlink" title="寻址方式在结构化数据访问"></a>寻址方式在结构化数据访问</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p><img src="http://oqca0721d.bkt.clouddn.com/rrklry1503848161.png" alt="题目"></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">assume cs:codesg,ds:data,es:table</div><div class="line">data segment</div><div class="line">    db &apos;1975&apos;,&apos;1976&apos;,&apos;1977&apos;,&apos;1978&apos;,&apos;1979&apos;,&apos;1980&apos;,&apos;1981&apos;,&apos;1982&apos;,&apos;1983&apos;</div><div class="line">    db &apos;1984&apos;,&apos;1985&apos;,&apos;1986&apos;,&apos;1987&apos;,&apos;1988&apos;,&apos;1989&apos;,&apos;1990&apos;,&apos;1991&apos;,&apos;1992&apos;</div><div class="line">    db &apos;1993&apos;,&apos;1994&apos;,&apos;1995&apos;</div><div class="line">    dd 16,22,382,1356,2390,8000,16000,24486,50065,97479,140417,197514</div><div class="line">    dd 345980,590827,803530,1183000,1843000,2759000,3753000,4649000,5937000</div><div class="line">    dw 3,7,9,13,28,38,130,220,476,778,1001,1442,2258,2793,4037,5635,8226</div><div class="line">    dw 11452,14430,15257,17800</div><div class="line">data ends</div><div class="line">table segment</div><div class="line">    db 21 dup (&apos;0000 0000 00 00 &apos;)</div><div class="line">table ends</div><div class="line">codesg segment </div><div class="line">start:	mov ax,data</div><div class="line">		mov es,ax</div><div class="line">		mov ax,table</div><div class="line">		mov ds,ax</div><div class="line">		mov bx,0</div><div class="line">		mov di,0</div><div class="line">		mov si,0</div><div class="line">		mov cx,21</div><div class="line">	s1:	</div><div class="line">		mov ax,es:[di]</div><div class="line">		mov ds:[bx],ax</div><div class="line">		add di,2</div><div class="line">		mov ax,es:[di]</div><div class="line">		mov ds:[bx][2],ax</div><div class="line">		add di,2</div><div class="line">		add bx,0010h</div><div class="line">	loop s1	</div><div class="line">		mov bx,0</div><div class="line">		mov cx,21</div><div class="line">	s2: mov ax,es:[di]</div><div class="line">		mov [bx][5],ax</div><div class="line">		add di,2</div><div class="line">		mov ax,es:[di]</div><div class="line">		mov ds:[bx][7],ax</div><div class="line">		add di,2</div><div class="line">		add bx,0010h</div><div class="line">	loop s2</div><div class="line">		mov bx,0</div><div class="line">		mov cx,21</div><div class="line">	s3: mov ax,es:[di]</div><div class="line">		mov [bx][10],ax</div><div class="line">		add di,2</div><div class="line">		add bx,0010h</div><div class="line">	loop s3</div><div class="line">		mov bx,0</div><div class="line">		mov cx,21</div><div class="line">	s4: mov ax,[bx][5]</div><div class="line">		mov dx,[bx][7]</div><div class="line">		div word ptr [bx+10]</div><div class="line">		mov [bx][13],ax</div><div class="line">		mov bx,0010h</div><div class="line">	loop s4</div><div class="line">		mov ax,4c00h</div><div class="line">		int 21</div><div class="line">codesg ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><p><img src="http://oqca0721d.bkt.clouddn.com/4o7k4u1503848185.png" alt="debug"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://mcat.im/2017/08/21/灵活的定位内存地址/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -449,402 +770,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://mcat.im/2017/08/17/汇编Loop和-bx-的联合应用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Colorful_Ghost">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mcat">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/17/汇编Loop和-bx-的联合应用/" itemprop="url">
-                  汇编Loop和[bx]的联合应用
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T08:51:17+08:00">
-                2017-08-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/汇编/" itemprop="url" rel="index">
-                    <span itemprop="name">汇编</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/17/汇编Loop和-bx-的联合应用/" class="leancloud_visitors" data-flag-title="汇编Loop和[bx]的联合应用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">assume cs:codesg</div><div class="line">codesg segment</div><div class="line"></div><div class="line">	mov ax,0ffffh 		;累加寄存器负责把ffffh传送给ds段地址</div><div class="line">	mov bx,0000h		;基地址寄存器为下面循环偏移做初始化</div><div class="line">	mov cx,12		;计数器寄存器初始化，为循环做准备循环12次</div><div class="line">	mov dx,0000h		;数据寄存器,为了避免超界会利用ax累加后传送到DX</div><div class="line">	mov ds,ax</div><div class="line">	mov ah,0000h		;初始化高八位单元</div><div class="line">	</div><div class="line">	i: mov al,[bx]		;循环体把ds:bx的8位数据等位传送到低八位al中</div><div class="line">	add dx,ax		;(dx)=(dx)+(ax)</div><div class="line">	inc bx			;bx++</div><div class="line">	</div><div class="line">	loop i			;判断cx是否为0如果为0结束循环</div><div class="line">	</div><div class="line">	mov ax,4c00h		;结束程序</div><div class="line">	int 21h</div><div class="line"></div><div class="line">codesg ends</div><div class="line">end</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://mcat.im/2017/06/13/Laravel搭建迷你博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Colorful_Ghost">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mcat">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/13/Laravel搭建迷你博客/" itemprop="url">
-                  Laravel搭建迷你博客
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-13T17:08:43+08:00">
-                2017-06-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/教程/" itemprop="url" rel="index">
-                    <span itemprop="name">教程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/06/13/Laravel搭建迷你博客/" class="leancloud_visitors" data-flag-title="Laravel搭建迷你博客">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>项目是直接部署在WampServer环境  版本：3.0.6 （PHP7.0+）</p>
-<h3 id="安装框架"><a href="#安装框架" class="headerlink" title="安装框架"></a>安装框架</h3><p>使用<code>composer</code>包管理器安装Laravel框架，使用的是Laravel5.4版本</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer create-project laravel/laravel blog --prefer-dist</div></pre></td></tr></table></figure>
-<h3 id="配置Apache"><a href="#配置Apache" class="headerlink" title="配置Apache"></a>配置Apache</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;VirtualHost *:80&gt;</div><div class="line">	ServerName miniblog.com</div><div class="line">	DocumentRoot G:/wamp64/www/blog/public/</div><div class="line">	&lt;Directory  &quot;G:/wamp64/www/blog/public/&quot;&gt;</div><div class="line">		Options +Indexes +Includes +FollowSymLinks +MultiViews</div><div class="line">		AllowOverride All</div><div class="line">		Require all granted</div><div class="line">	&lt;/Directory&gt;</div><div class="line">&lt;/VirtualHost&gt;</div></pre></td></tr></table></figure>
-<h3 id="添加Hosts"><a href="#添加Hosts" class="headerlink" title="添加Hosts"></a>添加Hosts</h3><blockquote>
-<p>127.0.0.1    miniblog.com</p>
-</blockquote>
-<h3 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h3><p>创建数据库</p>
-<p>CREATE DATABASE <code>blog</code> /<em>!40100 COLLATE ‘utf8mb4_general_ci’ </em>/;</p>
-<p>修改<code>.env</code>文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">APP_NAME=迷你博客</div><div class="line">DB_CONNECTION=mysql</div><div class="line">DB_HOST=127.0.0.1</div><div class="line">DB_PORT=3306</div><div class="line">DB_DATABASE=blog</div><div class="line">DB_USERNAME=root</div><div class="line">DB_PASSWORD=</div></pre></td></tr></table></figure>
-<h2 id="开始制作"><a href="#开始制作" class="headerlink" title="开始制作"></a>开始制作</h2><h3 id="创建控制器"><a href="#创建控制器" class="headerlink" title="创建控制器"></a>创建控制器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:controller ArticlesController</div></pre></td></tr></table></figure>
-<h3 id="创建路由"><a href="#创建路由" class="headerlink" title="创建路由"></a>创建路由</h3><p>打开<code>routes</code>文件夹中<code>web.php</code>加入以下代码：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Route::resource(<span class="string">'articles'</span>,<span class="string">'ArticlesController'</span>);</div></pre></td></tr></table></figure>
-<p>只需要上面这样一行代码，就相当于创建了如下7条路由，且都是命名路由，我们可以使用类似<code>route(&#39;articles.show&#39;)</code> 这样的用法。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Route::get(<span class="string">'/articles'</span>, <span class="string">'ArticlesController@index'</span>)-&gt;name(<span class="string">'articles.index'</span>);</div><div class="line">Route::get(<span class="string">'/articles/&#123;id&#125;'</span>, <span class="string">'ArticlesController@show'</span>)-&gt;name(<span class="string">'articles.show'</span>);</div><div class="line">Route::get(<span class="string">'/articles/create'</span>, <span class="string">'ArticlesController@create'</span>)-&gt;name(<span class="string">'articles.create'</span>);</div><div class="line">Route::post(<span class="string">'/articles'</span>, <span class="string">'ArticlesController@store'</span>)-&gt;name(<span class="string">'articles.store'</span>);</div><div class="line">Route::get(<span class="string">'/articles/&#123;id&#125;/edit'</span>, <span class="string">'ArticlesController@edit'</span>)-&gt;name(<span class="string">'articles.edit'</span>);</div><div class="line">Route::patch(<span class="string">'/articles/&#123;id&#125;'</span>, <span class="string">'ArticlesController@update'</span>)-&gt;name(<span class="string">'articles.update'</span>);</div><div class="line">Route::delete(<span class="string">'/articles/&#123;id&#125;'</span>, <span class="string">'ArticlesController@destroy'</span>)-&gt;name(<span class="string">'articles.destroy'</span>);</div></pre></td></tr></table></figure>
-<p>如果你使用的PHPStrom的自带终端或者其他终端软件，在项目文件夹下输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan route:list</div></pre></td></tr></table></figure>
-<p>可以查看到路由表所有信息。</p>
-<h3 id="创建注册登录"><a href="#创建注册登录" class="headerlink" title="创建注册登录"></a>创建注册登录</h3><p>这里还是使用Laravel自带的注册登录组件，在项目下的终端输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:auth</div></pre></td></tr></table></figure>
-<h3 id="验证码扩展包"><a href="#验证码扩展包" class="headerlink" title="验证码扩展包"></a>验证码扩展包</h3><p><a href="https://packagist.org/packages/mews/captcha" target="_blank" rel="external">Composer验证码包简介：https://packagist.org/packages/mews/captcha</a></p>
-<p>也用中文验证码包：<a href="https://packagist.org/packages/kangkang66/captcha" target="_blank" rel="external">https://packagist.org/packages/kangkang66/captcha</a></p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require mews/captcha</div></pre></td></tr></table></figure>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>使用Captcha服务提供者之前还需要在config/app.php中注册服务提供者：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">'providers'</span> =&gt; [</div><div class="line">    <span class="comment">// ...</span></div><div class="line">    Mews\Captcha\CaptchaServiceProvider::class,</div><div class="line">]</div></pre></td></tr></table></figure>
-<p>同时注册下相应门面：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">'aliases'</span> =&gt; [</div><div class="line">    <span class="comment">// ...</span></div><div class="line">    <span class="string">'Captcha'</span> =&gt; Mews\Captcha\Facades\Captcha::class,</div><div class="line">]</div></pre></td></tr></table></figure>
-<p>如果要使用自定义的配置，还可以发布配置文件到config目录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan vendor:publish</div></pre></td></tr></table></figure>
-<p>编辑新生成的Captcha.php</p>
-<h3 id="重写默认登录注册验证方法"><a href="#重写默认登录注册验证方法" class="headerlink" title="重写默认登录注册验证方法"></a>重写默认登录注册验证方法</h3><p>找到：app\Http\Controllers\Auth\LoginController.php<br>进入use AuthenticatesUsers类找到validateLogin方法，修改验证方法代码如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">validateLogin</span><span class="params">(Request $request)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">$this</span>-&gt;validate($request, [</div><div class="line">        <span class="keyword">$this</span>-&gt;username() =&gt; <span class="string">'required|string'</span>,</div><div class="line">        <span class="string">'password'</span> =&gt; <span class="string">'required|string'</span>,</div><div class="line">        <span class="string">'captcha'</span> =&gt;<span class="string">'required|captcha|max:5|string'</span></div><div class="line">    ],[</div><div class="line">        <span class="string">'captcha.captcha'</span>=&gt;trans(<span class="string">'验证码错误！'</span>),</div><div class="line">        <span class="string">'captcha.required'</span>=&gt;trans(<span class="string">'验证码为必须！'</span>),</div><div class="line">    ]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>同理，也可以在注册也添加上验证码：<br>找到app\Http\Controllers\Auth\RegisterController.php<br>修改验证：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">validator</span><span class="params">(array $data)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> Validator::make($data, [</div><div class="line">        <span class="string">'name'</span> =&gt; <span class="string">'required|string|max:255'</span>,</div><div class="line">        <span class="string">'email'</span> =&gt; <span class="string">'required|string|email|max:255|unique:users'</span>,</div><div class="line">        <span class="string">'password'</span> =&gt; <span class="string">'required|string|min:6|confirmed'</span>,</div><div class="line">        <span class="string">'captcha'</span>=&gt;<span class="string">'required|max:5|captcha|string'</span></div><div class="line">    ],[</div><div class="line">        <span class="string">'captcha.captcha'</span>=&gt;trans(<span class="string">'验证码错误！'</span>),</div><div class="line">        <span class="string">'captcha.required'</span>=&gt;trans(<span class="string">'验证码为空！'</span>)</div><div class="line">    ]);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="对视图文件的添加"><a href="#对视图文件的添加" class="headerlink" title="对视图文件的添加"></a>对视图文件的添加</h3><blockquote>
-<p>添加验证码图片+验证</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group&#123;&#123; $errors-&gt;has('captcha') ? ' has-error' : '' &#125;&#125;"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"col-md-4 control-label"</span>&gt;</span>验证码<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-6"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"text"</span> <span class="attr">type</span>=<span class="string">"captcha"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">name</span>=<span class="string">"captcha"</span> <span class="attr">required</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"input-group-btn"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">style</span>=<span class="string">""</span> <span class="attr">src</span>=<span class="string">"&#123;&#123;captcha_src()&#125;&#125;"</span></span></div><div class="line">                 <span class="attr">onclick</span>=<span class="string">"this.src='&#123;&#123;captcha_src()&#125;&#125;' + Math.random()"</span>&gt;</div><div class="line">        <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        @if ($errors-&gt;has('captcha'))</div><div class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"help-block"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">strong</span>&gt;</span>&#123;&#123; $errors-&gt;first('captcha') &#125;&#125;<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        @endif</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="创建数据表"><a href="#创建数据表" class="headerlink" title="创建数据表"></a>创建数据表</h3><p>利用 artisan 命令生成迁移：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:migration create_articles_talbe</div></pre></td></tr></table></figure>
-<p>然后打开迁移文件：</p>
-<p>database/migrations/XXXX_create_articles_table.php</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Schema</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Schema</span>\<span class="title">Blueprint</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Migrations</span>\<span class="title">Migration</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreateArticlesTable</span> <span class="keyword">extends</span> <span class="title">Migration</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Run the migrations.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> void</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        Schema::create(<span class="string">'articles'</span>,<span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span></span>&#123;</div><div class="line">            $table-&gt;increments(<span class="string">'id'</span>);</div><div class="line">            $table-&gt;string(<span class="string">'title'</span>);</div><div class="line">            $table-&gt;longText(<span class="string">'content'</span>)-&gt;nullable();</div><div class="line">            $table-&gt;timestamps();</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Reverse the migrations.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> void</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        Schema::dropIfExists(<span class="string">'articles'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在Laravel5.4中要修改默认字符串长度，<code>app/Providers/AppServiceProvider.php</code></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Providers</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Schema</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">ServiceProvider</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppServiceProvider</span> <span class="keyword">extends</span> <span class="title">ServiceProvider</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Bootstrap any application services.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> void</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">boot</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        Schema::defaultStringLength(<span class="number">191</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Register any application services.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> void</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">register</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="生成数据表"><a href="#生成数据表" class="headerlink" title="生成数据表"></a>生成数据表</h3><p>在终端里输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan migrate</div></pre></td></tr></table></figure>
-<p>如果有错误或者需要修改，可以使用下面命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan migrate:rollback</div></pre></td></tr></table></figure>
-<h3 id="创建模型"><a href="#创建模型" class="headerlink" title="创建模型"></a>创建模型</h3><p>利用 artisan 命令创建模型：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:model Article</div></pre></td></tr></table></figure>
-<p>打开模型文件，输入以下代码：</p>
-<p>app/Article.php</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Eloquent</span>\<span class="title">Model</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Article</span> <span class="keyword">extends</span> <span class="title">Model</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">protected</span> $table = <span class="string">'articles'</span>;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> $fillable = [</div><div class="line">        <span class="string">'title'</span>,</div><div class="line">        <span class="string">'content'</span>,</div><div class="line">    ];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样就可以指定某个表的可写字段。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan route:list</div></pre></td></tr></table></figure>
-<p>可以查看到每个路由的控制器的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">+--------+-----------+-------------------------+------------------+------------------------------------------------------------------------+--------------+</div><div class="line">| Domain | Method    | URI                     | Name             | Action                                                                 | Middleware   |</div><div class="line">+--------+-----------+-------------------------+------------------+------------------------------------------------------------------------+--------------+</div><div class="line">|        | GET|HEAD  | /                       |                  | Closure                                                                | web          |</div><div class="line">|        | GET|HEAD  | api/user                |                  | Closure                                                                | api,auth:api |</div><div class="line">|        | GET|HEAD  | articles                | articles.index   | App\Http\Controllers\ArticlesController@index                          | web          |</div><div class="line">|        | POST      | articles                | articles.store   | App\Http\Controllers\ArticlesController@store                          | web          |</div><div class="line">|        | GET|HEAD  | articles/create         | articles.create  | App\Http\Controllers\ArticlesController@create                         | web          |</div><div class="line">|        | GET|HEAD  | articles/&#123;article&#125;      | articles.show    | App\Http\Controllers\ArticlesController@show                           | web          |</div><div class="line">|        | PUT|PATCH | articles/&#123;article&#125;      | articles.update  | App\Http\Controllers\ArticlesController@update                         | web          |</div><div class="line">|        | DELETE    | articles/&#123;article&#125;      | articles.destroy | App\Http\Controllers\ArticlesController@destroy                        | web          |</div><div class="line">|        | GET|HEAD  | articles/&#123;article&#125;/edit | articles.edit    | App\Http\Controllers\ArticlesController@edit                           | web          |</div><div class="line">|        | GET|HEAD  | home                    | home             | App\Http\Controllers\HomeController@index                              | web,auth     |</div><div class="line">|        | GET|HEAD  | login                   | login            | App\Http\Controllers\Auth\LoginController@showLoginForm                | web,guest    |</div><div class="line">|        | POST      | login                   |                  | App\Http\Controllers\Auth\LoginController@login                        | web,guest    |</div><div class="line">|        | POST      | logout                  | logout           | App\Http\Controllers\Auth\LoginController@logout                       | web          |</div><div class="line">|        | POST      | password/email          | password.email   | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail  | web,guest    |</div><div class="line">|        | GET|HEAD  | password/reset          | password.request | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm | web,guest    |</div><div class="line">|        | POST      | password/reset          |                  | App\Http\Controllers\Auth\ResetPasswordController@reset                | web,guest    |</div><div class="line">|        | GET|HEAD  | password/reset/&#123;token&#125;  | password.reset   | App\Http\Controllers\Auth\ResetPasswordController@showResetForm        | web,guest    |</div><div class="line">|        | GET|HEAD  | register                | register         | App\Http\Controllers\Auth\RegisterController@showRegistrationForm      | web,guest    |</div><div class="line">|        | POST      | register                |                  | App\Http\Controllers\Auth\RegisterController@register                  | web,guest    |</div><div class="line">+--------+-----------+-------------------------+------------------+------------------------------------------------------------------------+--------------+</div></pre></td></tr></table></figure>
-<h3 id="创建、修改视图"><a href="#创建、修改视图" class="headerlink" title="创建、修改视图"></a>创建、修改视图</h3><p>然后在 <code>resources/views</code> 目录下新建一个文件夹 <code>articles</code> ，然后在 <code>resources/views/articles</code> 目录下新建文件 <code>edit.blade.php</code>、<code>create.blade.php</code>、<code>index.blade.php</code>。</p>
-<p>修改<code>create.blade.php</code></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">@extends('layouts.app')</div><div class="line">@section('content')</div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-10 col-md-offset-1"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"&#123;&#123;route('articles.store')&#125;&#125;"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">role</span>=<span class="string">"form"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></div><div class="line">                        &#123;&#123; csrf_field() &#125;&#125;</div><div class="line">                        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"title"</span>&gt;</span>标题<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"title"</span> <span class="attr">value</span>=<span class="string">"&#123;&#123;old('title')&#125;&#125;"</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>文本框<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">name</span>=<span class="string">"articleContent"</span> <span class="attr">rows</span>=<span class="string">"3"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span> <span class="attr">style</span>=<span class="string">"margin-top:8px; float: right"</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    @endsection</div></pre></td></tr></table></figure>
-<h3 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h3><p>然后在<code>ArticlesController.php</code>创建<code>create()</code>的方法</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">create</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'articles.create'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>现在就可以访问<a href="http://xxxxx/articles/create，显示创建文章视图，From访问的是储存文章的路由。现在可以写储存文章的方法了。" target="_blank" rel="external">http://xxxxx/articles/create，显示创建文章视图，From访问的是储存文章的路由。现在可以写储存文章的方法了。</a></p>
-<h3 id="储存文章"><a href="#储存文章" class="headerlink" title="储存文章"></a>储存文章</h3><p>打开 <code>ArticlesController.php</code> 控制器，创建<code>store()</code> 方法。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Article</span>;<span class="comment">//因为这段代码中用到了Eloquent 模型的构造器用法，所以需要引入我们之前创建的模型。</span></div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArticlesController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">store</span><span class="params">(Request $request)</span></span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;validate($request,[</div><div class="line">            <span class="string">'title'</span>=&gt;<span class="string">'required|max:50'</span>,<span class="comment">//在收到表单传过来的数据时，可以先对表单数据进行验证</span></div><div class="line">        ]);</div><div class="line"></div><div class="line">        $article = Article::create([</div><div class="line">            <span class="string">'title'</span> =&gt; $request-&gt;title,</div><div class="line">            <span class="string">'content'</span> =&gt; $request-&gt;articleContent,</div><div class="line">        ]);</div><div class="line">        <span class="keyword">return</span> redirect()-&gt;route(<span class="string">'article.index'</span>);<span class="comment">//最后完成文章的创建，然后重定向到文章列表页</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="文章首页"><a href="#文章首页" class="headerlink" title="文章首页"></a>文章首页</h3><p>创建<code>index()</code>方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public function index()&#123;</div><div class="line">    $articles = Article::orderBy(&apos;created_at&apos;,&apos;desc&apos;)-&gt;get();</div><div class="line">    return view(&apos;articles.index&apos;,compact(&apos;articles&apos;));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>修改<code>articles.index</code>的视图</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">@extends('layouts.app')</div><div class="line">@section('content')</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-8 col-md-offset-2"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span>  <span class="attr">href</span>=<span class="string">"&#123;&#123;route('articles.create')&#125;&#125;"</span> <span class="attr">style</span>=<span class="string">"margin-bottom: 8px;"</span>&gt;</span>创建文章<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">                @foreach($articles as $article)</div><div class="line"></div><div class="line"></div><div class="line">                    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&#123;&#123;route('articles.edit',$article-&gt;id)&#125;&#125;"</span> <span class="attr">style</span>=<span class="string">"display: block;text-decoration: none;"</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel panel-default"</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-heading"</span>&gt;</span>&#123;&#123;$article-&gt;title&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">                            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-body"</span>&gt;</span></div><div class="line">                                &#123;&#123;$article-&gt;content&#125;&#125;</div><div class="line">                            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-footer"</span>&gt;</span></div><div class="line">                                <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"&#123;&#123;route('articles.destroy',$article-&gt;id)&#125;&#125;"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">style</span>=<span class="string">"display: block;"</span>&gt;</span></div><div class="line">                                    &#123;&#123; csrf_field() &#125;&#125;</div><div class="line">                                    &#123;&#123; method_field('DELETE') &#125;&#125;</div><div class="line">                                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">                                <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">                            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">                @endforeach</div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">@endsection</div></pre></td></tr></table></figure>
-<p>好了，现在创建文章和显示文章列表都有了，现在我们做修改文章和删除文章</p>
-<h3 id="修改文章"><a href="#修改文章" class="headerlink" title="修改文章"></a>修改文章</h3><p>创建<code>edit()</code>方法</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">edit</span><span class="params">($id)</span></span>&#123;</div><div class="line">    $article = Article::findOrFail($id);</div><div class="line">    <span class="keyword">return</span> view(<span class="string">'articles.edit'</span>,compact(<span class="string">'article'</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="更新文章"><a href="#更新文章" class="headerlink" title="更新文章"></a>更新文章</h3><p>创建<code>update()</code>方法</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span><span class="params">(Request $request,$id)</span></span>&#123;</div><div class="line">    <span class="keyword">$this</span>-&gt;validate($request,[</div><div class="line">        <span class="string">'title'</span>=&gt;<span class="string">'required|max:50'</span></div><div class="line">    ]);</div><div class="line">    $article=Article::findOrFail($id);</div><div class="line">    $article-&gt;update([</div><div class="line">        <span class="string">'title'</span>=&gt;$request-&gt;title,</div><div class="line">        <span class="string">'content'</span>=&gt;$request-&gt;articleContent,</div><div class="line">    ]);</div><div class="line">    <span class="keyword">return</span> redirect()-&gt;route(<span class="string">'articles.index'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>修改<code>articles.edit</code>视图</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"> @extends('layouts.app')</div><div class="line">@section('content')</div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-10 col-md-offset-1"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"&#123;&#123;route('articles.update',$article-&gt;id)&#125;&#125;"</span>  <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">role</span>=<span class="string">"form"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></div><div class="line">                        &#123;&#123; csrf_field() &#125;&#125;</div><div class="line">                        &#123;&#123; method_field('PATCH') &#125;&#125;</div><div class="line">                        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"title"</span>&gt;</span>标题<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"title"</span> <span class="attr">value</span>=<span class="string">"&#123;&#123;$article-&gt;title&#125;&#125;"</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>文本框<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">name</span>=<span class="string">"articleContent"</span> <span class="attr">rows</span>=<span class="string">"3"</span>&gt;</span>&#123;&#123;$article-&gt;content&#125;&#125;<span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span> <span class="attr">style</span>=<span class="string">"margin-top:8px; float: right"</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    @endsection</div></pre></td></tr></table></figure>
-<h3 id="删除文章"><a href="#删除文章" class="headerlink" title="删除文章"></a>删除文章</h3><p>现在满足了修改更新，下面我们来写删除。修改<code>destroy()</code></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">destroy</span><span class="params">($id)</span></span>&#123;</div><div class="line">    $article=Article::findOrfail($id);</div><div class="line">    $article-&gt;delete();</div><div class="line">    <span class="keyword">return</span> back();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>现在我们已经满足了，博客的基本的增、删、改、查、的功能，现在我们添加中间件，只有登录后才能使用博客。</p>
-<h3 id="添加登录中间件"><a href="#添加登录中间件" class="headerlink" title="添加登录中间件"></a>添加登录中间件</h3><p>打开 <code>ArticlesController.php</code> 控制器，创建<code>__construct()</code> 方法。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">$this</span>-&gt;middleware(<span class="string">'auth'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>打开<code>app/Http/Middleware/RedirectIfAuthenticated.php</code></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Auth</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RedirectIfAuthenticated</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Handle an incoming request.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  \Illuminate\Http\Request  $request</div><div class="line">     * <span class="doctag">@param</span>  \Closure  $next</div><div class="line">     * <span class="doctag">@param</span>  string|null  $guard</div><div class="line">     * <span class="doctag">@return</span> mixed</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span><span class="params">($request, Closure $next, $guard = null)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (Auth::guard($guard)-&gt;check()) &#123;</div><div class="line">            <span class="keyword">return</span> redirect(<span class="string">'/articles'</span>);<span class="comment">//修改重定向到文章列表页</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> $next($request);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>打开<code>app/Http/Controllers/Auth/LoginController.php</code></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">Auth</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">Controller</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Auth</span>\<span class="title">AuthenticatesUsers</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/*</span></div><div class="line">    |--------------------------------------------------------------------------</div><div class="line">    | Login Controller</div><div class="line">    |--------------------------------------------------------------------------</div><div class="line">    |</div><div class="line">    | This controller handles authenticating users for the application and</div><div class="line">    | redirecting them to your home screen. The controller uses a trait</div><div class="line">    | to conveniently provide its functionality to your applications.</div><div class="line">    |</div><div class="line">    */</div><div class="line"></div><div class="line">    <span class="keyword">use</span> <span class="title">AuthenticatesUsers</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Where to redirect users after login.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@var</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">protected</span> $redirectTo = <span class="string">'/articles'</span>;<span class="comment">//修改重定向到文章页</span></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Create a new controller instance.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> void</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;middleware(<span class="string">'guest'</span>)-&gt;except(<span class="string">'logout'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>修改<code>welcome.blade.php</code>视图</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!doctype html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"&#123;&#123; config('app.locale') &#125;&#125;"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1"</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Laravel<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- Fonts --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"https://fonts.googleapis.com/css?family=Raleway:100,600"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- Styles --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">            html, body &#123;</div><div class="line">                background-color: #fff;</div><div class="line">                color: #636b6f;</div><div class="line">                font-family: 'Raleway', sans-serif;</div><div class="line">                font-weight: 100;</div><div class="line">                height: 100vh;</div><div class="line">                margin: 0;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            .full-height &#123;</div><div class="line">                height: 100vh;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            .flex-center &#123;</div><div class="line">                align-items: center;</div><div class="line">                display: flex;</div><div class="line">                justify-content: center;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            .position-ref &#123;</div><div class="line">                position: relative;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            .top-right &#123;</div><div class="line">                position: absolute;</div><div class="line">                right: 10px;</div><div class="line">                top: 18px;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            .content &#123;</div><div class="line">                text-align: center;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            .title &#123;</div><div class="line">                font-size: 84px;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            .links &gt; a &#123;</div><div class="line">                color: #636b6f;</div><div class="line">                padding: 0 25px;</div><div class="line">                font-size: 12px;</div><div class="line">                font-weight: 600;</div><div class="line">                letter-spacing: .1rem;</div><div class="line">                text-decoration: none;</div><div class="line">                text-transform: uppercase;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            .m-b-md &#123;</div><div class="line">                margin-bottom: 30px;</div><div class="line">            &#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"flex-center position-ref full-height"</span>&gt;</span></div><div class="line">            @if (Route::has('login'))</div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"top-right links"</span>&gt;</span></div><div class="line">                    @if (Auth::check())</div><div class="line">                        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&#123;&#123; route('articles.index') &#125;&#125;"</span>&gt;</span>博客<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">                    @else</div><div class="line">                        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&#123;&#123; url('/login') &#125;&#125;"</span>&gt;</span>登录<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&#123;&#123; url('/register') &#125;&#125;"</span>&gt;</span>注册<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">                    @endif</div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            @endif</div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title m-b-md"</span>&gt;</span></div><div class="line">                    迷你博客 <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&#123;&#123;route('articles.index')&#125;&#125;"</span>&gt;</span>点我进入<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"links"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://laravel.com/docs"</span>&gt;</span>Documentation<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://laracasts.com"</span>&gt;</span>Laracasts<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://laravel-news.com"</span>&gt;</span>News<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://forge.laravel.com"</span>&gt;</span>Forge<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://github.com/laravel/laravel"</span>&gt;</span>GitHub<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="文章控制器完整代码"><a href="#文章控制器完整代码" class="headerlink" title="文章控制器完整代码"></a>文章控制器完整代码</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Article</span>;<span class="comment">//因为这段代码中用到了Eloquent 模型的构造器用法，所以需要引入我们之前创建的模型。</span></div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArticlesController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;middleware(<span class="string">'auth'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">create</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> view(<span class="string">'articles.create'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">edit</span><span class="params">($id)</span></span>&#123;</div><div class="line">        $article = Article::findOrFail($id);</div><div class="line">        <span class="keyword">return</span> view(<span class="string">'articles.edit'</span>,compact(<span class="string">'article'</span>));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">()</span></span>&#123;</div><div class="line">        $articles = Article::orderBy(<span class="string">'created_at'</span>,<span class="string">'desc'</span>)-&gt;get();</div><div class="line">        <span class="keyword">return</span> view(<span class="string">'articles.index'</span>,compact(<span class="string">'articles'</span>));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">store</span><span class="params">(Request $request)</span></span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;validate($request,[</div><div class="line">            <span class="string">'title'</span>=&gt;<span class="string">'required|max:50'</span>,<span class="comment">//在收到表单传过来的数据时，可以先对表单数据进行验证</span></div><div class="line">        ]);</div><div class="line"></div><div class="line">        $article = Article::create([</div><div class="line">            <span class="string">'title'</span> =&gt; $request-&gt;title,</div><div class="line">            <span class="string">'content'</span> =&gt; $request-&gt;articleContent,</div><div class="line">        ]);</div><div class="line">        <span class="keyword">return</span> redirect()-&gt;route(<span class="string">'articles.index'</span>);<span class="comment">//最后完成文章的创建，然后重定向到文章列表页</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span><span class="params">(Request $request,$id)</span></span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;validate($request,[</div><div class="line">            <span class="string">'title'</span>=&gt;<span class="string">'required|max:50'</span></div><div class="line">        ]);</div><div class="line">        $article=Article::findOrFail($id);</div><div class="line">        $article-&gt;update([</div><div class="line">            <span class="string">'title'</span>=&gt;$request-&gt;title,</div><div class="line">            <span class="string">'content'</span>=&gt;$request-&gt;articleContent,</div><div class="line">        ]);</div><div class="line">        <span class="keyword">return</span> redirect()-&gt;route(<span class="string">'articles.index'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">destroy</span><span class="params">($id)</span></span>&#123;</div><div class="line">        $article=Article::findOrfail($id);</div><div class="line">        $article-&gt;delete();</div><div class="line">        <span class="keyword">return</span> back();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="DEMO项目地址"><a href="#DEMO项目地址" class="headerlink" title="DEMO项目地址"></a>DEMO项目地址</h2><p><a href="https://coding.net/u/Colorful_Ghost/p/Laravel-Miniblog/git" target="_blank" rel="external">https://coding.net/u/Colorful_Ghost/p/Laravel-Miniblog/git</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -894,7 +819,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

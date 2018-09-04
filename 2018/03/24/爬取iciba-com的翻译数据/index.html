@@ -1,0 +1,1390 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="爬虫,iciba," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="ICIBA接口调研访问ICIBA网站接口默认传参URLhttp://www.iciba.com/index.php?callback=jQuery190037237954499612624_1521877397217&amp;amp;a=getWordMean&amp;amp;c=search&amp;amp;list=1,2,3,4,5,8,9,10,12,13,14,15,18,21,22,24,3003,3004,">
+<meta name="keywords" content="爬虫,iciba">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬取iciba.com的翻译数据">
+<meta property="og:url" content="https://mcat.im/2018/03/24/爬取iciba-com的翻译数据/index.html">
+<meta property="og:site_name" content="Mcat">
+<meta property="og:description" content="ICIBA接口调研访问ICIBA网站接口默认传参URLhttp://www.iciba.com/index.php?callback=jQuery190037237954499612624_1521877397217&amp;amp;a=getWordMean&amp;amp;c=search&amp;amp;list=1,2,3,4,5,8,9,10,12,13,14,15,18,21,22,24,3003,3004,">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-24T08:46:02.204Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="爬取iciba.com的翻译数据">
+<meta name="twitter:description" content="ICIBA接口调研访问ICIBA网站接口默认传参URLhttp://www.iciba.com/index.php?callback=jQuery190037237954499612624_1521877397217&amp;amp;a=getWordMean&amp;amp;c=search&amp;amp;list=1,2,3,4,5,8,9,10,12,13,14,15,18,21,22,24,3003,3004,">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mcat.im/2018/03/24/爬取iciba-com的翻译数据/"/>
+
+
+
+
+
+  <title> 爬取iciba.com的翻译数据 | Mcat </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ac9533e5100bee8b75e87a8bb5e51c10";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mcat</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Ghost's Blog</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-wisdom">
+          <a href="/wisdom" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-support">
+          <a href="/support" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-support"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://mcat.im/2018/03/24/爬取iciba-com的翻译数据/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mcat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                爬取iciba.com的翻译数据
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-24T15:33:05+08:00">
+                2018-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/24/爬取iciba-com的翻译数据/" class="leancloud_visitors" data-flag-title="爬取iciba.com的翻译数据">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="ICIBA接口调研"><a href="#ICIBA接口调研" class="headerlink" title="ICIBA接口调研"></a>ICIBA接口调研</h1><h2 id="访问ICIBA网站接口默认传参URL"><a href="#访问ICIBA网站接口默认传参URL" class="headerlink" title="访问ICIBA网站接口默认传参URL"></a>访问ICIBA网站接口默认传参URL</h2><p><a href="http://www.iciba.com/index.php?callback=jQuery190037237954499612624_1521877397217&amp;a=getWordMean&amp;c=search&amp;list=1,2,3,4,5,8,9,10,12,13,14,15,18,21,22,24,3003,3004,3005&amp;word=test&amp;_=1521877397218" target="_blank" rel="noopener">http://www.iciba.com/index.php?callback=jQuery190037237954499612624_1521877397217&amp;a=getWordMean&amp;c=search&amp;list=1,2,3,4,5,8,9,10,12,13,14,15,18,21,22,24,3003,3004,3005&amp;word=test&amp;_=1521877397218</a></p>
+<h2 id="接口传参意义，分析传参含义"><a href="#接口传参意义，分析传参含义" class="headerlink" title="接口传参意义，分析传参含义"></a>接口传参意义，分析传参含义</h2><ol>
+<li><p>callback：iciba JQuery回调函数形式返回到该网站</p>
+</li>
+<li><p>a=getWordMean：获取单词参数</p>
+</li>
+<li><p>c=search：查询单词参数</p>
+</li>
+<li><p>word：传递所需要的单词</p>
+</li>
+<li><p>list=1,2,3,4,5,8,9,10,12,13,14,15,18,21,22,24,3003,3004,3005</p>
+<ol>
+<li>1参数显示基础单词信息，路径：JSON.baesInfo</li>
+<li>2参数显示单词分析信息，路径：JSON.sameAnalysis</li>
+<li>3柯林斯高阶英汉双解学习词典，路径：JSON.collins</li>
+<li>4英英词典，路径：JSON.ee_mean</li>
+<li>5行业词典，路径：JSON.trade_means</li>
+<li>8双语例句，路径：JSON.sentence</li>
+<li>9（1,9组合会出现网络释义，路径JSON.netmean），路径：JSON.baesInfo</li>
+<li>10权威例句，路径：JSON.auth_sentence</li>
+<li>12释义变形（此参数并没有显示在页面里），路径：JSON.synonym</li>
+<li>14词组和句型，路径：JSON.phrase</li>
+<li>15词根词缀，路径：JSON.stems_affixes</li>
+<li>18百度百科，路径：JSON.encyclopedia</li>
+<li>21四级真题，路径：JSON.cetFour</li>
+<li>3003词性、中英例句、翻译并未在页面展示 ，路径：JSON.bidec</li>
+<li>3005句式用法，路径：JSON.jushi</li>
+<li>如果list不传参或者输入0默认显示所有信息</li>
+</ol>
+</li>
+</ol>
+<h1 id="产品需求数据"><a href="#产品需求数据" class="headerlink" title="产品需求数据"></a>产品需求数据</h1><ul>
+<li>输入单词：JSON.baesInfo.word_name</li>
+<li>音标+翻译：JSON.baesInfo.symbols</li>
+<li>变形：JSON.baesInfo.exchange</li>
+<li>双语例句：JSON.sentence</li>
+<li>句式用法：JSON.jushi</li>
+<li>权威例句：JSON.auth_sentence</li>
+</ul>
+<p>此时list参数传参值为：1,6,8,10,3005 ，减少无用参数，优化请求速度。</p>
+<p><a href="http://www.iciba.com/index.php?&amp;a=getWordMean&amp;c=search&amp;list=1,6,8,10,3005&amp;word=test" target="_blank" rel="noopener">http://www.iciba.com/index.php?&amp;a=getWordMean&amp;c=search&amp;list=1,6,8,10,3005&amp;word=test</a></p>
+<h1 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h1><p><strong>数据表名：dic_auth_sentence</strong>注释：<strong>权威例句表</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>数据类型</th>
+<th>注释</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(11)</td>
+<td>权威例句id</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>content</td>
+<td>varchar(255)</td>
+<td>内容</td>
+<td></td>
+</tr>
+<tr>
+<td>link</td>
+<td>varchar(255)</td>
+<td>相关链接</td>
+<td></td>
+</tr>
+<tr>
+<td>source</td>
+<td>varchar(50)</td>
+<td>来源</td>
+<td></td>
+</tr>
+<tr>
+<td>word_id</td>
+<td>int(11)</td>
+<td>单词id</td>
+</tr>
+</tbody>
+</table>
+<p><strong>数据表名：dic_base_info</strong>注释：<strong>音标表</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>数据类型</th>
+<th>注释</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(11)</td>
+<td>单词id</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>word</td>
+<td>varchar(128)</td>
+<td>单词</td>
+<td></td>
+</tr>
+<tr>
+<td>ph_en</td>
+<td>varchar(255)</td>
+<td>英  音标</td>
+<td></td>
+</tr>
+<tr>
+<td>ph_am</td>
+<td>varchar(255)</td>
+<td>美  音标</td>
+<td></td>
+</tr>
+<tr>
+<td>ph_en_mp3</td>
+<td>varchar(255)</td>
+<td>英  音标mp3</td>
+<td></td>
+</tr>
+<tr>
+<td>ph_am_mp3</td>
+<td>varchar(255)</td>
+<td>美  音标mp3</td>
+<td></td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>datetime</td>
+<td>创建时间</td>
+</tr>
+</tbody>
+</table>
+<p><strong>数据表名：dic_base_info_test</strong>注释： <strong>音标表</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>数据类型</th>
+<th>注释</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(11)</td>
+<td>单词id</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>word</td>
+<td>varchar(128)</td>
+<td>单词</td>
+<td></td>
+</tr>
+<tr>
+<td>ph_en</td>
+<td>varchar(255)</td>
+<td>英  音标</td>
+<td></td>
+</tr>
+<tr>
+<td>ph_am</td>
+<td>varchar(255)</td>
+<td>美  音标</td>
+<td></td>
+</tr>
+<tr>
+<td>ph_en_mp3</td>
+<td>varchar(255)</td>
+<td>英  音标mp3</td>
+<td></td>
+</tr>
+<tr>
+<td>ph_am_mp3</td>
+<td>varchar(255)</td>
+<td>美  音标mp3</td>
+<td></td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>datetime</td>
+<td>创建时间</td>
+</tr>
+</tbody>
+</table>
+<p><strong>数据表名：dic_exchange</strong>注释： <strong>单词变形表</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>数据类型</th>
+<th>注释</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>word_id</td>
+<td>int(11)</td>
+<td>单词id</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>word_pl</td>
+<td>varchar(128)</td>
+<td>复数</td>
+<td></td>
+</tr>
+<tr>
+<td>word_past</td>
+<td>varchar(128)</td>
+<td>过去式</td>
+<td></td>
+</tr>
+<tr>
+<td>word_done</td>
+<td>varchar(128)</td>
+<td>过去分词</td>
+<td></td>
+</tr>
+<tr>
+<td>word_ing</td>
+<td>varchar(128)</td>
+<td>现在分词</td>
+<td></td>
+</tr>
+<tr>
+<td>word_third</td>
+<td>varchar(128)</td>
+<td>第三人称单数</td>
+<td></td>
+</tr>
+<tr>
+<td>word_er</td>
+<td>varchar(128)</td>
+<td>比较级</td>
+<td></td>
+</tr>
+<tr>
+<td>word_est</td>
+<td>varchar(128)</td>
+<td>最高级</td>
+<td></td>
+</tr>
+<tr>
+<td>word_prep</td>
+<td>varchar(128)</td>
+<td>代词</td>
+<td></td>
+</tr>
+<tr>
+<td>word_adv</td>
+<td>varchar(128)</td>
+<td>副词</td>
+<td></td>
+</tr>
+<tr>
+<td>word_verb</td>
+<td>varchar(128)</td>
+<td>动词</td>
+<td></td>
+</tr>
+<tr>
+<td>word_noun</td>
+<td>varchar(128)</td>
+<td>名词</td>
+<td></td>
+</tr>
+<tr>
+<td>word_adj</td>
+<td>varchar(128)</td>
+<td>形容词</td>
+<td></td>
+</tr>
+<tr>
+<td>word_conn</td>
+<td>varchar(128)</td>
+<td>系连词</td>
+</tr>
+</tbody>
+</table>
+<p><strong>数据表名：dic_jushi</strong>注释： <strong>句式用法表</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>数据类型</th>
+<th>注释</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(11)</td>
+<td>句式用法id</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>word_id</td>
+<td>int(11)</td>
+<td>单词id</td>
+<td></td>
+</tr>
+<tr>
+<td>english</td>
+<td>varchar(255)</td>
+<td>英语例句</td>
+<td></td>
+</tr>
+<tr>
+<td>chinese</td>
+<td>varchar(255)</td>
+<td>中文例句</td>
+</tr>
+</tbody>
+</table>
+<p><strong>数据表名：dic_parts</strong>注释：<strong>翻译表</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>数据类型</th>
+<th>注释</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(11)</td>
+<td>词性id</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>word_id</td>
+<td>int(11)</td>
+<td>单词id</td>
+<td></td>
+</tr>
+<tr>
+<td>part</td>
+<td>varchar(50)</td>
+<td>词性</td>
+<td></td>
+</tr>
+<tr>
+<td>means</td>
+<td>varchar(255)</td>
+<td>释义</td>
+</tr>
+</tbody>
+</table>
+<p><strong>数据表名：dic_sentence</strong>注释：<strong>双语例句表</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>数据类型</th>
+<th>注释</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(11)</td>
+<td>例句id</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>word_id</td>
+<td>int(11)</td>
+<td>单词id</td>
+<td></td>
+</tr>
+<tr>
+<td>english</td>
+<td>varchar(255)</td>
+<td>例句英文</td>
+<td></td>
+</tr>
+<tr>
+<td>chinese</td>
+<td>varchar(255)</td>
+<td>例句中文</td>
+</tr>
+</tbody>
+</table>
+<p><strong>数据表名：dic_temp_word</strong>注释： <strong>跑批单词</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>数据类型</th>
+<th>注释</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(11)</td>
+<td>单词id</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>word</td>
+<td>varchar(255)</td>
+<td>单词</td>
+<td></td>
+</tr>
+<tr>
+<td>is_set</td>
+<td>tinyint(1) unsigned zerofill</td>
+<td>0未跑1跑过</td>
+</tr>
+</tbody>
+</table>
+<h1 id="JAVA实现方案"><a href="#JAVA实现方案" class="headerlink" title="JAVA实现方案"></a>JAVA实现方案</h1><ul>
+<li><a href="https://mvnrepository.com/artifact/de.taimos/httputils" target="_blank" rel="noopener">HTTPUtils</a>：请求接口，获取资源</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">String url = <span class="string">"http://www.iciba.com/index.php&amp;a=getWordMean&amp;c=search&amp;list=1,6,8,10,3005&amp;word="</span>;</div><div class="line">			<span class="comment">//get请求翻译API</span></div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                wordMean = java.net.URLEncoder.encode(wordMean, <span class="string">"UTF-8"</span>);<span class="comment">//把特殊字符转码</span></div><div class="line">            &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">final</span> HttpResponse response = WS.url(url + wordMean).get();<span class="comment">//get请求url</span></div><div class="line">            <span class="keyword">final</span> String res = WS.getResponseAsString(response);</div></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://mvnrepository.com/artifact/com.alibaba/fastjson" target="_blank" rel="noopener">Fastjson</a>：解析获取到的JSON，找到所需要数据的路径</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">       JSONObject jsonObject = JSON.parseObject(res);</div><div class="line">            <span class="keyword">int</span> errno = (<span class="keyword">int</span>) JSONPath.eval(jsonObject, <span class="string">"$.errno"</span>);</div><div class="line">            <span class="keyword">if</span> (errno == <span class="number">404</span>) &#123;</div><div class="line">                 <span class="keyword">return</span> FAIL;</div><div class="line">            &#125;</div><div class="line">JSONObject symbols = (JSONObject) JSONPath.eval(jsonObject, <span class="string">"$.baesInfo.symbols[0]"</span>);<span class="comment">//音标+mp3</span></div><div class="line">JSONObject exchange = (JSONObject) JSONPath.eval(jsonObject, <span class="string">"$.baesInfo.exchange"</span>);<span class="comment">//变形单词</span></div><div class="line">ArrayList&lt;JSONObject&gt; sentences = (ArrayList&lt;JSONObject&gt;) JSONPath.eval(jsonObject, <span class="string">"$.sentence[0:2]"</span>);<span class="comment">//双语例句</span></div><div class="line">ArrayList&lt;JSONObject&gt; jushi = (ArrayList&lt;JSONObject&gt;) JSONPath.eval(jsonObject, <span class="string">"$.jushi[0:2]"</span>);<span class="comment">//句式语法</span></div><div class="line">ArrayList&lt;JSONObject&gt; authSentence = (ArrayList&lt;JSONObject&gt;) JSONPath.eval(jsonObject, <span class="string">"$.auth_sentence[0:2]"</span>);<span class="comment">//权威例句</span></div><div class="line">String wordName = (String) JSONPath.eval(jsonObject, <span class="string">"$.baesInfo.word_name"</span>);<span class="comment">//单词名</span></div></pre></td></tr></table></figure>
+<ul>
+<li>遍历获取到的数据并存入MYSQL</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">            <span class="keyword">int</span> wordId;</div><div class="line">            <span class="keyword">if</span> (wordMeanMapper.checkWord(wordName) != <span class="keyword">null</span>) &#123;</div><div class="line">                ReturnT.FAIL.setMsg(<span class="string">"单词已经存在"</span>);</div><div class="line">                <span class="keyword">return</span> FAIL;</div><div class="line">            &#125;</div><div class="line">            wordMeanMapper.insertWord(wordName);</div><div class="line">            wordId = (<span class="keyword">int</span>) wordMeanMapper.checkWord(wordName).get(<span class="string">"id"</span>);</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                <span class="keyword">if</span> (symbols != <span class="keyword">null</span>) &#123;<span class="comment">//没有音标一定没有该单词的释义，直接取得单词的网络翻译</span></div><div class="line">                    <span class="comment">//发音音标</span></div><div class="line">                    String ph_en = symbols.getString(<span class="string">"ph_en"</span>);<span class="comment">// 英 音标</span></div><div class="line">                    String ph_am = symbols.getString(<span class="string">"ph_am"</span>);<span class="comment">//美 音标</span></div><div class="line"><span class="comment">//                String ph_other = symbols.getString("ph_other");</span></div><div class="line">                    String ph_en_mp3 = symbols.getString(<span class="string">"ph_en_mp3"</span>);<span class="comment">//英 音标发音</span></div><div class="line">                    String ph_am_mp3 = symbols.getString(<span class="string">"ph_am_mp3"</span>);<span class="comment">//美 音标发音</span></div><div class="line">                    String ph_tts_mp3 = symbols.getString(<span class="string">"ph_tts_mp3"</span>);<span class="comment">//tts原生 发音</span></div><div class="line">                    wordMeanMapper.insertSymbols(wordId, ph_en, ph_am, ph_en_mp3, ph_am_mp3, ph_tts_mp3);</div><div class="line">                    <span class="comment">//变形词汇</span></div><div class="line">                    String reg = <span class="string">"[\\[\\]\"]"</span>;</div><div class="line">                    String word_pl = exchange.getString(<span class="string">"word_pl"</span>).replaceAll(reg, <span class="string">""</span>);</div><div class="line">                    String word_third = exchange.getString(<span class="string">"word_third"</span>).replaceAll(reg, <span class="string">""</span>);</div><div class="line">                    String word_past = exchange.getString(<span class="string">"word_past"</span>).replaceAll(reg, <span class="string">""</span>);</div><div class="line">                    String word_done = exchange.getString(<span class="string">"word_done"</span>).replaceAll(reg, <span class="string">""</span>);</div><div class="line">                    String word_ing = exchange.getString(<span class="string">"word_ing"</span>).replaceAll(reg, <span class="string">""</span>);</div><div class="line">                    String word_er = exchange.getString(<span class="string">"word_er"</span>).replaceAll(reg, <span class="string">""</span>);</div><div class="line">                    String word_est = exchange.getString(<span class="string">"word_est"</span>).replaceAll(reg, <span class="string">""</span>);</div><div class="line">                    String word_prep = exchange.getString(<span class="string">"word_prep"</span>).replaceAll(reg, <span class="string">""</span>);</div><div class="line">                    String word_adv = exchange.getString(<span class="string">"word_adv"</span>).replaceAll(reg, <span class="string">""</span>);</div><div class="line">                    String word_verb = exchange.getString(<span class="string">"word_verb"</span>).replaceAll(reg, <span class="string">""</span>);</div><div class="line">                    String word_noun = exchange.getString(<span class="string">"word_noun"</span>).replaceAll(reg, <span class="string">""</span>);</div><div class="line">                    String word_adj = exchange.getString(<span class="string">"word_adj"</span>).replaceAll(reg, <span class="string">""</span>);</div><div class="line">                    String word_conn = exchange.getString(<span class="string">"word_conn"</span>).replaceAll(reg, <span class="string">""</span>);</div><div class="line">                    wordMeanMapper.insertExchange(wordId, word_pl, word_past, word_done, word_ing, word_third, word_er, word_est, word_prep, word_adv, word_verb, word_noun, word_adj, word_conn</div><div class="line">                    );</div><div class="line">                    <span class="comment">//词性翻译</span></div><div class="line">                    JSONArray parts = symbols.getJSONArray(<span class="string">"parts"</span>);</div><div class="line">                    <span class="keyword">for</span> (Object partObj : parts) &#123;</div><div class="line">                        JSONObject partJSONObject = (JSONObject) partObj;</div><div class="line">                        String means = partJSONObject.getString(<span class="string">"means"</span>);</div><div class="line">                        means = means.replaceAll(reg, <span class="string">""</span>);</div><div class="line">                        String part = partJSONObject.getString(<span class="string">"part"</span>);</div><div class="line">                        wordMeanMapper.insertParts(part, means, wordId);</div><div class="line">                    &#125;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    String translateResult = (String) JSONPath.eval(jsonObject, <span class="string">"$.baesInfo.translate_result"</span>);</div><div class="line">                    wordMeanMapper.updateTranslateResult(wordMean, translateResult);</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">                <span class="keyword">return</span> FAIL;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//双语例句</span></div><div class="line">            <span class="keyword">for</span> (JSONObject sentence : sentences) &#123;</div><div class="line">                String networkEN = sentence.getString(<span class="string">"Network_en"</span>);</div><div class="line">                String networkCN = sentence.getString(<span class="string">"Network_cn"</span>);</div><div class="line">                String mp3 = sentence.getString(<span class="string">"tts_mp3"</span>);</div><div class="line">                String mp3Size = sentence.getString(<span class="string">"tts_size"</span>);</div><div class="line">                wordMeanMapper.insertSentence(networkEN, networkCN, mp3, mp3Size, wordId);</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//句式用法</span></div><div class="line">            <span class="keyword">for</span> (JSONObject jushiObj : jushi) &#123;</div><div class="line">                String english = jushiObj.getString(<span class="string">"english"</span>);</div><div class="line">                String chinese = jushiObj.getString(<span class="string">"chinese"</span>);</div><div class="line">                String mp3 = jushiObj.getString(<span class="string">"mp3"</span>);</div><div class="line">                wordMeanMapper.insertJushi(english, chinese, mp3, wordId);</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//权威例句</span></div><div class="line">            <span class="keyword">for</span> (JSONObject authSentenceObj : authSentence) &#123;</div><div class="line">                String content = authSentenceObj.getString(<span class="string">"content"</span>);</div><div class="line">                String link = authSentenceObj.getString(<span class="string">"link"</span>);</div><div class="line">                String source = authSentenceObj.getString(<span class="string">"source"</span>);</div><div class="line">                String mp3 = authSentenceObj.getString(<span class="string">"tts_mp3"</span>);</div><div class="line">                String mp3Size = authSentenceObj.getString(<span class="string">"tts_size"</span>);</div><div class="line">                wordMeanMapper.insertAuthSentence(content, link, source, mp3, mp3Size, wordId);</div><div class="line">            &#125;</div></pre></td></tr></table></figure>
+<h2 id="Mapper"><a href="#Mapper" class="headerlink" title="Mapper"></a>Mapper</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">   <span class="meta">@Insert</span>(<span class="string">"INSERT INTO fanyi_word(word)VALUES(#&#123;word&#125;)"</span>)<span class="comment">//插入传入的单词</span></div><div class="line">   <span class="function"><span class="keyword">int</span> <span class="title">insertWord</span><span class="params">(String word)</span></span>;</div><div class="line">   <span class="meta">@Insert</span>(<span class="string">"UPDATE fanyi_word SET translate_result=#&#123;translate_result&#125; WHERE word=#&#123;word&#125;"</span>)</div><div class="line">   <span class="function"><span class="keyword">int</span> <span class="title">updateTranslateResult</span><span class="params">(@Param(<span class="string">"word"</span>)</span>String word,@<span class="title">Param</span><span class="params">(<span class="string">"translate_result"</span>)</span>String translateResult)</span>;<span class="comment">//网络翻译结果</span></div><div class="line"></div><div class="line">   <span class="meta">@Insert</span>(<span class="string">"INSERT INTO fanyi_sentence(english,chinese,tts_mp3,tts_size,word_id) VALUES(#&#123;english&#125;,#&#123;chinese&#125;,#&#123;tts_mp3&#125;,#&#123;tts_size&#125;,#&#123;word_id&#125;)"</span>)<span class="comment">//插入例句</span></div><div class="line">   <span class="function"><span class="keyword">int</span> <span class="title">insertSentence</span><span class="params">(@Param(<span class="string">"english"</span>)</span> String english,</span></div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"chinese"</span>)</span> String chinese,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"tts_mp3"</span>)</span> String tts_mp3,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"tts_size"</span>)</span> String tts_size,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"word_id"</span>)</span> <span class="keyword">int</span> wordId);</div><div class="line"></div><div class="line">   <span class="meta">@Insert</span>(<span class="string">"INSERT INTO fanyi_auth_sentence(content,link,source,tts_mp3,tts_size,word_id)VALUES(#&#123;content&#125;,#&#123;link&#125;,#&#123;source&#125;,#&#123;tts_mp3&#125;,#&#123;tts_size&#125;,#&#123;word_id&#125;)"</span>)<span class="comment">//权威例句</span></div><div class="line">   <span class="function"><span class="keyword">int</span> <span class="title">insertAuthSentence</span><span class="params">(@Param(<span class="string">"content"</span>)</span> String content,</span></div><div class="line">                          @<span class="title">Param</span><span class="params">(<span class="string">"link"</span>)</span> String link,</div><div class="line">                          @<span class="title">Param</span><span class="params">(<span class="string">"source"</span>)</span> String source,</div><div class="line">                          @<span class="title">Param</span><span class="params">(<span class="string">"tts_mp3"</span>)</span> String tts_mp3,</div><div class="line">                          @<span class="title">Param</span><span class="params">(<span class="string">"tts_size"</span>)</span> String tts_size,</div><div class="line">                          @<span class="title">Param</span><span class="params">(<span class="string">"word_id"</span>)</span> <span class="keyword">int</span> wordId);</div><div class="line"></div><div class="line">   <span class="meta">@Insert</span>(<span class="string">"INSERT INTO fanyi_jushi(english,chinese,mp3,word_id)VALUES(#&#123;english&#125;,#&#123;chinese&#125;,#&#123;mp3&#125;,#&#123;word_id&#125;)"</span>)<span class="comment">//句式</span></div><div class="line">   <span class="function"><span class="keyword">int</span> <span class="title">insertJushi</span><span class="params">(@Param(<span class="string">"english"</span>)</span> String english,</span></div><div class="line">                   @<span class="title">Param</span><span class="params">(<span class="string">"chinese"</span>)</span> String chinese,</div><div class="line">                   @<span class="title">Param</span><span class="params">(<span class="string">"mp3"</span>)</span> String mp3,</div><div class="line">                   @<span class="title">Param</span><span class="params">(<span class="string">"word_id"</span>)</span> <span class="keyword">int</span> wordId);</div><div class="line"></div><div class="line">   <span class="meta">@Insert</span>(<span class="string">"INSERT INTO fanyi_symbols(word_id,ph_en,ph_am,ph_en_mp3,ph_am_mp3,ph_tts_mp3)VALUES(#&#123;word_id&#125;,#&#123;ph_en&#125;,#&#123;ph_am&#125;,#&#123;ph_en_mp3&#125;,#&#123;ph_am_mp3&#125;,#&#123;ph_tts_mp3&#125;)"</span>)<span class="comment">//音标资源</span></div><div class="line">   <span class="function"><span class="keyword">int</span> <span class="title">insertSymbols</span><span class="params">(@Param(<span class="string">"word_id"</span>)</span> <span class="keyword">int</span> wordId,</span></div><div class="line">                     @<span class="title">Param</span><span class="params">(<span class="string">"ph_en"</span>)</span> String ph_en,</div><div class="line">                     @<span class="title">Param</span><span class="params">(<span class="string">"ph_am"</span>)</span> String ph_am,</div><div class="line">                     @<span class="title">Param</span><span class="params">(<span class="string">"ph_en_mp3"</span>)</span> String ph_en_mp3,</div><div class="line">                     @<span class="title">Param</span><span class="params">(<span class="string">"ph_am_mp3"</span>)</span> String ph_am_mp3,</div><div class="line">                     @<span class="title">Param</span><span class="params">(<span class="string">"ph_tts_mp3"</span>)</span> String ph_tts_mp3);</div><div class="line"></div><div class="line">   <span class="meta">@Insert</span>(<span class="string">"INSERT INTO fanyi_parts(part,means,word_id)VALUES(#&#123;part&#125;,#&#123;means&#125;,#&#123;word_id&#125;)"</span>)</div><div class="line"><span class="comment">//翻译+词性</span></div><div class="line">   <span class="function"><span class="keyword">int</span> <span class="title">insertParts</span><span class="params">(@Param(<span class="string">"part"</span>)</span>String part,</span></div><div class="line">                   @<span class="title">Param</span><span class="params">(<span class="string">"means"</span>)</span>String means,</div><div class="line">                   @<span class="title">Param</span><span class="params">(<span class="string">"word_id"</span>)</span><span class="keyword">int</span> wordId);</div><div class="line">   <span class="meta">@Insert</span>(<span class="string">"INSERT INTO fanyi_exchange (`word_id`, `word_pl`, `word_past`, `word_done`, `word_ing`, `word_third`, `word_er`, `word_est`, `word_prep`, `word_adv`, `word_verb`, `word_noun`, `word_adj`, `word_conn`)"</span> +</div><div class="line">           <span class="string">"VALUES(#&#123;word_id&#125;,#&#123;word_pl&#125;,#&#123;word_past&#125;,#&#123;word_done&#125;,#&#123;word_ing&#125;,#&#123;word_third&#125;,#&#123;word_er&#125;,#&#123;word_est&#125;,#&#123;word_prep&#125;,#&#123;word_adv&#125;,#&#123;word_verb&#125;,#&#123;word_noun&#125;,#&#123;word_adj&#125;,#&#123;word_conn&#125;)"</span>)<span class="comment">//单词变形</span></div><div class="line">   <span class="function"><span class="keyword">int</span> <span class="title">insertExchange</span><span class="params">(@Param(<span class="string">"word_id"</span>)</span><span class="keyword">int</span> wordId,</span></div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"word_pl"</span>)</span>String word_pl,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"word_past"</span>)</span>String word_past,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"word_done"</span>)</span>String word_done,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"word_ing"</span>)</span>String word_ing,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"word_third"</span>)</span>String word_third,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"word_er"</span>)</span>String word_er,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"word_est"</span>)</span>String word_est,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"word_prep"</span>)</span>String word_prep,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"word_adv"</span>)</span>String word_adv,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"word_verb"</span>)</span>String word_verb,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"word_noun"</span>)</span>String word_noun,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"word_adj"</span>)</span>String word_adj,</div><div class="line">                      @<span class="title">Param</span><span class="params">(<span class="string">"word_conn"</span>)</span>String word_conn);</div><div class="line"></div><div class="line">   <span class="meta">@Select</span>(<span class="string">"SELECT word,id FROM fanyi_word WHERE word = #&#123;word&#125;"</span>)<span class="comment">//检查单词是否存在</span></div><div class="line">   <span class="function">Map <span class="title">checkWord</span><span class="params">(String word)</span></span>;</div></pre></td></tr></table></figure>
+<h1 id="Python-实现方案"><a href="#Python-实现方案" class="headerlink" title="Python    实现方案"></a>Python    实现方案</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> io</div><div class="line"><span class="keyword">import</span> json</div><div class="line"><span class="keyword">import</span> jsonpath</div><div class="line"></div><div class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> get_redis_conn</div><div class="line"><span class="keyword">from</span> examples.iciba.crawler <span class="keyword">import</span> Crawler</div><div class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> mysql_util</div><div class="line"></div><div class="line">sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding=<span class="string">'utf8'</span>)  <span class="comment"># 为了xxl-job输出不出现乱码，格式化为utf8</span></div><div class="line"></div><div class="line">host = <span class="string">'http://www.iciba.com/index.php?&amp;a=getWordMean&amp;c=search&amp;list=1,6,8,10,3005&amp;word='</span></div><div class="line">waiting_set = <span class="string">'iciba:seeds:to_crawl'</span></div><div class="line">seeds_all = <span class="string">'iciba:seeds:all'</span></div><div class="line">info_set = <span class="string">'iciba:info:wordmsg'</span></div><div class="line"></div><div class="line"><span class="comment"># Not considering concurrent security</span></div><div class="line">common_crawler = Crawler()</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_db</span><span class="params">()</span>:</span></div><div class="line">    redis_client = get_redis_conn(db=<span class="number">2</span>)</div><div class="line">    <span class="keyword">return</span> redis_client</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_info</span><span class="params">(word)</span>:</span></div><div class="line">    <span class="string">"""get user info"""</span></div><div class="line">    url = host + word</div><div class="line">    html = common_crawler.get(url)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> html:</div><div class="line">        <span class="keyword">return</span></div><div class="line">    py_obj = json.loads(html.encode(<span class="string">'utf8'</span>))</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        word_name = jsonpath.jsonpath(py_obj, <span class="string">"$.baesInfo.word_name"</span>)  <span class="comment"># 单词名称</span></div><div class="line">        exchanges = jsonpath.jsonpath(py_obj, <span class="string">"$.baesInfo.exchange"</span>)  <span class="comment"># 变形单词</span></div><div class="line">        symbols = jsonpath.jsonpath(py_obj, <span class="string">"$.baesInfo.symbols[0]"</span>)  <span class="comment"># 音标+mp3</span></div><div class="line">        parts = jsonpath.jsonpath(py_obj, <span class="string">"$.baesInfo.symbols[0].parts"</span>)  <span class="comment"># 翻译词性</span></div><div class="line">        translate_result = jsonpath.jsonpath(py_obj, <span class="string">"$.baesInfo.translate_result"</span>)  <span class="comment"># 网络翻译</span></div><div class="line">        is_errno = jsonpath.jsonpath(py_obj, <span class="string">"$.errno"</span>)  <span class="comment"># 单词是否存在</span></div><div class="line"></div><div class="line">        auth_sentence = jsonpath.jsonpath(py_obj, <span class="string">"$.auth_sentence[:3]"</span>)  <span class="comment"># 权威例句</span></div><div class="line">        jushi = jsonpath.jsonpath(py_obj, <span class="string">"$.jushi[:3]"</span>)  <span class="comment"># 句式语法</span></div><div class="line">        sentence = jsonpath.jsonpath(py_obj, <span class="string">"$.sentence[:3]"</span>)  <span class="comment"># 双语例句</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> translate_result <span class="keyword">or</span> is_errno[<span class="number">0</span>] == <span class="number">404</span>:  <span class="comment"># 单词是否错误翻译，使用网络翻译，返回单词id</span></div><div class="line">            print(<span class="string">'单词不存在，单词出错'</span>)</div><div class="line">            <span class="keyword">return</span></div><div class="line">        word_id = mysql_util.insert_word(word_name[<span class="number">0</span>])</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> word_id: <span class="comment">#如果单词已经存在则直接跳出</span></div><div class="line">            <span class="keyword">return</span></div><div class="line">        <span class="keyword">for</span> symbol <span class="keyword">in</span> symbols: <span class="comment">#发音音标</span></div><div class="line">            mysql_util.insert_symbols(word_id, symbol[<span class="string">'ph_en'</span>], symbol[<span class="string">'ph_am'</span>], symbol[<span class="string">'ph_en_mp3'</span>],</div><div class="line">                                      symbol[<span class="string">'ph_am_mp3'</span>], symbol[<span class="string">'ph_tts_mp3'</span>])</div><div class="line"></div><div class="line">        <span class="keyword">for</span> part <span class="keyword">in</span> parts[<span class="number">0</span>]: <span class="comment"># 词性翻译</span></div><div class="line">            mysql_util.insert_parts(word_id, part[<span class="string">'part'</span>], part[<span class="string">'means'</span>])</div><div class="line">        <span class="keyword">if</span>  auth_sentence:</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> auth_sentence:  <span class="comment"># 单词权威例句</span></div><div class="line">                mysql_util.insert_auth_sentence(i[<span class="string">'content'</span>], i[<span class="string">'link'</span>], i[<span class="string">'source'</span>], i[<span class="string">'tts_mp3'</span>], i[<span class="string">'tts_size'</span>], word_id)</div><div class="line">        <span class="keyword">if</span>  jushi:</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> jushi:  <span class="comment"># 句式</span></div><div class="line">                mysql_util.insert_jushi(i[<span class="string">'english'</span>], i[<span class="string">'chinese'</span>], i[<span class="string">'mp3'</span>], word_id)</div><div class="line">        <span class="keyword">if</span>  sentence:</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> sentence:  <span class="comment"># 双语例句</span></div><div class="line">                mysql_util.insert_sentence(i[<span class="string">'Network_en'</span>], i[<span class="string">'Network_cn'</span>], i[<span class="string">'tts_mp3'</span>], i[<span class="string">'tts_size'</span>], word_id)</div><div class="line"></div><div class="line">        <span class="keyword">for</span> exchange <span class="keyword">in</span> exchanges: <span class="comment"># 单词变形 把空数组赋值为NULL，并存入</span></div><div class="line">            <span class="keyword">for</span> key,value <span class="keyword">in</span> exchange.items():</div><div class="line">                <span class="keyword">if</span> <span class="keyword">not</span> value:</div><div class="line">                    exchange[key]=<span class="keyword">None</span></div><div class="line"></div><div class="line">            mysql_util.insert_exchange(word_id, exchange[<span class="string">'word_pl'</span>], exchange[<span class="string">'word_past'</span>], exchange[<span class="string">'word_done'</span>],</div><div class="line">                                       exchange[<span class="string">'word_ing'</span>], exchange[<span class="string">'word_third'</span>], exchange[<span class="string">'word_er'</span>],</div><div class="line">                                       exchange[<span class="string">'word_est'</span>], exchange[<span class="string">'word_prep'</span>], exchange[<span class="string">'word_adv'</span>],</div><div class="line">                                       exchange[<span class="string">'word_verb'</span>], exchange[<span class="string">'word_noun'</span>], exchange[<span class="string">'word_adj'</span>],</div><div class="line">                                       exchange[<span class="string">'word_conn'</span>])</div><div class="line"></div><div class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="line">        print(e)</div><div class="line">        <span class="keyword">return</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> html</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">start</span><span class="params">()</span>:</span></div><div class="line">    redis_client = init_db()</div><div class="line">    <span class="keyword">while</span> <span class="keyword">not</span> redis_client.scard(waiting_set):</div><div class="line">        <span class="comment"># block if there is no seed in waitting_set</span></div><div class="line">        print(<span class="string">"%s里的单词全部跑完，等待下次跑批"</span> % waiting_set)</div><div class="line">        <span class="keyword">return</span></div><div class="line"></div><div class="line">    <span class="comment"># fetch seeds from waitting_set</span></div><div class="line">    word = redis_client.spop(waiting_set).decode()</div><div class="line"></div><div class="line">    print(<span class="string">"正在获取%s单词数据中……"</span> % word)</div><div class="line">    word_data = get_info(word)</div><div class="line">    redis_client.hset(info_set, word, word_data)</div><div class="line">    <span class="comment"># redis_client.sadd(info_set, user)</span></div><div class="line">    print(<span class="string">"%s单词已经保存"</span> % word)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">xxl_job</span><span class="params">()</span>:</span> <span class="comment"># xxl_job调用的函数  waiting_set的单词从Redis里获取然后跑入到MySQL</span></div><div class="line">    redis_conn = init_db()</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> redis_conn.scard(waiting_set):</div><div class="line">            print(<span class="string">"所有单词已经跑完，等待下次跑批"</span>)</div><div class="line">            <span class="keyword">break</span></div><div class="line">        start()</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    init_seeds = [<span class="string">'test'</span>] <span class="comment"># 直接运行测试数据</span></div><div class="line">    redis_conn = init_db()</div><div class="line">    redis_conn.sadd(waiting_set, *init_seeds)</div><div class="line">    redis_conn.sadd(seeds_all, *init_seeds)</div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        start()</div></pre></td></tr></table></figure>
+<h2 id="MySQL-util-py"><a href="#MySQL-util-py" class="headerlink" title="MySQL_util.py"></a>MySQL_util.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> config.settings <span class="keyword">import</span> (MYSQL_DATABASE, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_PROT, MYSQL_USER, MYSQL_CHARSET)</div><div class="line"><span class="keyword">import</span> pymysql.cursors</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_conn_mysql</span><span class="params">()</span>:</span></div><div class="line">    connection = pymysql.connect(host=MYSQL_HOST,</div><div class="line">                                 user=MYSQL_USER,</div><div class="line">                                 port=MYSQL_PROT,</div><div class="line">                                 passwd=MYSQL_PASSWORD,</div><div class="line">                                 db=MYSQL_DATABASE,</div><div class="line">                                 charset=MYSQL_CHARSET)</div><div class="line">    <span class="keyword">return</span> connection</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_word</span><span class="params">(word)</span>:</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        connection = get_conn_mysql()</div><div class="line">        cursor = connection.cursor()</div><div class="line">        insert_word = <span class="string">"INSERT INTO `fanyi_word` (`id`,`word`) VALUES (%s, %s)"</span></div><div class="line">        check_word = <span class="string">"SELECT word FROM `fanyi_word` WHERE word=%s LIMIT 1"</span></div><div class="line">        result = cursor.execute(check_word, word)  <span class="comment"># 检查表内是否有该单词</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> result:</div><div class="line">            cursor.execute(insert_word, (cursor.lastrowid, word))</div><div class="line">            connection.commit()</div><div class="line">            <span class="keyword">return</span> cursor.lastrowid</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span></div><div class="line">    <span class="keyword">finally</span>:</div><div class="line">        connection.close()</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_symbols</span><span class="params">(word_id, ph_en, ph_am, ph_en_mp3, ph_am_mp3, ph_tts_mp3)</span>:</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        connection = get_conn_mysql()</div><div class="line">        cursor = connection.cursor()</div><div class="line">        insert_symbols = <span class="string">"INSERT INTO `fanyi_symbols` (`word_id`, `ph_en`, `ph_am`, `ph_en_mp3`, `ph_am_mp3`, `ph_tts_mp3`) VALUES (%s, %s, %s, %s, %s, %s)"</span></div><div class="line">        cursor.execute(insert_symbols, (word_id, ph_en, ph_am, ph_en_mp3, ph_am_mp3, ph_tts_mp3))</div><div class="line">        connection.commit()</div><div class="line">    <span class="keyword">finally</span>:</div><div class="line">        connection.close()</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_parts</span><span class="params">(word_id, part, means)</span>:</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        connection = get_conn_mysql()</div><div class="line">        cursor = connection.cursor()</div><div class="line">        insert_parts = <span class="string">"INSERT INTO `fanyi_parts` (`part`, `means`, `word_id`) VALUES (%s, %s, %s)"</span></div><div class="line">        means_str = <span class="string">','</span>.join(means)</div><div class="line">        cursor.execute(insert_parts, (part, means_str, word_id))</div><div class="line">        connection.commit()</div><div class="line">    <span class="keyword">finally</span>:</div><div class="line">        connection.close()</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_sentence</span><span class="params">(english, chinese, tts_mp3, tts_size, word_id)</span>:</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        connection = get_conn_mysql()</div><div class="line">        cursor = connection.cursor()</div><div class="line">        insert_sentence = <span class="string">"INSERT INTO `fanyi_sentence` (`english`, `chinese`, `tts_mp3`, `tts_size`, `word_id`) VALUES (%s, %s, %s,%s, %s)"</span></div><div class="line">        cursor.execute(insert_sentence, (english, chinese, tts_mp3, tts_size, word_id))</div><div class="line">        connection.commit()</div><div class="line">    <span class="keyword">finally</span>:</div><div class="line">        connection.close()</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_jushi</span><span class="params">(english, chinese, mp3, word_id)</span>:</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        connection = get_conn_mysql()</div><div class="line">        cursor = connection.cursor()</div><div class="line">        insert_jushi = <span class="string">"INSERT INTO `fanyi_jushi` (`english`, `chinese`, `mp3`, `word_id`) VALUES ( %s, %s,%s, %s)"</span></div><div class="line">        cursor.execute(insert_jushi, (english, chinese, mp3, word_id))</div><div class="line">        connection.commit()</div><div class="line">    <span class="keyword">finally</span>:</div><div class="line">        connection.close()</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_auth_sentence</span><span class="params">(content, link, source, tts_mp3, tts_size, word_id)</span>:</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        connection = get_conn_mysql()</div><div class="line">        cursor = connection.cursor()</div><div class="line">        insert_auth_sentence = <span class="string">"INSERT INTO `fanyi_auth_sentence` (`content`, `link`, `source`, `tts_mp3`, `tts_size`, `word_id`) VALUES (%s, %s,%s, %s,%s,%s)"</span></div><div class="line">        cursor.execute(insert_auth_sentence, (content, link, source, tts_mp3, tts_size, word_id))</div><div class="line">        connection.commit()</div><div class="line">    <span class="keyword">finally</span>:</div><div class="line">        connection.close()</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_exchange</span><span class="params">(word_id, word_pl, word_past, word_done, word_ing, word_third, word_er, word_est, word_prep,</span></span></div><div class="line">                    word_adv, word_verb, word_noun, word_adj, word_conn):</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        connection = get_conn_mysql()</div><div class="line">        cursor = connection.cursor()</div><div class="line">        insert_exchange = <span class="string">"INSERT INTO `fanyi_exchange` (`word_id`, `word_pl`, `word_past`, `word_done`, `word_ing`, `word_third`, `word_er`, `word_est`, `word_prep`, `word_adv`, `word_verb`, `word_noun`, `word_adj`, `word_conn`) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"</span></div><div class="line">        cursor.execute(insert_exchange, (</div><div class="line">        word_id, word_pl, word_past, word_done, word_ing, word_third, word_er, word_est, word_prep, word_adv, word_verb,</div><div class="line">        word_noun, word_adj, word_conn))</div><div class="line">        connection.commit()</div><div class="line">    <span class="keyword">finally</span>:</div><div class="line">        connection.close()</div></pre></td></tr></table></figure>
+<h1 id="使用Spring-Boot-对Redis缓存单词"><a href="#使用Spring-Boot-对Redis缓存单词" class="headerlink" title="使用Spring Boot 对Redis缓存单词"></a>使用Spring Boot 对Redis缓存单词</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xxl.job.executor.mvc.controller;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.EnableAutoConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.RedisConnectionFailureException;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.core.StringRedisTemplate;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PathVariable;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMethod;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</div><div class="line"></div><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="meta">@EnableAutoConfiguration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> StringRedisTemplate stringRedisTemplate;</div><div class="line"></div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/redis/addWord/&#123;value&#125;"</span>, method = RequestMethod.GET)</div><div class="line">    <span class="meta">@ResponseBody</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">redisTest</span><span class="params">(@PathVariable String value)</span> </span>&#123;</div><div class="line">        String waitingSet = <span class="string">"iciba:seeds:to_crawl"</span>;</div><div class="line">        String seedsAll = <span class="string">"iciba:seeds:all"</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            stringRedisTemplate.opsForSet().add(waitingSet, value);</div><div class="line">            stringRedisTemplate.opsForSet().add(seedsAll, value);</div><div class="line">            <span class="keyword">return</span> String.format(<span class="string">"%s已经成功添加！"</span>, value);</div><div class="line">        &#125;<span class="keyword">catch</span> (RedisConnectionFailureException e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">            <span class="keyword">return</span> <span class="string">"redis连接失败"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="使用xxl-job调度中心执行"><a href="#使用xxl-job调度中心执行" class="headerlink" title="使用xxl-job调度中心执行"></a>使用xxl-job调度中心执行</h1><blockquote>
+<p><a href="https://github.com/xuxueli/xxl-job" target="_blank" rel="noopener">https://github.com/xuxueli/xxl-job</a></p>
+</blockquote>
+<ul>
+<li><p>Java ：在xxl-job里运行模式选择Bean模式<br>使用Java版本在调度中心设置JobHandler执行器名称和，并执行器内添加注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@JobHandler</span>(value=<span class="string">"demoJobHandler"</span>)</div></pre></td></tr></table></figure>
+</li>
+<li><p>Python：使用GLUE（Python）模式</p>
+</li>
+</ul>
+<p>注：如果在Linux下Python有多个版本，可以在<code>com.xxl.job.core.glue.GlueTypeEnum</code>下修改脚本执行前缀，如：<code>GLUE_PYTHON(&quot;GLUE(Python)&quot;, true, &quot;python3.6&quot;, &quot;.py&quot;)</code></p>
+<p>GLUE(Python)模式代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/python3.6</div><div class="line"># -*- coding: UTF-8 -*-</div><div class="line">import time</div><div class="line">import sys</div><div class="line">print(sys.stdout)</div><div class="line">sys.path.append(&apos;F:\\workspace\\haipproxy-0.1&apos;) # Windows下的项目路径，Linux下需要更换</div><div class="line">from examples.iciba.iciba_spider import xxl_job</div><div class="line">xxl_job()</div><div class="line">exit(0)</div></pre></td></tr></table></figure>
+<h1 id="使用haipproxy匿名代理爬取"><a href="#使用haipproxy匿名代理爬取" class="headerlink" title="使用haipproxy匿名代理爬取"></a>使用haipproxy匿名代理爬取</h1><blockquote>
+<p><a href="https://github.com/SpiderClub/haipproxy" target="_blank" rel="noopener">https://github.com/SpiderClub/haipproxy</a></p>
+</blockquote>
+<p>这个开源项目爬取一些免费的代理网站，获取代理IP地址，然后对这些IP进行筛选打分，打分策略针对各个IP<code>请求成功率</code>、<code>响应速度</code>、<code>最近验证时间</code>和<code>是否匿名</code>这四个维度。</p>
+<p>这个项目的详细文档在github上的<a href="https://github.com/SpiderClub/haipproxy/tree/master/docs" target="_blank" rel="noopener">wiki</a>里，我在配置一些Python环境和依赖踩了不少坑，为了用这个项目去特意学习了Python和Redis…</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
+          
+            <a href="/tags/iciba/" rel="tag"># iciba</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/23/Spring-boot-入门篇-新建项目/" rel="next" title="Spring boot 入门篇-新建项目">
+                <i class="fa fa-chevron-left"></i> Spring boot 入门篇-新建项目
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/04/vue-element-admin 后台管理框架集成/" rel="prev" title="vue-element-admin 后台管理框架集成">
+                vue-element-admin 后台管理框架集成 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTUyMy82MDkx"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Colorful_Ghost" />
+          <p class="site-author-name" itemprop="name">Colorful_Ghost</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://coding.net/u/Colorful_Ghost" target="_blank" title="Coding">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  Coding
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://steamcommunity.com/id/233000/" target="_blank" title="Steam">
+                  
+                    <i class="fa fa-fw fa-steam"></i>
+                  
+                  Steam
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://wpa.qq.com/msgrd?v=3&uin=815666528&site=qq&menu=yes" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                  QQ
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.xiami.com/radio/play/type/4/oid/37530096?spm=a1z1s.6626009.0.0.0Yy7lG" target="_blank" title="XiaMi">
+                  
+                    <i class="fa fa-fw fa-music"></i>
+                  
+                  XiaMi
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.chaosgoo.com" title="Chaosgoo" target="_blank">Chaosgoo</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ICIBA接口调研"><span class="nav-number">1.</span> <span class="nav-text">ICIBA接口调研</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#访问ICIBA网站接口默认传参URL"><span class="nav-number">1.1.</span> <span class="nav-text">访问ICIBA网站接口默认传参URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口传参意义，分析传参含义"><span class="nav-number">1.2.</span> <span class="nav-text">接口传参意义，分析传参含义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#产品需求数据"><span class="nav-number">2.</span> <span class="nav-text">产品需求数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库设计"><span class="nav-number">3.</span> <span class="nav-text">数据库设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JAVA实现方案"><span class="nav-number">4.</span> <span class="nav-text">JAVA实现方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mapper"><span class="nav-number">4.1.</span> <span class="nav-text">Mapper</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-实现方案"><span class="nav-number">5.</span> <span class="nav-text">Python    实现方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-util-py"><span class="nav-number">5.1.</span> <span class="nav-text">MySQL_util.py</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Spring-Boot-对Redis缓存单词"><span class="nav-number">6.</span> <span class="nav-text">使用Spring Boot 对Redis缓存单词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用xxl-job调度中心执行"><span class="nav-number">7.</span> <span class="nav-text">使用xxl-job调度中心执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用haipproxy匿名代理爬取"><span class="nav-number">8.</span> <span class="nav-text">使用haipproxy匿名代理爬取</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Colorful_Ghost</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+  <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("CMy8p0IKabFrLoxquEPHCG78-gzGzoHsz", "G56Llot2xxWkY6wGYx0pmkpt");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

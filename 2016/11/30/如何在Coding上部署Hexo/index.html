@@ -91,7 +91,7 @@
 <meta name="keywords" content="Hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何在coding上部署hexo">
-<meta property="og:url" content="https://mcat.im/2016/11/30/如何在Coding上部署Hexo/index.html">
+<meta property="og:url" content="http://vimc.cc/2016/11/30/如何在Coding上部署Hexo/index.html">
 <meta property="og:site_name" content="Mcat">
 <meta property="og:description" content="前言 终于完成了！  这是我第一次使用Hexo博客，在对很多内容感觉还是很迷的情况下终于配置完成了Hexo，说来惭愧连MarkDown语法都没熟练掌握就开始想着手写文章了。本鸟也是看见身边不少的朋友在使用Hexo博客心血来潮就想折腾一番，在Windows环境下也踩了很多坑。 关于教程 最好的文档肯定是官方文档 『简体中文Hexo文档』  这一点是毋庸置疑的，但是为了避免踩坑，我还是推荐一开始还是阅">
 <meta property="og:locale" content="zh-Hans">
@@ -126,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="https://mcat.im/2016/11/30/如何在Coding上部署Hexo/"/>
+  <link rel="canonical" href="http://vimc.cc/2016/11/30/如何在Coding上部署Hexo/"/>
 
 
 
@@ -291,7 +291,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://mcat.im/2016/11/30/如何在Coding上部署Hexo/">
+    <link itemprop="mainEntityOfPage" href="http://vimc.cc/2016/11/30/如何在Coding上部署Hexo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Colorful_Ghost">
@@ -366,17 +366,6 @@
           
 
           
-          
-             <span id="/2016/11/30/如何在Coding上部署Hexo/" class="leancloud_visitors" data-flag-title="如何在coding上部署hexo">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
           
 
           
@@ -825,113 +814,6 @@
 
 
   
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("CMy8p0IKabFrLoxquEPHCG78-gzGzoHsz", "G56Llot2xxWkY6wGYx0pmkpt");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
 
   
 

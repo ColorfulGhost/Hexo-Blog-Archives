@@ -291,6 +291,215 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vimc.cc/2017/05/22/Laravel微信公众号开发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我要开始吹逼了">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/22/Laravel微信公众号开发/" itemprop="url">
+                  Laravel微信公众号游戏查询
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-22T08:56:22+08:00">
+                2017-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="环境与部署"><a href="#环境与部署" class="headerlink" title="环境与部署"></a>环境与部署</h2><p>基于Laravel5.4 和 easywechat 框架制作，以下说明了部署过程，框架使用，核心代码，一些问题解决方案。</p>
+<h3 id="环境需求"><a href="#环境需求" class="headerlink" title="环境需求"></a>环境需求</h3><ul>
+<li>PHP &gt;= 5.5.9 (PHP 7 的时代了，我在开发中一直用的PHP7)</li>
+<li>PHP cURL 扩展</li>
+<li>PHP OpenSSL 扩展</li>
+<li>PHP fileinfo 拓展 素材管理模块需要用到（微信公众号权限不够暂时用不到）</li>
+</ul>
+<h3 id="开始部署"><a href="#开始部署" class="headerlink" title="开始部署"></a>开始部署</h3><blockquote>
+<p>安装Laravel框架<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer create-project laravel/laravel wechat --prefer-dist</div></pre></td></tr></table></figure></p>
+<p>安装laravel-wechat框架<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require <span class="string">"overtrue/wechat:~3.3"</span> -vvv</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><blockquote>
+<p>注册服务提供者</p>
+</blockquote>
+<ul>
+<li><p>在目录 <code>config/app.php</code>下<code>providers</code>数组里添加：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Overtrue\LaravelWechat\ServiceProvider::class,</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan vendor:publish --provider=<span class="string">"Overtrue\LaravelWechat\ServiceProvider"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>修改应用根目录下的 config/wechat.php 中对应的项即可；</p>
+</li>
+<li><p>添加外观到 config/app.php 中的 aliases 部分：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'EasyWeChat'</span> =&gt; Overtrue\LaravelWechat\Facade::class,</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><code>ServiceProvider</code>和<code>Facade</code>具体用法看下面的其他<a href="#其他调用SDK方法">其他调用SDK方法</a></li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>Laravel 5.2 以后的版本默认启用了 web 中间件，意味着 CSRF 会默认打开，有两种方案：</p>
+<ol>
+<li><p>在 CSRF 中间件里排除微信相关的路由，添加例外路由，在<code>app\Http\Middleware\VerifyCsrfToken.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> $except = [</div><div class="line">     <span class="string">'wechat'</span></div><div class="line">];</div></pre></td></tr></table></figure>
+</li>
+<li><p>关掉 CSRF 中间件（极不推荐）</p>
+</li>
+</ol>
+<p>路由：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Route::any(<span class="string">'/wechat'</span>, <span class="string">'WechatController@serve'</span>);</div></pre></td></tr></table></figure></p>
+<p>“开发者中心” 修改 “URL（服务器配置）” 为： <a href="http://codinger.cn/wechat" target="_blank" rel="noopener">http://codinger.cn/wechat</a></p>
+<blockquote>
+<p>注意：一定是 Route::any, 因为微信服务端认证的时候是 GET, 接收用户消息时是 POST ！</p>
+</blockquote>
+<p>然后创建控制器 WechatController<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:controller WechatController</div></pre></td></tr></table></figure></p>
+<p>载入第三方类库：</p>
+<p>在控制器目录下创建一个Tools文件夹，放入第三方类库文件夹。这里我使用的是</p>
+<p><a href="https://code.google.com/archive/p/phpquery/downloads" target="_blank" rel="noopener">PHPQuery</a>一个爬网站的工具，写到WechatController里。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">require <span class="string">'Tools\phpQuery\phpQuery.php'</span>;</div></pre></td></tr></table></figure>
+<p>实用composer自动加载，这样我们就可以直接在控制器里使用它了<code>use phpQuery;</code></p>
+<p>因为我要对Minecraft服务端进行获取服务器信息和在线人数，使用一个别人写好的库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer require xpaw/php-minecraft-query</div></pre></td></tr></table></figure></p>
+<p>现在开始写WechatController控制器：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">EasyWeChat</span>\<span class="title">Message</span>\<span class="title">Text</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Log</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">xPaw</span>\<span class="title">MinecraftPing</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">xPaw</span>\<span class="title">MinecraftPingException</span>;</div><div class="line"><span class="keyword">require</span> <span class="string">'Tools\phpQuery\phpQuery.php'</span>;<span class="comment">//抓取网页数据的类</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WechatController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 处理微信的请求消息</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> string</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">serve</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">#  Log::info('响应请求.'); # Log 为 Laravel 组件，所以它记的日志去 Laravel 日志看，而不是 EasyWeChat 日志</span></div><div class="line">        $weChat = app(<span class="string">'wechat'</span>);<span class="comment">//// 从项目实例中得到服务端应用实例。</span></div><div class="line">        $weChat-&gt;server-&gt;setMessageHandler(<span class="function"><span class="keyword">function</span><span class="params">($message)</span></span>&#123;<span class="comment">//使用 setMessageHandler(callable $callback) 来设置消息处理函数</span></div><div class="line">            <span class="keyword">switch</span> ($message-&gt;MsgType)&#123;<span class="comment">//检查消息类型</span></div><div class="line">                <span class="keyword">case</span> <span class="string">'event'</span>:</div><div class="line">                    <span class="keyword">if</span> ($message-&gt;Event == <span class="string">'subscribe'</span>)&#123;</div><div class="line">                        $text = <span class="keyword">new</span> Text([</div><div class="line">                            <span class="string">'content'</span>=&gt;<span class="string">"感谢您关注一言查询机器人\n例:正版玩家Player 查询Minecraft正版玩家\n例:服务器mc.Decraft.cc(默认端口25565) 查询游戏服务器\n还可以用语音来调教我XD\n文字召唤机器人需要在前面加上'小冰'即可"</span></div><div class="line">                        ]);</div><div class="line">                        <span class="keyword">return</span> $text;</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> <span class="string">'text'</span>:</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;pqText($message-&gt;Content); <span class="comment">//对接受的文字内容进行住处理</span></div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> <span class="string">'image'</span>:</div><div class="line">                    <span class="keyword">return</span> <span class="string">'emmm,我没有对图片写相关功能，可以使用机器人查询你想要的图片 '</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> <span class="string">'voice'</span>:</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;pqVoice($message-&gt;Recognition); <span class="comment">//对接受的语音消息转换文字处理</span></div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> <span class="string">'video'</span>:</div><div class="line">                    <span class="keyword">return</span> <span class="string">'因为管理员很懒没有写对视频的功能，如果让我添加也可以哦！'</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> <span class="string">'location'</span>:</div><div class="line">                    <span class="keyword">return</span> <span class="string">'因为管理员很懒没有写对坐标的功能，如果让我添加也可以哦！'</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> <span class="string">'link'</span>:</div><div class="line">                    <span class="keyword">return</span> <span class="string">'因为管理员很懒没有写对链接的功能，如果让我添加也可以哦！'</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="comment">// ... 其它消息</span></div><div class="line">                <span class="keyword">default</span>:</div><div class="line">                    <span class="keyword">return</span> <span class="string">'暂时不支持其它消息'</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        <span class="comment"># Log::info('返回请求完成');</span></div><div class="line"></div><div class="line">        <span class="keyword">return</span> $weChat-&gt;server-&gt;serve();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">pqText</span><span class="params">($content)</span></span>&#123;<span class="comment">//对文字进行匹配，修剪，对空格的删除</span></div><div class="line">         <span class="keyword">if</span> (mb_substr($content,<span class="number">0</span>,<span class="number">4</span>)==<span class="string">'正版玩家'</span>)&#123;</div><div class="line">            $playername = ltrim($content,<span class="string">'正版玩家'</span>);</div><div class="line">            $playername = str_replace(<span class="string">' '</span>,<span class="string">''</span>,$playername);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;playerSearch($playername);</div><div class="line"></div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (mb_substr($content,<span class="number">0</span>,<span class="number">3</span>)==<span class="string">'服务器'</span>)&#123;</div><div class="line">            $address = ltrim($content,<span class="string">'服务器'</span>);</div><div class="line">            $address = str_replace(<span class="string">' '</span>,<span class="string">''</span>,$address);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;serverQuery($address);</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(mb_substr($content,<span class="number">0</span>,<span class="number">2</span>)==<span class="string">'小冰'</span>)&#123;</div><div class="line">            $ice = ltrim($content,<span class="string">'小冰'</span>);</div><div class="line">            $ice = str_replace(<span class="string">' '</span>,<span class="string">''</span>,$ice);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;bot($ice);</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>($content==<span class="string">'一言'</span>)&#123;</div><div class="line">            $hitokoto= <span class="keyword">$this</span>-&gt;hitokoto();</div><div class="line">            <span class="keyword">return</span> $hitokoto[<span class="string">'hitokoto'</span>].<span class="string">"\n                    ——"</span>.$hitokoto[<span class="string">'from'</span>];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span>&#123;<span class="comment">//对其他文字消息进行功能性提示</span></div><div class="line">            $another = <span class="string">"游戏查询功能例如下: \n"</span>;</div><div class="line">            $another.= <span class="string">"正版玩家Colorful_Ghost\n"</span>;</div><div class="line">            $another.= <span class="string">"服务器	mc.Decraft.cc\n"</span>;</div><div class="line">            $another.= <span class="string">"一言\n"</span>;</div><div class="line">            $another.= <span class="string">"额外功能：召唤小冰\n"</span>;</div><div class="line">            $another.= <span class="string">"小冰蚌埠天气怎样\n"</span>;</div><div class="line">            $another.= <span class="string">"小冰水瓶座今日运势\n"</span>;</div><div class="line">            $another.= <span class="string">"小冰蚌埠天气怎样\n"</span>;</div><div class="line">            $another.= <span class="string">"小冰讲个笑话\n"</span>;</div><div class="line">            $another.= <span class="string">"小冰讲个故事\n"</span>;</div><div class="line">            $another.= <span class="string">"小冰成语接龙一诺千金\n"</span>;</div><div class="line">            $another.= <span class="string">"小冰周杰伦这个名字好不好\n"</span>;</div><div class="line">            $another.= <span class="string">"小冰图灵的简介\n"</span>;</div><div class="line">            $another.= <span class="string">"小冰图灵的图片\n"</span>;</div><div class="line">            $another.= <span class="string">"小冰查询快递123456789\n"</span>;</div><div class="line">            $another.= <span class="string">"小冰说个绕口令~\n"</span>;</div><div class="line">            $another.= <span class="string">"现在小冰支持语音功能啦！直接对提问翻译都可以哦！\n"</span>;</div><div class="line">            $another.= <span class="string">"更多功能陆续添加等你测试~\n"</span>;</div><div class="line">            <span class="keyword">return</span> $another;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">pqVoice</span><span class="params">($content)</span></span>&#123;<span class="comment">//对语音消息的处理</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;bot($content);<span class="comment">//把语音消息让机器人处理</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">serverQuery</span><span class="params">($host,$port = <span class="number">25565</span>)</span></span>&#123;<span class="comment">//对Minecraft服务器进行查询,使用了composer第三方包xpaw/php-minecraft-query</span></div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            $query = <span class="keyword">new</span> MinecraftPing($host,$port);</div><div class="line">            <span class="keyword">if</span> (!$query-&gt;Connect()) &#123;</div><div class="line">                $status = $query-&gt;Query();</div><div class="line">                $result = <span class="string">"在线人数:"</span> . $status[<span class="string">'players'</span>][<span class="string">'online'</span>] . <span class="string">'/'</span> . $status[<span class="string">'players'</span>][<span class="string">'max'</span>] . <span class="string">"\n服务器版本:"</span> . $status[<span class="string">'version'</span>][<span class="string">'name'</span>] . <span class="string">"\n服务器简介:"</span> . $status[<span class="string">'description'</span>][<span class="string">'text'</span>];</div><div class="line">                <span class="keyword">return</span> $result;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">return</span> <span class="string">'服务器不存在，或者IP地址错误！'</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;<span class="keyword">catch</span> (MinecraftPingException $e)&#123;</div><div class="line">            Log::info($e-&gt;getMessage());</div><div class="line">        &#125;<span class="keyword">finally</span>&#123;</div><div class="line">           $query-&gt;Close();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">playerSearch</span><span class="params">($player)</span></span>&#123;<span class="comment">//对Minecraft 正版玩家的信息查询，包括玩家用户名 ，UUID,皮肤数据</span></div><div class="line">        \phpQuery::newDocumentFile(<span class="string">'https://mcuuid.net/?q='</span>.$player);<span class="comment">//对mcuuid这个网站进行数据采集工作</span></div><div class="line">        <span class="keyword">if</span>(pq(<span class="string">'h3:first'</span>)-&gt;html()==<span class="string">'Useful Minecraft Resources'</span>)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">'用户不存在,或者请求过多稍后再试'</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            $playerdata[<span class="string">'username'</span>] = pq(<span class="string">'h3:first'</span>)-&gt;html();</div><div class="line">            $playerdata[<span class="string">'uuid'</span>]  = pq(<span class="string">'input.form-control:last'</span>)-&gt;attr(<span class="string">'value'</span>);</div><div class="line">            $playerdata[<span class="string">'skin'</span>]  = pq(<span class="string">'img:last'</span>)-&gt;attr(<span class="string">'src'</span>);</div><div class="line"></div><div class="line">            $result = <span class="string">"玩家用户名:"</span>.$playerdata[<span class="string">'username'</span>].<span class="string">"\n玩家UUID:"</span>.$playerdata[<span class="string">'uuid'</span>].<span class="string">"\n玩家皮肤:"</span>.$playerdata[<span class="string">'skin'</span>];</div><div class="line">            <span class="keyword">return</span> $result;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">hitokoto</span><span class="params">()</span></span>&#123;<span class="comment">//调用一言API,具体API调用方法参考一言API ： http://hitokoto.cn/api</span></div><div class="line">        $url = <span class="string">'http://api.hitokoto.cn/?encode=json'</span>;</div><div class="line">        $json = file_get_contents($url);</div><div class="line">        $objArr = json_decode($json);</div><div class="line">        $hitokoto[<span class="string">'hitokoto'</span>] = $objArr-&gt;hitokoto;</div><div class="line">        $hitokoto[<span class="string">'from'</span>] = $objArr-&gt;from;</div><div class="line">        <span class="keyword">if</span> ($objArr-&gt;hitokoto)&#123;</div><div class="line">            <span class="keyword">return</span> $hitokoto;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">'一言数据获取失败'</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">bot</span><span class="params">($content)</span></span>&#123;<span class="comment">//对图灵机器人的调用</span></div><div class="line">        $url = <span class="string">'http://www.tuling123.com/openapi/api?key=d8f68602b1e32dc211a4d85a87e12c90&amp;info='</span>.$content;</div><div class="line">        $json = file_get_contents($url);</div><div class="line">        $objArr = json_decode($json);</div><div class="line"></div><div class="line">        <span class="keyword">switch</span> ($objArr-&gt;code)&#123;<span class="comment">//机器人一些异常处理返回内容进行匹配</span></div><div class="line">            <span class="keyword">case</span> <span class="number">100000</span>:</div><div class="line">                $text = <span class="keyword">new</span> Text([<span class="string">'content'</span>=&gt;$objArr-&gt;text]);</div><div class="line">                <span class="keyword">return</span> $text;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> <span class="number">200000</span>:</div><div class="line">                $text = <span class="keyword">new</span> Text([<span class="string">'content'</span>=&gt;$objArr-&gt;text.<span class="string">"\n"</span>.$objArr-&gt;url]);</div><div class="line">                <span class="keyword">return</span> $text;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> <span class="number">40001</span>:</div><div class="line">                $text = <span class="keyword">new</span> Text([<span class="string">'content'</span>=&gt;<span class="string">'小冰KEY错误，请联系管理员'</span>]);</div><div class="line">                <span class="keyword">return</span> $text;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> <span class="number">40002</span>:</div><div class="line">                $text = <span class="keyword">new</span> Text([<span class="string">'content'</span>=&gt;<span class="string">'小冰没听清你说的是什么？请说明白一些~'</span>]);</div><div class="line">                <span class="keyword">return</span> $text;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> <span class="number">40004</span>:</div><div class="line">                $text = <span class="keyword">new</span> Text([<span class="string">'content'</span>=&gt;<span class="string">'小冰今天累了~明天再来和我玩吧'</span>]);</div><div class="line">                <span class="keyword">return</span> $text;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> <span class="number">40007</span>:</div><div class="line">                $text = <span class="keyword">new</span> Text([<span class="string">'content'</span>=&gt;<span class="string">'小冰出现了一些异常，请认真对待我！'</span>]);</div><div class="line">                <span class="keyword">return</span> $text;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">default</span>:</div><div class="line">                $text = <span class="keyword">new</span> Text([<span class="string">'content'</span>=&gt;<span class="string">"小冰并不想和你说话，并向你扔了一只猫！"</span>]);</div><div class="line">                <span class="keyword">return</span> $text;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="其他调用SDK方法"><a href="#其他调用SDK方法" class="headerlink" title="其他调用SDK方法"></a>其他调用SDK方法</h2><h3 id="可以通过容器自动注入"><a href="#可以通过容器自动注入" class="headerlink" title="可以通过容器自动注入"></a>可以通过容器自动注入</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">EasyWeChat</span>\<span class="title">Foundation</span>\<span class="title">Application</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WechatController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">demo</span><span class="params">(Application $wechat)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// $wechat 则为容器中 EasyWeChat\Foundation\Application 的实例</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="使用门面-facades"><a href="#使用门面-facades" class="headerlink" title="使用门面(facades)"></a>使用门面(facades)</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$wechatServer = EasyWeChat::server(); <span class="comment">// 服务端</span></div><div class="line">$wechatUser = EasyWeChat::user(); <span class="comment">// 用户服务</span></div></pre></td></tr></table></figure>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>在实际上线的项目 ，有可能会遇到各种问题，所以要开启Log日志debug，我就遇见了SSL证书问题，这里请参考：easyWechat的官方<a href="https://easywechat.org/zh-cn/docs/troubleshooting.html#curl-60-SSL-certificate-problem-unable-to-get-local-issuer-certificate" target="_blank" rel="noopener">疑难解答</a>，来解决这个问题。</p>
+<h2 id="相关API"><a href="#相关API" class="headerlink" title="相关API"></a>相关API</h2><p>Minecraft Mojang 官方API：<a href="https://sessionserver.mojang.com/session/minecraft/profile/" target="_blank" rel="noopener">https://sessionserver.mojang.com/session/minecraft/profile/</a></p>
+<p>第三方Minecraft皮肤查询接口：<a href="https://crafatar.com/" target="_blank" rel="noopener">https://crafatar.com/</a></p>
+<p>图灵机器人API： <a href="http://www.tuling123.com/" target="_blank" rel="noopener">http://www.tuling123.com/</a></p>
+<p>一言API ： <a href="http://hitokoto.cn/api" target="_blank" rel="noopener">http://hitokoto.cn/api</a></p>
+<h2 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h2><blockquote>
+<p>公众号：Game5Hei</p>
+</blockquote>
+<p><img src="http://oqca0721d.bkt.clouddn.com/IMG_0112.PNG" alt="微信消息"></p>
+<p><img src="http://oqca0721d.bkt.clouddn.com/wechat2.png" alt="微信小冰"></p>
+<p><img src="http://oqca0721d.bkt.clouddn.com/kitokoto.png" alt="一言"></p>
+<p><img src="http://oqca0721d.bkt.clouddn.com/424cye1496637209.png" alt="功能翻译"></p>
+<p><img src="http://oqca0721d.bkt.clouddn.com/gnh6gu1496637653.png" alt="高铁路线"></p>
+<p><img src="http://oqca0721d.bkt.clouddn.com/2u4fcy1496638069.png" alt="去哪儿"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vimc.cc/2016/12/28/Laravel-5-3-学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -617,171 +826,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vimc.cc/2016/11/30/如何在Coding上部署Hexo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Colorful_Ghost">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我要开始吹逼了">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/30/如何在Coding上部署Hexo/" itemprop="url">
-                  如何在coding上部署hexo
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-30T10:07:55+08:00">
-                2016-11-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/教程/" itemprop="url" rel="index">
-                    <span itemprop="name">教程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>终于完成了！</p>
-</blockquote>
-<p>这是我第一次使用Hexo博客，在对很多内容感觉还是很迷的情况下终于配置完成了Hexo，说来惭愧连MarkDown语法都没熟练掌握就开始想着手写文章了。本鸟也是看见身边不少的朋友在使用Hexo博客心血来潮就想折腾一番，在Windows环境下也踩了很多坑。</p>
-<h2 id="关于教程"><a href="#关于教程" class="headerlink" title="关于教程"></a>关于教程</h2><blockquote>
-<p>最好的文档肯定是官方文档 <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">『简体中文Hexo文档』</a></p>
-</blockquote>
-<p>这一点是毋庸置疑的，但是为了避免踩坑，我还是推荐一开始还是阅读别人的博客相关文档来解决问题，这里我推荐一个<a href="http://jiji262.github.io/2016/04/15/2016-04-15-hexo-github-pages-blog/" target="_blank" rel="noopener">我认为写的比较好的教程</a>，配合文档阅读效果极佳。</p>
-<h2 id="部署到哪里呢？"><a href="#部署到哪里呢？" class="headerlink" title="部署到哪里呢？"></a>部署到哪里呢？</h2><blockquote>
-<p>被墙的感觉真难受啊。</p>
-</blockquote>
-<p>GitHub国内访问犹如便秘一般，我在这里推荐一个访问比较快的国内Git远程仓库<a href="https://coding.net/" target="_blank" rel="noopener">Coding</a>，不要吐槽和我的域名很像2333。关于Git的教程网上很多，在创建coding-pages服务生成分支后，可以在分支选项卡里切换coding-pages分支为主分支，然后删除master分支[避免强迫症发作]。</p>
-<h2 id="git配置文件修改"><a href="#git配置文件修改" class="headerlink" title="git配置文件修改"></a>git配置文件修改</h2><blockquote>
-<p>_config.yml文件修改</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repo: https://git.coding.net/&lt;Username&gt;/Hexo-Blog.git</div><div class="line">  branch: coding-pages</div></pre></td></tr></table></figure>
-<p>然后把hexo d 推送到coding-pages远程仓库上。</p>
-<h2 id="友情链接"><a href="#友情链接" class="headerlink" title="友情链接"></a>友情链接</h2><p>欢迎各位大佬和本鸟互换友链，本站的主页<a href="http://codinger.cn/" target="_blank" rel="noopener">http://codinger.cn/</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -826,7 +875,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -942,7 +991,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

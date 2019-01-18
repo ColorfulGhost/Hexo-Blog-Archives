@@ -291,6 +291,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vimc.cc/2017/09/21/DF标志和传送指令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我要开始吹逼了">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/09/21/DF标志和传送指令/" itemprop="url">
+                  DF标志和传送指令
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-21T09:47:29+08:00">
+                2017-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/汇编/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="传送命令"><a href="#传送命令" class="headerlink" title="传送命令"></a>传送命令</h3><p>1)movsb</p>
+<p>操作步骤如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1.((es)*16+(di))=((ds)**16+(si))</div><div class="line"></div><div class="line">2.if (df==0)&#123;</div><div class="line"> (si)=+1</div><div class="line"> (di)=+1</div><div class="line">&#125;</div><div class="line">if(df==1)&#123;</div><div class="line"> (si)=+1</div><div class="line"> (di)=+1</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2)movsw<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1.((es)*16+(di))=((ds)**16+(si))</div><div class="line"></div><div class="line">2.if (df==0)&#123;</div><div class="line"> (si)=+2</div><div class="line"> (di)=+2</div><div class="line">&#125;</div><div class="line">if(df==1)&#123;</div><div class="line"> (si)=-2</div><div class="line"> (di)=-2</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>设置DF标志：<em>cld;DF=0</em> ,<em>std;DF=1</em></p>
+<h3 id="编程"><a href="#编程" class="headerlink" title="编程"></a>编程</h3><p>用传送命令，将data段中的第一个字符串复制到他后面的空间中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">assume cs:code</div><div class="line"></div><div class="line">data segment</div><div class="line">db &apos;Welcome to masm!&apos;</div><div class="line">db 16 dup (0)</div><div class="line">data ends</div><div class="line"></div><div class="line">code segment</div><div class="line">start: mov ax,data</div><div class="line">	   mov ds,ax</div><div class="line">	   mov si,0</div><div class="line">	   mov es,ax</div><div class="line">	   mov di,16</div><div class="line">	   mov cx,16</div><div class="line">	   cld ;df=0正向传送</div><div class="line">	   rep movsb</div><div class="line">	   </div><div class="line">	   mov ax,4c00h;</div><div class="line">	   int 21;</div><div class="line">	   </div><div class="line">code ends</div><div class="line">end start</div></pre></td></tr></table></figure>
+<p><img src="http://oqca0721d.bkt.clouddn.com/bskobm1505961075.png" alt="11.10"></p>
+<p>用传送指令，把F000H段中的最后16个字符复制到data段中</p>
+<p><img src="http://oqca0721d.bkt.clouddn.com/w2kddy1505961947.png" alt="11.10.2"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vimc.cc/2017/09/09/检测比较结果条件转移指令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -581,167 +733,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vimc.cc/2017/08/21/灵活的定位内存地址/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Colorful_Ghost">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我要开始吹逼了">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/21/灵活的定位内存地址/" itemprop="url">
-                  更灵活的定位内存地址的方法
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T12:01:00+08:00">
-                2017-08-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/汇编/" itemprop="url" rel="index">
-                    <span itemprop="name">汇编</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="更灵活的定位内存地址的方法"><a href="#更灵活的定位内存地址的方法" class="headerlink" title="更灵活的定位内存地址的方法"></a>更灵活的定位内存地址的方法</h2><h3 id="汇编大小写转换"><a href="#汇编大小写转换" class="headerlink" title="汇编大小写转换"></a>汇编大小写转换</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">assume cs:code,ds:data</div><div class="line">data segment</div><div class="line">db 'BaSiC' ;把这个字符串全部变为大写</div><div class="line">db 'iNfOrMaTiOn' ;把这个字符串全部变为小写</div><div class="line">data ends</div><div class="line">code segment</div><div class="line">start:  mov ax,data	 ;获取数据代码段地址</div><div class="line">		mov ds,ax 	 ;把代码段地址传送到数据寄存器</div><div class="line">		mov bx,0	 ;初始化基地址寄存器  笔记（ds与bx配合，es与dx配合，cx作为计数器）</div><div class="line">		mov cx,5</div><div class="line">s: 		mov al,[bx]  ;循环体</div><div class="line">		and al,11011111b ;b是二进制 对al的值进行位与运算取反</div><div class="line">		mov [bx],al</div><div class="line">		inc bx</div><div class="line">		loop s</div><div class="line">		</div><div class="line">		mov bx,5	;指向下一个字符串</div><div class="line">		mov cx,11	;循环11次</div><div class="line">		</div><div class="line">s1:		mov al,[bx]</div><div class="line">		or al,00100000b	;对al的值进行位或运算取反 </div><div class="line">		mov [bx],al</div><div class="line">		inc bx</div><div class="line">		loop s1</div><div class="line">		mov ax,4c00h</div><div class="line">		int 21</div><div class="line">code ends</div><div class="line">end start</div></pre></td></tr></table></figure>
-<h3 id="使用-bx-idata-的方法优化程序"><a href="#使用-bx-idata-的方法优化程序" class="headerlink" title="使用[bx+idata]的方法优化程序"></a>使用[bx+idata]的方法优化程序</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">assume cs:code,ds:data</div><div class="line">data segment</div><div class="line">db 'BaSiC'</div><div class="line">db 'MinIX'</div><div class="line">data ends</div><div class="line">code segment</div><div class="line">start: mov ax,data</div><div class="line">	mov ds,ax</div><div class="line">	mov bx,0</div><div class="line">	mov cx,5</div><div class="line">	s: mov al,[bx]</div><div class="line">	and al,11011111b</div><div class="line">	mov [bx],al</div><div class="line">	</div><div class="line">	mov al,[5+bx]</div><div class="line">	or al,00100000b</div><div class="line">	mov [5+bx],al</div><div class="line">	inc bx</div><div class="line">	loop s</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">code ends</div><div class="line">end start</div></pre></td></tr></table></figure>
-<p><img src="http://oqca0721d.bkt.clouddn.com/wwtpxy1503303934.png" alt="结果"></p>
-<h3 id="SI-AND-DI"><a href="#SI-AND-DI" class="headerlink" title="SI AND DI"></a>SI AND DI</h3><p>si和di不能分成2个8位寄存器，也就是不能进行<code>mov al,[si]</code> ,<code>mov al,[di]</code>这样的操作，下面写一个栗子~</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">assume cs:codesm,ds:datasg</div><div class="line">datasg segment</div><div class="line">db &apos;welcome to masm!&apos;</div><div class="line">db &apos;................&apos;</div><div class="line">datasg ends</div><div class="line"></div><div class="line">codesm segment</div><div class="line">start: mov ax,datasg</div><div class="line">	mov ds,ax</div><div class="line">	mov si,0</div><div class="line">	mov di,16	</div><div class="line">	mov cx,8</div><div class="line">	</div><div class="line">s:	mov ax,[si]</div><div class="line">	mov [di],ax</div><div class="line">	add si,2</div><div class="line">	add di,2</div><div class="line">	loop s</div><div class="line">	</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">	</div><div class="line">codesm ends</div><div class="line">end start</div></pre></td></tr></table></figure>
-<p>上面的代码可以看出si,di递增为2 ，循环次数也缩短了一倍，用16位寄存器进行内存单元之间的数据传送一次复制2 个字节，一共循环八次。</p>
-<p>再次优化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">assume cs:codesm,ds:datasg</div><div class="line">datasg segment</div><div class="line">db &apos;welcome to masm!&apos;</div><div class="line">db &apos;................&apos;</div><div class="line">datasg ends</div><div class="line"></div><div class="line">codesm segment</div><div class="line">start: mov ax,datasg</div><div class="line">	mov ds,ax</div><div class="line">	mov si,0</div><div class="line">	mov cx,8</div><div class="line">	</div><div class="line">s:	mov ax,[si]</div><div class="line">	mov [si+16],ax</div><div class="line">	inc si,2</div><div class="line">	loop s</div><div class="line">	</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">	</div><div class="line">codesm ends</div><div class="line">end start</div></pre></td></tr></table></figure></p>
-<h3 id="将字符串头一个字母改为大写"><a href="#将字符串头一个字母改为大写" class="headerlink" title="将字符串头一个字母改为大写"></a>将字符串头一个字母改为大写</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">assume cs:codesg,ds:datasg</div><div class="line">datasg segment</div><div class="line">db &apos;1. file         &apos;</div><div class="line">db &apos;2. edit         &apos;</div><div class="line">db &apos;3. search       &apos;</div><div class="line">db &apos;4. view         &apos;</div><div class="line">db &apos;5. options      &apos;</div><div class="line">db &apos;6. help         &apos;</div><div class="line">datasg ends</div><div class="line"></div><div class="line">codesg segment</div><div class="line">start: mov ax,datasg</div><div class="line">	mov ds,ax</div><div class="line">	mov bx,0</div><div class="line">	mov cx,6</div><div class="line">	mov si,3</div><div class="line"></div><div class="line">s:	mov al,[bx][si]</div><div class="line">	and al,11011111b</div><div class="line">	mov [bx][si],al</div><div class="line">	add bx,16</div><div class="line">	</div><div class="line">	loop s</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">codesg ends</div><div class="line">end start</div></pre></td></tr></table></figure>
-<p><img src="http://oqca0721d.bkt.clouddn.com/bj264i1503359790.png" alt="结果"></p>
-<h3 id="嵌套循环-把datasg每个单词改为大写"><a href="#嵌套循环-把datasg每个单词改为大写" class="headerlink" title="嵌套循环(把datasg每个单词改为大写)"></a>嵌套循环(把datasg每个单词改为大写)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">assume cs:codesg,ds:datasg</div><div class="line">datasg segment</div><div class="line">db &apos;ibm             &apos;</div><div class="line">db &apos;dec             &apos;</div><div class="line">db &apos;dos             &apos;</div><div class="line">db &apos;vax             &apos;</div><div class="line">datasg ends</div><div class="line"></div><div class="line">codesg segment</div><div class="line">start: mov ax,datasg</div><div class="line">	mov ds,ax</div><div class="line">	mov bx,0</div><div class="line">	mov cx,4	;外层循环4次</div><div class="line">s:	mov dx,cx	;因为进行下一次循环不能保存CX利用dx暂存</div><div class="line">	mov si,0</div><div class="line">	mov cx,3	;内层循环3次</div><div class="line">s0:	mov al,[bx][si]	</div><div class="line">	and al,11011111b</div><div class="line">	mov [bx][si],al</div><div class="line">	inc si</div><div class="line">loop s0</div><div class="line">	add bx,16	;每次内循环完成偏移到下一段字符串</div><div class="line">	mov cx,dx</div><div class="line">loop s</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">	</div><div class="line">codesg ends</div><div class="line">end start</div></pre></td></tr></table></figure>
-<p>讲道理汇编的嵌套循环有点不习惯….<br>这只是2层嵌套 如果更多嵌套则寄存器不够用，这时候我们就不能用寄存器来暂存CX了</p>
-<h3 id="用栈来处理cx缓存问题"><a href="#用栈来处理cx缓存问题" class="headerlink" title="用栈来处理cx缓存问题"></a>用栈来处理cx缓存问题</h3><p>将datasg数据段每个单词前4个字幕改为大写</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">assume cs:codesg,ds:datasg,ss:stacksg</div><div class="line">datasg segment</div><div class="line">db &apos;1. display      &apos;</div><div class="line">db &apos;2. brows        &apos;</div><div class="line">db &apos;3. replace      &apos;</div><div class="line">db &apos;4. modify       &apos;</div><div class="line">datasg ends</div><div class="line"></div><div class="line">stacksg segment</div><div class="line">dw 0,0,0,0,0,0,0,0</div><div class="line">stacksg ends</div><div class="line"></div><div class="line">codesg segment</div><div class="line">start: mov ax,datasg</div><div class="line">	mov ds,ax</div><div class="line">	mov bx,0</div><div class="line">	mov cx,4</div><div class="line">	</div><div class="line">i0: mov ax,[bx]</div><div class="line">	push cx				;保存外层循环次数</div><div class="line">	mov cx,2			;初始化内层循环次数</div><div class="line">	mov di,0</div><div class="line">i1:	mov ax,[bx][3][di]	; (ax)=(bx)+(di)+3</div><div class="line">	and al,11011111b	; 因为di是16位寄存器所以要利用把ax拆开与运算</div><div class="line">	and ah,11011111b	;这样做的目的是为了减少循环次数</div><div class="line">	mov [bx][3][di],ax	;把处理后的ax传送到原来的位置</div><div class="line">	add di,2			;(di)=(di)+2  di地址偏移2个字单元</div><div class="line">	loop i1</div><div class="line"></div><div class="line">	add bx,16			;把基地址便宜到下一行字符串</div><div class="line">	pop cx				;把刚才push的cx出栈</div><div class="line">	</div><div class="line">	loop i0</div><div class="line">	mov ax,4c00h</div><div class="line">	int 21</div><div class="line">	</div><div class="line">codesg ends</div><div class="line">end start</div></pre></td></tr></table></figure>
-<p><img src="http://oqca0721d.bkt.clouddn.com/sjl4nu1503451008.png" alt="实验6"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -786,7 +782,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -902,7 +898,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

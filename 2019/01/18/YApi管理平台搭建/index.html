@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo,">
+  <meta name="keywords" content="mcat">
 
 
 
@@ -87,18 +87,17 @@
 
 
 
-<meta name="description" content="前言 终于完成了！  这是我第一次使用Hexo博客，在对很多内容感觉还是很迷的情况下终于配置完成了Hexo，说来惭愧连MarkDown语法都没熟练掌握就开始想着手写文章了。本鸟也是看见身边不少的朋友在使用Hexo博客心血来潮就想折腾一番，在Windows环境下也踩了很多坑。 关于教程 最好的文档肯定是官方文档 『简体中文Hexo文档』  这一点是毋庸置疑的，但是为了避免踩坑，我还是推荐一开始还是阅">
-<meta name="keywords" content="Hexo">
+<meta name="description" content="YApi 管理平台搭建YApi是我在github上逛了一圈感觉还不错API管理平台，就是功能比较复杂使用的学习成本比较高。 以下操作是在CentOS上进行搭建。 Nodejs环境搭建注意：国内第一个方案可能不能使用 第一个方案1curl -sL https://rpm.nodesource.com/setup_11.x | sudo bash - 1sudo yum install nodejs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何在coding上部署hexo">
-<meta property="og:url" content="http://blog.vimc.cc/2016/11/30/如何在Coding上部署Hexo/index.html">
+<meta property="og:title" content="YApi管理平台搭建">
+<meta property="og:url" content="http://blog.vimc.cc/2019/01/18/YApi管理平台搭建/index.html">
 <meta property="og:site_name" content="你的口袋有什么？">
-<meta property="og:description" content="前言 终于完成了！  这是我第一次使用Hexo博客，在对很多内容感觉还是很迷的情况下终于配置完成了Hexo，说来惭愧连MarkDown语法都没熟练掌握就开始想着手写文章了。本鸟也是看见身边不少的朋友在使用Hexo博客心血来潮就想折腾一番，在Windows环境下也踩了很多坑。 关于教程 最好的文档肯定是官方文档 『简体中文Hexo文档』  这一点是毋庸置疑的，但是为了避免踩坑，我还是推荐一开始还是阅">
+<meta property="og:description" content="YApi 管理平台搭建YApi是我在github上逛了一圈感觉还不错API管理平台，就是功能比较复杂使用的学习成本比较高。 以下操作是在CentOS上进行搭建。 Nodejs环境搭建注意：国内第一个方案可能不能使用 第一个方案1curl -sL https://rpm.nodesource.com/setup_11.x | sudo bash - 1sudo yum install nodejs">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2016-12-22T02:11:24.000Z">
+<meta property="og:updated_time" content="2019-02-16T07:23:06.039Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何在coding上部署hexo">
-<meta name="twitter:description" content="前言 终于完成了！  这是我第一次使用Hexo博客，在对很多内容感觉还是很迷的情况下终于配置完成了Hexo，说来惭愧连MarkDown语法都没熟练掌握就开始想着手写文章了。本鸟也是看见身边不少的朋友在使用Hexo博客心血来潮就想折腾一番，在Windows环境下也踩了很多坑。 关于教程 最好的文档肯定是官方文档 『简体中文Hexo文档』  这一点是毋庸置疑的，但是为了避免踩坑，我还是推荐一开始还是阅">
+<meta name="twitter:title" content="YApi管理平台搭建">
+<meta name="twitter:description" content="YApi 管理平台搭建YApi是我在github上逛了一圈感觉还不错API管理平台，就是功能比较复杂使用的学习成本比较高。 以下操作是在CentOS上进行搭建。 Nodejs环境搭建注意：国内第一个方案可能不能使用 第一个方案1curl -sL https://rpm.nodesource.com/setup_11.x | sudo bash - 1sudo yum install nodejs">
 
 
 
@@ -126,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.vimc.cc/2016/11/30/如何在Coding上部署Hexo/">
+  <link rel="canonical" href="http://blog.vimc.cc/2019/01/18/YApi管理平台搭建/">
 
 
 
 
 
-  <title> 如何在coding上部署hexo | 你的口袋有什么？ </title>
+  <title> YApi管理平台搭建 | 你的口袋有什么？ </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -291,7 +290,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://blog.vimc.cc/2016/11/30/如何在Coding上部署Hexo/">
+    <link itemprop="mainEntityOfPage" href="http://blog.vimc.cc/2019/01/18/YApi管理平台搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Colorful_Ghost">
@@ -312,7 +311,7 @@
             
             
               
-                如何在coding上部署hexo
+                YApi管理平台搭建
               
             
           </h2>
@@ -327,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-30T10:07:55+08:00">
-                2016-11-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T12:14:39+08:00">
+                2019-01-18
               </time>
             
 
@@ -337,28 +336,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/教程/" itemprop="url" rel="index">
-                    <span itemprop="name">教程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -385,24 +362,50 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>终于完成了！</p>
-</blockquote>
-<p>这是我第一次使用Hexo博客，在对很多内容感觉还是很迷的情况下终于配置完成了Hexo，说来惭愧连MarkDown语法都没熟练掌握就开始想着手写文章了。本鸟也是看见身边不少的朋友在使用Hexo博客心血来潮就想折腾一番，在Windows环境下也踩了很多坑。</p>
-<h2 id="关于教程"><a href="#关于教程" class="headerlink" title="关于教程"></a>关于教程</h2><blockquote>
-<p>最好的文档肯定是官方文档 <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">『简体中文Hexo文档』</a></p>
-</blockquote>
-<p>这一点是毋庸置疑的，但是为了避免踩坑，我还是推荐一开始还是阅读别人的博客相关文档来解决问题，这里我推荐一个<a href="http://jiji262.github.io/2016/04/15/2016-04-15-hexo-github-pages-blog/" target="_blank" rel="noopener">我认为写的比较好的教程</a>，配合文档阅读效果极佳。</p>
-<h2 id="部署到哪里呢？"><a href="#部署到哪里呢？" class="headerlink" title="部署到哪里呢？"></a>部署到哪里呢？</h2><blockquote>
-<p>被墙的感觉真难受啊。</p>
-</blockquote>
-<p>GitHub国内访问犹如便秘一般，我在这里推荐一个访问比较快的国内Git远程仓库<a href="https://coding.net/" target="_blank" rel="noopener">Coding</a>，不要吐槽和我的域名很像2333。关于Git的教程网上很多，在创建coding-pages服务生成分支后，可以在分支选项卡里切换coding-pages分支为主分支，然后删除master分支[避免强迫症发作]。</p>
-<h2 id="git配置文件修改"><a href="#git配置文件修改" class="headerlink" title="git配置文件修改"></a>git配置文件修改</h2><blockquote>
-<p>_config.yml文件修改</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://git.coding.net/&lt;Username&gt;/Hexo-Blog.git</span><br><span class="line">  branch: coding-pages</span><br></pre></td></tr></table></figure>
-<p>然后把hexo d 推送到coding-pages远程仓库上。</p>
-<h2 id="友情链接"><a href="#友情链接" class="headerlink" title="友情链接"></a>友情链接</h2><p>欢迎各位大佬和本鸟互换友链，本站的主页<a href="http://codinger.cn/" target="_blank" rel="noopener">http://codinger.cn/</a></p>
+        <h1 id="YApi-管理平台搭建"><a href="#YApi-管理平台搭建" class="headerlink" title="YApi 管理平台搭建"></a>YApi 管理平台搭建</h1><p>YApi是我在github上逛了一圈感觉还不错API管理平台，就是功能比较复杂使用的学习成本比较高。</p>
+<p>以下操作是在CentOS上进行搭建。</p>
+<h2 id="Nodejs环境搭建"><a href="#Nodejs环境搭建" class="headerlink" title="Nodejs环境搭建"></a>Nodejs环境搭建</h2><p><strong>注意：国内第一个方案可能不能使用</strong></p>
+<h3 id="第一个方案"><a href="#第一个方案" class="headerlink" title="第一个方案"></a>第一个方案</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sL https://rpm.nodesource.com/setup_11.x | sudo bash -</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install nodejs</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node --version</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出 v11.1.0</span></span><br></pre></td></tr></table></figure>
+<p>​    由于国内大墙，在使用yum安装最新的Nodejs会遇到一些坑。 本应该是这样 ，但是rpm.nodesource.com必须挂代理才能正常连接，所以我换了个更好的方案。</p>
+<h3 id="第二个方案：NVM（Node-Version-Manager）安装"><a href="#第二个方案：NVM（Node-Version-Manager）安装" class="headerlink" title="第二个方案：NVM（Node Version Manager）安装"></a>第二个方案：NVM（Node Version Manager）安装</h3><p>项目地址：<a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">https://github.com/creationix/nvm</a></p>
+<ol>
+<li>安装脚本：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash</span><br></pre></td></tr></table></figure>
+<p>出现以下内容<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Close and reopen your terminal to start using nvm</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>运行如下命令</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+<ol>
+<li>验证安装</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm --version</span><br></pre></td></tr></table></figure>
+<h2 id="MongoDB-4-0安装"><a href="#MongoDB-4-0安装" class="headerlink" title="MongoDB 4.0安装"></a>MongoDB 4.0安装</h2><p>本来我是按照<a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/" target="_blank" rel="noopener">官方教程</a>走的但是国内大墙我实在是佩服（时间都浪费在找镜像上）….最后找到了阿里的镜像….</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
+<li><p>添加yum</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/yum.repos.d/mongodb-org-4.0.repo</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增如下配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[mngodb-org]</span><br><span class="line">name=MongoDB Repository</span><br><span class="line">baseurl=http://mirrors.aliyun.com/mongodb/yum/redhat/7Server/mongodb-org/4.0/x86_64/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>3.更新安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum -y install mongodb-org</span><br></pre></td></tr></table></figure>
+<p>4.查看mongo安装位置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">whereis mongod</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出</span></span><br><span class="line">mongod: /usr/bin/mongod /etc/mongod.conf /usr/share/man/man1/mongod.1</span><br></pre></td></tr></table></figure>
+<p>5.修改配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/mongod.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改如下内容</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bindIp: 172.0.0.1  改为 bindIp: 0.0.0.0</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>启动MongoDB<br>启动mongodb ：systemctl start mongod.service<br>停止mongodb ：systemctl stop mongod.service<br>查看mongodb的状态：systemctl status mongod.service</li>
+</ol>
+<h2 id="API管理平台搭建"><a href="#API管理平台搭建" class="headerlink" title="API管理平台搭建"></a>API管理平台搭建</h2><p>项目地址：<a href="https://github.com/YMFE/yapi" target="_blank" rel="noopener">https://github.com/YMFE/yapi</a></p>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g yapi-cli --registry https://registry.npm.taobao.org</span><br><span class="line">yapi server</span><br></pre></td></tr></table></figure>
+<p>然后到安装目录下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvm install node</span><br><span class="line">node vendors/server/app.js</span><br></pre></td></tr></table></figure>
+<p>然后在浏览器打开 <a href="http://127.0.0.1:3000" target="_blank" rel="noopener">http://127.0.0.1:3000</a> 访问</p>
 
       
     </div>
@@ -430,12 +433,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
-          
-        </div>
-      
 
       
         
@@ -445,15 +442,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/12/26/使用Docker部署MySQL/" rel="next" title="使用Docker部署MySQL">
+                <i class="fa fa-chevron-left"></i> 使用Docker部署MySQL
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/20/Chrome浏览器出现Flash已过期/" rel="prev" title="Chrome浏览器出现Flash已过期">
-                Chrome浏览器出现Flash已过期 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -625,7 +622,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于教程"><span class="nav-number">2.</span> <span class="nav-text">关于教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署到哪里呢？"><span class="nav-number">3.</span> <span class="nav-text">部署到哪里呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git配置文件修改"><span class="nav-number">4.</span> <span class="nav-text">git配置文件修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#友情链接"><span class="nav-number">5.</span> <span class="nav-text">友情链接</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#YApi-管理平台搭建"><span class="nav-number">1.</span> <span class="nav-text">YApi 管理平台搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nodejs环境搭建"><span class="nav-number">1.1.</span> <span class="nav-text">Nodejs环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一个方案"><span class="nav-number">1.1.1.</span> <span class="nav-text">第一个方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二个方案：NVM（Node-Version-Manager）安装"><span class="nav-number">1.1.2.</span> <span class="nav-text">第二个方案：NVM（Node Version Manager）安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB-4-0安装"><span class="nav-number">1.2.</span> <span class="nav-text">MongoDB 4.0安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.2.1.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API管理平台搭建"><span class="nav-number">1.3.</span> <span class="nav-text">API管理平台搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">安装</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

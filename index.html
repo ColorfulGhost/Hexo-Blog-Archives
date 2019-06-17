@@ -135,6 +135,13 @@
   
 <script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js"></script>
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6875400535301032",
+    enable_page_level_ads: true
+  });
+</script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -297,6 +304,148 @@
             
 
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2019/03/11/使用crontab定时备份MySQL数据库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="你的口袋有什么？">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/03/11/使用crontab定时备份MySQL数据库/" itemprop="url">
+                  使用crontab定时备份MySQL数据库
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T19:47:42+08:00">
+                2019-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/03/11/使用crontab定时备份MySQL数据库/" class="leancloud_visitors" data-flag-title="使用crontab定时备份MySQL数据库">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 				<span class="post-meta-divider">|</span>
+<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 117</span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="定时备份"><a href="#定时备份" class="headerlink" title="定时备份"></a>定时备份</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">mysqldump --opt -Q -uroot -ppassword --default-character-set=utf8mb4 $(datatable) &gt; /$(pwd)/$(file_name)_$(date "+%Y%m%d_%H:%M").sql</span><br></pre></td></tr></table></figure>
+<h3 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h3><ol>
+<li><strong>–opt</strong>起到优化的作用，和–add-drop-table, –add-locks, –create-options, –skip-opt作用相似。</li>
+<li><strong>-Q</strong>将表名和列名使用 <code></code>包裹。以防他们是关键字时报错。</li>
+<li><strong>–default-character-set</strong> 设置导出的字符集</li>
+</ol>
+<h2 id="删除沉余备份"><a href="#删除沉余备份" class="headerlink" title="删除沉余备份"></a>删除沉余备份</h2><p>删除30天前备份的沉余数据</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">find /$(pwd) -name '*.sql' -mtime +30 -exec rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+	  
     
       
 
@@ -772,174 +921,6 @@
 
 	  
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2018/12/26/使用Docker部署MySQL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Colorful_Ghost">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="你的口袋有什么？">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/12/26/使用Docker部署MySQL/" itemprop="url">
-                  使用Docker部署MySQL
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-26T15:01:59+08:00">
-                2018-12-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/12/26/使用Docker部署MySQL/" class="leancloud_visitors" data-flag-title="使用Docker部署MySQL">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-				 				<span class="post-meta-divider">|</span>
-<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 713</span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="卸载旧版本Docker（如果没有安装过跳过）"><a href="#卸载旧版本Docker（如果没有安装过跳过）" class="headerlink" title="卸载旧版本Docker（如果没有安装过跳过）"></a>卸载旧版本Docker（如果没有安装过跳过）</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo yum remove docker \</span></span><br><span class="line">                  docker-client \</span><br><span class="line">                  docker-client-latest \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-latest \</span><br><span class="line">                  docker-latest-logrotate \</span><br><span class="line">                  docker-logrotate \</span><br><span class="line">                  docker-selinux \</span><br><span class="line">                  docker-engine-selinux \</span><br><span class="line">                  docker-engine</span><br></pre></td></tr></table></figure>
-<h2 id="安装Docker-CE"><a href="#安装Docker-CE" class="headerlink" title="安装Docker CE"></a>安装Docker CE</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> step 1: 安装必要的一些系统工具</span></span><br><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"><span class="meta">#</span><span class="bash"> Step 2: 添加软件源信息 这里推荐国内阿里的镜像</span></span><br><span class="line">sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line"><span class="meta">#</span><span class="bash"> Step 3: 更新并安装 Docker-CE</span></span><br><span class="line">sudo yum makecache fast</span><br><span class="line">sudo yum -y install docker-ce</span><br><span class="line"><span class="meta">#</span><span class="bash"> Step 4: 开启Docker服务</span></span><br><span class="line">sudo service docker start</span><br></pre></td></tr></table></figure>
-<h2 id="获取MySQL的Docker镜像"><a href="#获取MySQL的Docker镜像" class="headerlink" title="获取MySQL的Docker镜像"></a>获取MySQL的Docker镜像</h2><h3 id="找到MySQL的镜像仓库"><a href="#找到MySQL的镜像仓库" class="headerlink" title="找到MySQL的镜像仓库"></a>找到MySQL的镜像仓库</h3><p>MySQL镜像仓库：<a href="https://hub.docker.com/_/mysql" target="_blank" rel="noopener">https://hub.docker.com/_/mysql</a></p>
-<h2 id="创建MySQL容器"><a href="#创建MySQL容器" class="headerlink" title="创建MySQL容器"></a>创建MySQL容器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -p 把宿主机器的端口桥接到容器内的端口内 </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -- name 指的是你的docker container name</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -v 把宿主机器的文件挂载到容器内达到容器内容的数据能持久化到宿主机器上</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 关于-v参数Docker Volume 可以查看这篇文章  http://dockone.io/article/128</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -e 配置参数</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="variable">$PWD</span> 你持久化文件路径地址</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -d --detach=<span class="literal">false</span>  指定容器运行于前台还是后台，默认为<span class="literal">false</span>   </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> docker run 命令常见参数参考https://blog.csdn.net/kunloz520/article/details/53839237</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mysql:latest mysql镜像:版本 会指定从镜像仓库拉取5.7版本为基础的镜像后运行容器</span></span><br><span class="line">docker run -p 3306:3306 --name mysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7</span><br></pre></td></tr></table></figure>
-<h2 id="查看Docker运行状态"><a href="#查看Docker运行状态" class="headerlink" title="查看Docker运行状态"></a>查看Docker运行状态</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@middlehomework-no docker-mysql]# docker ps -a</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                               NAMES</span><br><span class="line">b2291bf42076        mysql:5.7           "docker-entrypoint.s…"   5 minutes ago       Up 5 minutes        0.0.0.0:3306-&gt;3306/tcp, 33060/tcp   mysql</span><br></pre></td></tr></table></figure>
-<h2 id="检查端口是否正常开放"><a href="#检查端口是否正常开放" class="headerlink" title="检查端口是否正常开放"></a>检查端口是否正常开放</h2><p>iptables配置：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -L</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果没有则开通端口</span></span><br><span class="line">iptables -A INPUT -p tcp --dport 3306 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p tcp --sport 3306 -j ACCEPT</span><br></pre></td></tr></table></figure>
-<p>CentOS7用户firewalld配置:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看所有打开的端口</span></span><br><span class="line">firewall-cmd --zone=public --list-ports</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果没有3306端口则开通端口</span></span><br><span class="line">firewall-cmd --zone=public --add-port=3306/tcp --permanent</span><br></pre></td></tr></table></figure>
-<h2 id="意外情况"><a href="#意外情况" class="headerlink" title="意外情况"></a>意外情况</h2><h3 id="Docker-容器被意外关闭"><a href="#Docker-容器被意外关闭" class="headerlink" title="Docker 容器被意外关闭"></a>Docker 容器被意外关闭</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> restart 重启 stop 停止 容器</span></span><br><span class="line">docker start &lt;CONTAINER ID&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改MySQL密码"><a href="#修改MySQL密码" class="headerlink" title="修改MySQL密码"></a>修改MySQL密码</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker stop &lt;CONTAINER ID&gt;</span><br><span class="line">docker rm &lt;CONTAINER ID&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 因为mysql的重要数据和配置文件都已经持久化在宿主机器上，如果容器内的其他文件配置也需要持久化加-v</span></span><br><span class="line">docker run -p 3306:3306 --name mysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=你修改后的密码 -d mysql:5.7</span><br></pre></td></tr></table></figure>
-<p>因为Docker本身是无状态容器，有状态即有多个功能不同的实例，有依赖和启动先后关系，需要做数据持久化。无状态即实例间互相不依赖，它的请求包含了响应端需求的全部信息，比较好伸缩 ，所以在Docker做数据持久化就会稍微麻烦一些。</p>
-<div><h1>文章推荐です</h1><ul><li><a href="http://www.huweihuang.com/article/docker/install-docker/">[Docker] 安装Docker</a></li></ul></div>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-	  
-    
   </section>
 
   
@@ -987,7 +968,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1009,7 +990,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1127,7 +1108,7 @@
   </a>
 
 </div>
-      <span class="post-count"> | 博客字数统计：<b>17.8k</b></span>
+      <span class="post-count"> | 博客字数统计：<b>17.9k</b></span>
   <p>Hosted by <a href="https://pages.github.com/" style="font-weight: bold">Github Pages</a></p>
 
 

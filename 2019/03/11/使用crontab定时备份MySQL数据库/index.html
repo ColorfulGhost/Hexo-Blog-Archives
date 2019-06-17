@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="mcat">
+  <meta name="keywords" content="Linux,MySQL,">
 
 
 
@@ -87,16 +87,18 @@
 
 
 
-<meta name="description" content="Colorful_Ghost的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="你的口袋有什么？">
-<meta property="og:url" content="https://blog.vimc.cc/archives/2017/08/index.html">
+<meta name="description" content="定时备份12#!/bin/shmysqldump --opt -Q -uroot -ppassword --default-character-set=utf8mb4 $(datatable) &amp;gt; /$(pwd)/$(file_name)_$(date &quot;+%Y%m%d_%H:%M&quot;).sql 参数详解 –opt起到优化的作用，和–add-drop-table, –add-locks, –c">
+<meta name="keywords" content="Linux,MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用crontab定时备份MySQL数据库">
+<meta property="og:url" content="https://blog.vimc.cc/2019/03/11/使用crontab定时备份MySQL数据库/index.html">
 <meta property="og:site_name" content="你的口袋有什么？">
-<meta property="og:description" content="Colorful_Ghost的个人博客">
+<meta property="og:description" content="定时备份12#!/bin/shmysqldump --opt -Q -uroot -ppassword --default-character-set=utf8mb4 $(datatable) &amp;gt; /$(pwd)/$(file_name)_$(date &quot;+%Y%m%d_%H:%M&quot;).sql 参数详解 –opt起到优化的作用，和–add-drop-table, –add-locks, –c">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-11T13:33:30.177Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="你的口袋有什么？">
-<meta name="twitter:description" content="Colorful_Ghost的个人博客">
+<meta name="twitter:title" content="使用crontab定时备份MySQL数据库">
+<meta name="twitter:description" content="定时备份12#!/bin/shmysqldump --opt -Q -uroot -ppassword --default-character-set=utf8mb4 $(datatable) &amp;gt; /$(pwd)/$(file_name)_$(date &quot;+%Y%m%d_%H:%M&quot;).sql 参数详解 –opt起到优化的作用，和–add-drop-table, –add-locks, –c">
 
 
 
@@ -124,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="https://blog.vimc.cc/archives/2017/08/">
+  <link rel="canonical" href="https://blog.vimc.cc/2019/03/11/使用crontab定时备份MySQL数据库/">
 
 
 
 
 
-  <title> 归档 | 你的口袋有什么？ </title>
+  <title> 使用crontab定时备份MySQL数据库 | 你的口袋有什么？ </title>
   <meta name="google-site-verification" content="wTcsgX-w0V-zV3Ddu-oT2S4Q0_JMrz4Ei7tzr9wkx58">
   
 <script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js"></script>
@@ -176,7 +178,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 <a href="https://github.com/ColorfulGhost" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style></a>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -300,134 +302,192 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 19 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/27/寻址方式在结构化数据访问/" itemprop="url">
-              
-                <span itemprop="name">寻址方式在结构化数据访问</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2017-08-27T23:13:24+08:00" content="2017-08-27">
-          08-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/21/灵活的定位内存地址/" itemprop="url">
-              
-                <span itemprop="name">更灵活的定位内存地址的方法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2017-08-21T12:01:00+08:00" content="2017-08-21">
-          08-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/17/汇编Loop和-bx-的联合应用/" itemprop="url">
-              
-                <span itemprop="name">汇编Loop和[bx]的联合应用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2017-08-17T08:51:17+08:00" content="2017-08-17">
-          08-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2019/03/11/使用crontab定时备份MySQL数据库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="你的口袋有什么？">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用crontab定时备份MySQL数据库
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T19:47:42+08:00">
+                2019-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/03/11/使用crontab定时备份MySQL数据库/" class="leancloud_visitors" data-flag-title="使用crontab定时备份MySQL数据库">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 				<span class="post-meta-divider">|</span>
+<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 117</span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="定时备份"><a href="#定时备份" class="headerlink" title="定时备份"></a>定时备份</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">mysqldump --opt -Q -uroot -ppassword --default-character-set=utf8mb4 $(datatable) &gt; /$(pwd)/$(file_name)_$(date "+%Y%m%d_%H:%M").sql</span><br></pre></td></tr></table></figure>
+<h3 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h3><ol>
+<li><strong>–opt</strong>起到优化的作用，和–add-drop-table, –add-locks, –create-options, –skip-opt作用相似。</li>
+<li><strong>-Q</strong>将表名和列名使用 <code></code>包裹。以防他们是关键字时报错。</li>
+<li><strong>–default-character-set</strong> 设置导出的字符集</li>
+</ol>
+<h2 id="删除沉余备份"><a href="#删除沉余备份" class="headerlink" title="删除沉余备份"></a>删除沉余备份</h2><p>删除30天前备份的沉余数据</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">find /$(pwd) -name '*.sql' -mtime +30 -exec rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Colorful_Ghost
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.vimc.cc/2019/03/11/使用crontab定时备份MySQL数据库/" title="使用crontab定时备份MySQL数据库">https://blog.vimc.cc/2019/03/11/使用crontab定时备份MySQL数据库/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/27/IDEA设置更好的Java注释/" rel="next" title="IDEA设置更好的Java注释">
+                <i class="fa fa-chevron-left"></i> IDEA设置更好的Java注释
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -435,6 +495,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTUyMy82MDkx"></div>
+    
+  </div>
+
 
         </div>
         
@@ -454,8 +520,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Colorful_Ghost">
           <p class="site-author-name" itemprop="name">Colorful_Ghost</p>
@@ -571,6 +646,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定时备份"><span class="nav-number">1.</span> <span class="nav-text">定时备份</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数详解"><span class="nav-number">1.1.</span> <span class="nav-text">参数详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除沉余备份"><span class="nav-number">2.</span> <span class="nav-text">删除沉余备份</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -688,11 +779,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
 
 
   

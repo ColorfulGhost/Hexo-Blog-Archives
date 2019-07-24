@@ -90,7 +90,7 @@
 <meta name="description" content="Colorful_Ghost的个人博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="大黄猫の博客">
-<meta property="og:url" content="https://www.vimc.cc/index.html">
+<meta property="og:url" content="https://blog.vimc.cc/index.html">
 <meta property="og:site_name" content="大黄猫の博客">
 <meta property="og:description" content="Colorful_Ghost的个人博客">
 <meta property="og:locale" content="zh-Hans">
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="https://www.vimc.cc/">
+  <link rel="canonical" href="https://blog.vimc.cc/">
 
 
 
@@ -314,7 +314,142 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://www.vimc.cc/2019/03/11/使用crontab定时备份MySQL数据库/">
+    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2019/07/24/VSCode工作区配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大黄猫の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/07/24/VSCode工作区配置/" itemprop="url">
+                  VSCode工作区配置
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-24T21:21:05+08:00">
+                2019-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/07/24/VSCode工作区配置/" class="leancloud_visitors" data-flag-title="VSCode工作区配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 				<span class="post-meta-divider">|</span>
+<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 204</span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>个人用的比较舒服的VSCode工作区配置 ，记录下在换其他平台也能随手复制使用。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"workbench.activityBar.visible"</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="attr">"workbench.colorTheme"</span>: <span class="string">"Dark++ Regular"</span>,</span><br><span class="line">	<span class="attr">"workbench.iconTheme"</span>: <span class="string">"vscode-great-icons"</span>,</span><br><span class="line">	<span class="attr">"workbench.startupEditor"</span>: <span class="string">"newUntitledFile"</span>,</span><br><span class="line">	<span class="attr">"git.path"</span>: <span class="string">"C:\\Program Files\\Git\\cmd\\git.exe"</span>,</span><br><span class="line">	// 基础设置</span><br><span class="line">	"editor.tabSize": 2,</span><br><span class="line">	"editor.quickSuggestions": &#123;</span><br><span class="line">		"strings": true</span><br><span class="line">	&#125;,</span><br><span class="line">	// vue设置</span><br><span class="line">	"emmet.syntaxProfiles": &#123;</span><br><span class="line">		"vue-html": "html",</span><br><span class="line">		"vue": "html"</span><br><span class="line">	&#125;,</span><br><span class="line">	"files.associations": &#123;</span><br><span class="line">		"*.vue": "vue"</span><br><span class="line">	&#125;,</span><br><span class="line">	// vetur设置</span><br><span class="line">	"vetur.format.defaultFormatter.html": "js-beautify-html",</span><br><span class="line">	"vetur.format.defaultFormatter.js": "vscode-typescript",</span><br><span class="line">	// eslint设置</span><br><span class="line">	"eslint.autoFixOnSave": true,</span><br><span class="line">	"eslint.validate": [</span><br><span class="line">		"javascript",</span><br><span class="line">		"javascriptreact",</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="attr">"language"</span>: <span class="string">"html"</span>,</span><br><span class="line">			<span class="attr">"autoFix"</span>: <span class="literal">true</span></span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="attr">"language"</span>: <span class="string">"vue"</span>,</span><br><span class="line">			<span class="attr">"autoFix"</span>: <span class="literal">true</span></span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">	// format设置</span><br><span class="line">	"javascript.format.insertSpaceBeforeFunctionParenthesis": false,</span><br><span class="line">	"prettier.singleQuote": true,</span><br><span class="line">	"prettier.semi": false,</span><br><span class="line">	"prettier.useTabs": true,</span><br><span class="line">	// git设置</span><br><span class="line">	"gitlens.advanced.messages": &#123;</span><br><span class="line">		"suppressCommitHasNoPreviousCommitWarning": false,</span><br><span class="line">		"suppressCommitNotFoundWarning": false,</span><br><span class="line">		"suppressFileNotUnderSourceControlWarning": false,</span><br><span class="line">		"suppressGitVersionWarning": false,</span><br><span class="line">		"suppressLineUncommittedWarning": false,</span><br><span class="line">		"suppressNoRepositoryWarning": false,</span><br><span class="line">		"suppressUpdateNotice": false,</span><br><span class="line">		"suppressWelcomeNotice": true</span><br><span class="line">	&#125;,</span><br><span class="line">	"terminal.explorerKind": "external",</span><br><span class="line">	"terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",</span><br><span class="line">	"[javascript]": &#123;</span><br><span class="line">		"editor.defaultFormatter": "esbenp.prettier-vscode"</span><br><span class="line">	&#125;,</span><br><span class="line">	"explorer.confirmDelete": false,</span><br><span class="line">	"svn.enableProposedApi": "argument",</span><br><span class="line">	"search.location": "panel",</span><br><span class="line">	"workbench.statusBar.visible": false,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+	  
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2019/03/11/使用crontab定时备份MySQL数据库/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Colorful_Ghost">
@@ -456,7 +591,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://www.vimc.cc/2019/02/27/IDEA设置更好的Java注释/">
+    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2019/02/27/IDEA设置更好的Java注释/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Colorful_Ghost">
@@ -601,7 +736,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://www.vimc.cc/2019/02/18/Minecraft Sponge性能调优/">
+    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2019/02/18/Minecraft Sponge性能调优/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Colorful_Ghost">
@@ -743,184 +878,6 @@
 
 	  
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://www.vimc.cc/2019/01/18/YApi管理平台搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Colorful_Ghost">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="大黄猫の博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/01/18/YApi管理平台搭建/" itemprop="url">
-                  YApi管理平台搭建
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T12:14:39+08:00">
-                2019-01-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/01/18/YApi管理平台搭建/" class="leancloud_visitors" data-flag-title="YApi管理平台搭建">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-				 				<span class="post-meta-divider">|</span>
-<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 462</span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="YApi-管理平台搭建"><a href="#YApi-管理平台搭建" class="headerlink" title="YApi 管理平台搭建"></a>YApi 管理平台搭建</h1><p>YApi是我在github上逛了一圈感觉还不错API管理平台，就是功能比较复杂使用的学习成本比较高。</p>
-<p>以下操作是在CentOS上进行搭建。</p>
-<h2 id="Nodejs环境搭建"><a href="#Nodejs环境搭建" class="headerlink" title="Nodejs环境搭建"></a>Nodejs环境搭建</h2><p><strong>注意：国内第一个方案可能不能使用</strong></p>
-<h3 id="第一个方案"><a href="#第一个方案" class="headerlink" title="第一个方案"></a>第一个方案</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sL https://rpm.nodesource.com/setup_11.x | sudo bash -</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install nodejs</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node --version</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出 v11.1.0</span></span><br></pre></td></tr></table></figure>
-<p>​    由于国内大墙，在使用yum安装最新的Nodejs会遇到一些坑。 本应该是这样 ，但是rpm.nodesource.com必须挂代理才能正常连接，所以我换了个更好的方案。</p>
-<h3 id="第二个方案：NVM（Node-Version-Manager）安装"><a href="#第二个方案：NVM（Node-Version-Manager）安装" class="headerlink" title="第二个方案：NVM（Node Version Manager）安装"></a>第二个方案：NVM（Node Version Manager）安装</h3><p>项目地址：<a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">https://github.com/creationix/nvm</a></p>
-<ol>
-<li>安装脚本：</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash</span><br></pre></td></tr></table></figure>
-<p>出现以下内容<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Close and reopen your terminal to start using nvm</span><br></pre></td></tr></table></figure></p>
-<ol start="2">
-<li>运行如下命令</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>验证安装</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm --version</span><br></pre></td></tr></table></figure>
-<h2 id="MongoDB-4-0安装"><a href="#MongoDB-4-0安装" class="headerlink" title="MongoDB 4.0安装"></a>MongoDB 4.0安装</h2><p>本来我是按照<a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/" target="_blank" rel="noopener">官方教程</a>走的但是国内大墙我实在是佩服（时间都浪费在找镜像上）….最后找到了阿里的镜像….</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
-<li><p>添加yum</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/yum.repos.d/mongodb-org-4.0.repo</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>新增如下配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[mngodb-org]</span><br><span class="line">name=MongoDB Repository</span><br><span class="line">baseurl=http://mirrors.aliyun.com/mongodb/yum/redhat/7Server/mongodb-org/4.0/x86_64/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>3.更新安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum -y install mongodb-org</span><br></pre></td></tr></table></figure>
-<p>4.查看mongo安装位置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">whereis mongod</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出</span></span><br><span class="line">mongod: /usr/bin/mongod /etc/mongod.conf /usr/share/man/man1/mongod.1</span><br></pre></td></tr></table></figure>
-<p>5.修改配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/mongod.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改如下内容</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bindIp: 172.0.0.1  改为 bindIp: 0.0.0.0</span></span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li>启动MongoDB<br>启动mongodb ：systemctl start mongod.service<br>停止mongodb ：systemctl stop mongod.service<br>查看mongodb的状态：systemctl status mongod.service</li>
-</ol>
-<h2 id="API管理平台搭建"><a href="#API管理平台搭建" class="headerlink" title="API管理平台搭建"></a>API管理平台搭建</h2><p>项目地址：<a href="https://github.com/YMFE/yapi" target="_blank" rel="noopener">https://github.com/YMFE/yapi</a></p>
-<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g yapi-cli --registry https://registry.npm.taobao.org</span><br><span class="line">yapi server</span><br></pre></td></tr></table></figure>
-<p>然后到安装目录下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvm install node</span><br><span class="line">node vendors/server/app.js</span><br></pre></td></tr></table></figure>
-<p>然后在浏览器打开 <a href="http://127.0.0.1:3000" target="_blank" rel="noopener">http://127.0.0.1:3000</a> 访问</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-	  
-    
   </section>
 
   
@@ -968,7 +925,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -990,7 +947,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1108,7 +1065,7 @@
   </a>
 
 </div>
-      <span class="post-count"> | 博客字数统计：<b>17.9k</b></span>
+      <span class="post-count"> | 博客字数统计：<b>18.1k</b></span>
   <p>Hosted by <a href="https://pages.github.com/" style="font-weight: bold">Github Pages</a></p>
 
 

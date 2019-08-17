@@ -6,7 +6,7 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -381,7 +381,7 @@
                
                  <span class="leancloud-visitors-count"></span>
 				 				<span class="post-meta-divider">|</span>
-<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 1.3k</span>
+<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 1.9k</span>
              </span>
           
 
@@ -420,6 +420,18 @@
 <h3 id="感知机小结"><a href="#感知机小结" class="headerlink" title="感知机小结"></a>感知机小结</h3><p>• 感知机是具有输入和输出的算法。给定一个输入后，将输出一个既定的值。• 感知机将权重和偏置设定为参数。• 使用感知机可以表示与门和或门等逻辑电路。• 异或门无法通过单层感知机来表示。• 使用2层感知机可以表示异或门。• 单层感知机只能表示线性空间，而多层感知机可以表示非线性空间。• 多层感知机（在理论上）可以表示计算机。</p>
 <h2 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h2><h3 id="阶跃函数与sigmoid函数"><a href="#阶跃函数与sigmoid函数" class="headerlink" title="阶跃函数与sigmoid函数"></a>阶跃函数与sigmoid函数</h3><p>如果把这两个函数与水联系起来，则阶跃函数可以比作“竹筒敲石”A，sigmoid函数可以比作“水车”。阶跃函数就像竹筒敲石一样，只做是否传送水（0或1）两个动作，而sigmoid函数就像水车一样，根据流过来的水量相应地调整传送出去的水量。</p>
 <p>阶跃函数和sigmoid函数还有其他共同点，就是两者均为非线性函数。sigmoid函数是一条曲线，阶跃函数是一条像阶梯一样的折线，两者都属于非线性的函数。</p>
+<h2 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def relu(x):</span><br><span class="line"> return np.maximum(0, x)</span><br></pre></td></tr></table></figure>
+<p>maximum函数会从输入的数值中选择较大的那个值进行输出。</p>
+<h2 id="矩阵的乘积的计算方法"><a href="#矩阵的乘积的计算方法" class="headerlink" title="矩阵的乘积的计算方法"></a>矩阵的乘积的计算方法</h2><p>矩阵A和矩阵B的对应维度的元素个数必须保持一致。</p>
+<p>就是运算结果的矩阵C的形状是由矩阵A的行数和矩阵B的列数构成的。</p>
+<p>A是二维矩阵、B是一维数组时，也要保持对应维度的元素个数一致。</p>
+<h2 id="输出层函数"><a href="#输出层函数" class="headerlink" title="输出层函数"></a>输出层函数</h2><p>输出层所用的激活函数，要根据求解问题的性质决定。一般地，回归问题可以使用恒等函数，二元分类问题可以使用 sigmoid函数，多元分类问题可以使用 softmax函数。</p>
+<h2 id="恒等函数"><a href="#恒等函数" class="headerlink" title="恒等函数"></a>恒等函数</h2><p>恒等函数会将输入按原样输出。</p>
+<h2 id="softmax函数"><a href="#softmax函数" class="headerlink" title="softmax函数"></a>softmax函数</h2><p>在进行softmax的指数函数的运算时，加上（或者减去）某个常数并不会改变运算的结果。可以使用任何值，但是为了防止溢出，一般会使用输入信号中的最大值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def softmax(a):</span><br><span class="line">    max = np.max(a) # 为了解决溢出问题</span><br><span class="line">    exp_a = np.exp(a- max)</span><br><span class="line">    return exp_a / np.sum(exp_a)</span><br></pre></td></tr></table></figure>
+<p>softmax函数的输出是0.0到1.0之间的实数。并且，softmax函数的输出值的总和是1。输出总和为1是softmax函数的一个重要性质。正因为有了这个性质，我们才可以把softmax函数的输出解释为“概率</p>
+<h2 id="机器学习的分类"><a href="#机器学习的分类" class="headerlink" title="机器学习的分类"></a>机器学习的分类</h2><p>机器学习的问题大致可以分为分类问题和回归问题。分类问题是数据属于哪一个类别的问题。比如，区分图像中的人是男性还是女性的问题就是分类问题。而回归问题是根据某个输入预测一个（连续的）数值的问题。比如，根据一个人的图像预测这个人的体重的问题就是回归问题（类似“57.4kg”这样的预测）。</p>
+<h2 id="学习与推理"><a href="#学习与推理" class="headerlink" title="学习与推理"></a>学习与推理</h2><p>求解机器学习问题的步骤可以分为“学习”A 和“推理”两个阶段。首先，在学习阶段进行模型的学习B，然后，在推理阶段，用学到的模型对未知的数据进行推理（分类）。如前所述，推理阶段一般会省略输出层的 softmax函数。在输出层使用 softmax函数是因为它和神经网络的学习有关系</p>
 
           
         
@@ -1064,7 +1076,7 @@
   </a>
 
 </div>
-      <span class="post-count"> | 博客字数统计：<b>19.4k</b></span>
+      <span class="post-count"> | 博客字数统计：<b>20k</b></span>
   <p>Hosted by <a href="https://pages.github.com/" style="font-weight: bold">Github Pages</a></p>
 
 
@@ -1319,5 +1331,5 @@
 
     <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

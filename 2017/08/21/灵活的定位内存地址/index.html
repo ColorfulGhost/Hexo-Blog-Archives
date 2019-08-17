@@ -6,7 +6,7 @@
 
 
 <html class="theme-next muse use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://oqca0721d.bkt.clouddn.com/wwtpxy1503303934.png">
 <meta property="og:image" content="http://oqca0721d.bkt.clouddn.com/bj264i1503359790.png">
 <meta property="og:image" content="http://oqca0721d.bkt.clouddn.com/sjl4nu1503451008.png">
-<meta property="og:updated_time" content="2017-08-23T01:17:40.000Z">
+<meta property="og:updated_time" content="2019-08-15T23:09:22.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="更灵活的定位内存地址的方法">
 <meta name="twitter:description" content="更灵活的定位内存地址的方法汇编大小写转换12345678910111213141516171819202122232425262728assume cs:code,ds:datadata segmentdb &apos;BaSiC&apos; ;把这个字符串全部变为大写db &apos;iNfOrMaTiOn&apos; ;把这个字符串全部变为小写data endscode segmentstart:  mov ax,data	 ;获取">
@@ -692,7 +692,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#更灵活的定位内存地址的方法"><span class="nav-number">1.</span> <span class="nav-text">更灵活的定位内存地址的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编大小写转换"><span class="nav-number">1.1.</span> <span class="nav-text">汇编大小写转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-bx-idata-的方法优化程序"><span class="nav-number">1.2.</span> <span class="nav-text">使用[bx+idata]的方法优化程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SI-AND-DI"><span class="nav-number">1.3.</span> <span class="nav-text">SI AND DI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将字符串头一个字母改为大写"><span class="nav-number">1.4.</span> <span class="nav-text">将字符串头一个字母改为大写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌套循环-把datasg每个单词改为大写"><span class="nav-number">1.5.</span> <span class="nav-text">嵌套循环(把datasg每个单词改为大写)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用栈来处理cx缓存问题"><span class="nav-number">1.6.</span> <span class="nav-text">用栈来处理cx缓存问题</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">文章推荐です</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#更灵活的定位内存地址的方法"><span class="nav-number">1.</span> <span class="nav-text">更灵活的定位内存地址的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编大小写转换"><span class="nav-number">1.1.</span> <span class="nav-text">汇编大小写转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-bx-idata-的方法优化程序"><span class="nav-number">1.2.</span> <span class="nav-text">使用[bx+idata]的方法优化程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SI-AND-DI"><span class="nav-number">1.3.</span> <span class="nav-text">SI AND DI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将字符串头一个字母改为大写"><span class="nav-number">1.4.</span> <span class="nav-text">将字符串头一个字母改为大写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌套循环-把datasg每个单词改为大写"><span class="nav-number">1.5.</span> <span class="nav-text">嵌套循环(把datasg每个单词改为大写)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用栈来处理cx缓存问题"><span class="nav-number">1.6.</span> <span class="nav-text">用栈来处理cx缓存问题</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number"></span> <span class="nav-text">文章推荐です</span></a></li></div>
             
 
           </div>
@@ -735,7 +735,7 @@
   </a>
 
 </div>
-      <span class="post-count"> | 博客字数统计：<b>19.4k</b></span>
+      <span class="post-count"> | 博客字数统计：<b>20k</b></span>
   <p>Hosted by <a href="https://pages.github.com/" style="font-weight: bold">Github Pages</a></p>
 
 
@@ -994,5 +994,5 @@
 
     <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

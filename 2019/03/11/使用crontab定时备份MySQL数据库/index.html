@@ -387,14 +387,14 @@
       
 
       
-        <h2 id="定时备份"><a href="#定时备份" class="headerlink" title="定时备份"></a>定时备份</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line">mysqldump --opt -Q -uroot -ppassword --default-character-set=utf8mb4 $(datatable) &gt; /$(pwd)/$(file_name)_$(date "+%Y%m%d_%H:%M").sql</span><br></pre></td></tr></table></figure>
+        <h2 id="定时备份"><a href="#定时备份" class="headerlink" title="定时备份"></a>定时备份</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">mysqldump --opt -Q -uroot -ppassword --default-character-set=utf8mb4 $(datatable) &gt; /$(pwd)/$(file_name)_$(date "+%Y%m%d_%H:%M").sql</span><br></pre></td></tr></table></figure>
 <h3 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h3><ol>
 <li><strong>–opt</strong>起到优化的作用，和–add-drop-table, –add-locks, –create-options, –skip-opt作用相似。</li>
 <li><strong>-Q</strong>将表名和列名使用 <code></code>包裹。以防他们是关键字时报错。</li>
 <li><strong>–default-character-set</strong> 设置导出的字符集</li>
 </ol>
 <h2 id="删除沉余备份"><a href="#删除沉余备份" class="headerlink" title="删除沉余备份"></a>删除沉余备份</h2><p>删除30天前备份的沉余数据</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line">find /$(pwd) -name '*.sql' -mtime +30 -exec rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">find /$(pwd) -name '*.sql' -mtime +30 -exec rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure>
 
       
     </div>

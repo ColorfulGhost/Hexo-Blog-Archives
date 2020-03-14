@@ -391,7 +391,7 @@
 <h2 id="Nodejs环境搭建"><a href="#Nodejs环境搭建" class="headerlink" title="Nodejs环境搭建"></a>Nodejs环境搭建</h2><p><strong>注意：国内第一个方案可能不能使用</strong></p>
 <h3 id="第一个方案"><a href="#第一个方案" class="headerlink" title="第一个方案"></a>第一个方案</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sL https://rpm.nodesource.com/setup_11.x | sudo bash -</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install nodejs</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node --version</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出 v11.1.0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node --version</span><br><span class="line"><span class="meta">#</span> 输出 v11.1.0</span><br></pre></td></tr></table></figure>
 <p>​    由于国内大墙，在使用yum安装最新的Nodejs会遇到一些坑。 本应该是这样 ，但是rpm.nodesource.com必须挂代理才能正常连接，所以我换了个更好的方案。</p>
 <h3 id="第二个方案：NVM（Node-Version-Manager）安装"><a href="#第二个方案：NVM（Node-Version-Manager）安装" class="headerlink" title="第二个方案：NVM（Node Version Manager）安装"></a>第二个方案：NVM（Node Version Manager）安装</h3><p>项目地址：<a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">https://github.com/creationix/nvm</a></p>
 <ol>
@@ -419,9 +419,9 @@
 <p>3.更新安装</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum -y install mongodb-org</span><br></pre></td></tr></table></figure>
 <p>4.查看mongo安装位置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">whereis mongod</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出</span></span><br><span class="line">mongod: /usr/bin/mongod /etc/mongod.conf /usr/share/man/man1/mongod.1</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">whereis mongod</span><br><span class="line"><span class="meta">#</span> 输出</span><br><span class="line">mongod: /usr/bin/mongod /etc/mongod.conf /usr/share/man/man1/mongod.1</span><br></pre></td></tr></table></figure>
 <p>5.修改配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/mongod.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改如下内容</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bindIp: 172.0.0.1  改为 bindIp: 0.0.0.0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/mongod.conf</span><br><span class="line"><span class="meta">#</span> 修改如下内容</span><br><span class="line"><span class="meta">#</span> bindIp: 172.0.0.1  改为 bindIp: 0.0.0.0</span><br></pre></td></tr></table></figure>
 <ol start="6">
 <li>启动MongoDB<br>启动mongodb ：systemctl start mongod.service<br>停止mongodb ：systemctl stop mongod.service<br>查看mongodb的状态：systemctl status mongod.service</li>
 </ol>

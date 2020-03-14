@@ -274,16 +274,6 @@
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-plan">
-          <a href="/plan" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar-check-o"></i> <br>
-            
-            计划
-          </a>
-        </li>
-      
 
       
     </ul>
@@ -304,6 +294,201 @@
             
 
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2016/12/28/Laravel-5-3-学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大黄猫の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/28/Laravel-5-3-学习笔记/" itemprop="url">
+                  Laravel 5.3 学习笔记
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-28T09:47:11+08:00">
+                2016-12-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/12/28/Laravel-5-3-学习笔记/" class="leancloud_visitors" data-flag-title="Laravel 5.3 学习笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 				<span class="post-meta-divider">|</span>
+<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 807</span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="关于部署"><a href="#关于部署" class="headerlink" title="关于部署"></a>关于部署</h2><p>在这里写部署流程，也是对自己写的东西做一个笔记。</p>
+<p>项目是直接部署在WampServer环境里，默认访问链接<a href="http://localhost/Laravel-BBS/public" target="_blank" rel="noopener">http://localhost/Laravel-BBS/public</a><br>编辑器使用的PhpStorm，因为这个编辑器专门对Laravel框架做过优化…</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer create-project laravel/laravel bbs --prefer-dist</span><br></pre></td></tr></table></figure>
+<p>用composer包管理器，创建一个Laravel项目 命名为bbs。</p>
+<p>composer的<a href="http://docs.phpcomposer.com/00-intro.html" target="_blank" rel="noopener">中文文档</a>，由于国内GFW原因，推荐使用镜像或者VPN。</p>
+<p><a href="http://laravelacademy.org/post/5762.html" target="_blank" rel="noopener">Laravel5.3目录结构</a></p>
+<h3 id="部署数据库"><a href="#部署数据库" class="headerlink" title="部署数据库"></a>部署数据库</h3><p>修改<strong>.env</strong>文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">DB_CONNECTION=mysql</span></span><br><span class="line"><span class="string">DB_HOST=127.0.0.1</span></span><br><span class="line"><span class="string">DB_PORT=3306</span></span><br><span class="line"><span class="string">DB_DATABASE=bbs</span></span><br><span class="line"><span class="string">DB_USERNAME=root</span></span><br><span class="line"><span class="string">DB_PASSWORD=</span></span><br></pre></td></tr></table></figure>
+<h2 id="默认认证"><a href="#默认认证" class="headerlink" title="默认认证"></a>默认认证</h2><p>首先我们使用Laravel 5.3提供的开箱即用的认证：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:auth</span><br></pre></td></tr></table></figure>
+<p>详细教程用户登录注册→<a href="http://laravelacademy.org/post/5925.html" target="_blank" rel="noopener">教程</a></p>
+<p>如果Login/Register视图静态资源文件出现问题请修改app.blade.php的app.js和app.css的路径。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;link href=<span class="string">"**&#123;&#123; url('css/app.css') &#125;&#125;**"</span> rel=<span class="string">"stylesheet"</span>&gt;</span><br><span class="line">&lt;script src=<span class="string">"**&#123;&#123; url('js/app.js') &#125;&#125;**"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>关于Laravel静态资源和路径获取方法：<a href="http://blog.csdn.net/qq_28666081/article/details/51208492" target="_blank" rel="noopener">教程</a>，到这里一个非常基础的登录注册就完成了！</p>
+<h2 id="验证码扩展包"><a href="#验证码扩展包" class="headerlink" title="验证码扩展包"></a>验证码扩展包</h2><p><a href="https://packagist.org/packages/mews/captcha" target="_blank" rel="noopener">Composer验证码包简介：https://packagist.org/packages/mews/captcha</a></p>
+<p>也用中文验证码包：<a href="https://packagist.org/packages/kangkang66/captcha" target="_blank" rel="noopener">https://packagist.org/packages/kangkang66/captcha</a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer require mews/captcha</span><br></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>使用Captcha服务提供者之前还需要在config/app.php中注册服务提供者：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'providers'</span> =&gt; [</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    Mews\Captcha\CaptchaServiceProvider::class,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>同时注册下相应门面：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'aliases'</span> =&gt; [</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="string">'Captcha'</span> =&gt; Mews\Captcha\Facades\Captcha::class,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>如果要使用自定义的配置，还可以发布配置文件到config目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan vendor:publish</span><br></pre></td></tr></table></figure>
+<p>编辑新生成的Captcha.php</p>
+<h3 id="重写默认登录注册验证方法"><a href="#重写默认登录注册验证方法" class="headerlink" title="重写默认登录注册验证方法"></a>重写默认登录注册验证方法</h3><p>找到：H:\wamp64\www\Laravel-BBS\app\Http\Controllers\Auth\LoginController.php<br>进入AuthenticatesUsers找到validateLogin方法，修改验证方法代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">validateLogin</span><span class="params">(Request $request)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;validate($request, [</span><br><span class="line">            <span class="keyword">$this</span>-&gt;username() =&gt; <span class="string">'required'</span>,</span><br><span class="line">            <span class="string">'password'</span> =&gt; <span class="string">'required'</span>,</span><br><span class="line">            <span class="string">'captcha'</span>=&gt;<span class="string">'required|captcha|max:5'</span></span><br><span class="line">        ],[</span><br><span class="line">            <span class="string">'captcha.captcha'</span>=&gt;trans(<span class="string">'验证码错误！'</span>),</span><br><span class="line">            <span class="string">'captcha.required'</span>=&gt;trans(<span class="string">'验证码为必须！'</span>),</span><br><span class="line">        ]);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>同理，也可以在注册也添加上验证码：<br>找到H:\wamp64\www\Laravel-BBS\app\Http\Controllers\Auth\RegisterController.php<br>修改验证：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">validator</span><span class="params">(array $data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Validator::make($data, [</span><br><span class="line">        <span class="string">'name'</span> =&gt; <span class="string">'required|max:255'</span>,</span><br><span class="line">        <span class="string">'email'</span> =&gt; <span class="string">'required|email|max:255|unique:users'</span>,</span><br><span class="line">        <span class="string">'password'</span> =&gt; <span class="string">'required|min:6|confirmed'</span>,</span><br><span class="line">        <span class="string">'captcha'</span>=&gt;<span class="string">'required|max:5|captcha'</span></span><br><span class="line">    ],[</span><br><span class="line">        <span class="string">'captcha.captcha'</span>=&gt;trans(<span class="string">'验证码错误！'</span>),</span><br><span class="line">        <span class="string">'captcha.required'</span>=&gt;trans(<span class="string">'验证码为空！'</span>)</span><br><span class="line">    ]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="对视图文件的修改"><a href="#对视图文件的修改" class="headerlink" title="对视图文件的修改"></a>对视图文件的修改</h3><blockquote>
+<p>添加验证码图片+验证</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group&#123;&#123; $errors-&gt;has('captcha') ? ' has-error' : '' &#125;&#125;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"col-md-4 control-label"</span>&gt;</span>验证码<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-6"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"text"</span> <span class="attr">type</span>=<span class="string">"captcha"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">name</span>=<span class="string">"captcha"</span> <span class="attr">required</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"input-group-btn"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">style</span>=<span class="string">""</span> <span class="attr">src</span>=<span class="string">"&#123;&#123;captcha_src()&#125;&#125;"</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">onclick</span>=<span class="string">"this.src='&#123;&#123;captcha_src()&#125;&#125;' + Math.random()"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        @if ($errors-&gt;has('captcha'))</span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"help-block"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">strong</span>&gt;</span>&#123;&#123; $errors-&gt;first('captcha') &#125;&#125;<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        @endif</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装Laravel语言包"><a href="#安装Laravel语言包" class="headerlink" title="安装Laravel语言包"></a>安装Laravel语言包</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer require "overtrue/laravel-lang:~3.0"</span><br></pre></td></tr></table></figure>
+<h4 id="Laraval-5"><a href="#Laraval-5" class="headerlink" title="Laraval 5.*"></a>Laraval 5.*</h4><p>完成上面的操作后，将项目文件 <code>config/app.php</code> 中的下一行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Illuminate\Translation\TranslationServiceProvider::class,</span><br></pre></td></tr></table></figure>
+<p>替换为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Overtrue\LaravelLang\TranslationServiceProvider::class,</span><br></pre></td></tr></table></figure>
+<p>修改项目语言 <code>config/app.php</code>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'locale'</span> =&gt; <span class="string">'zh-CN'</span>,</span><br></pre></td></tr></table></figure>
+<p>未完待续。。。</p>
+<div><h1>文章推荐です</h1><ul><li><a href="https://blog.vimc.cc/2017/05/22/Laravel微信公众号开发/">Laravel微信公众号游戏查询</a></li><li><a href="https://blog.vimc.cc/2017/06/13/Laravel搭建迷你博客/">Laravel搭建迷你博客</a></li><li><a href="http://blog.themismin.com/posts/1b7bf0e4.html">PHP-将Laravel部署到服务器</a></li></ul></div>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+	  
     
       
 
@@ -694,7 +879,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -705,7 +890,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -814,7 +999,7 @@
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -834,7 +1019,7 @@
   </a>
 
 </div>
-      <span class="post-count"> | 博客字数统计：<b>20.4k</b></span>
+      <span class="post-count"> | 博客字数统计：<b>21k</b></span>
   <p>Hosted by <a href="https://pages.github.com/" style="font-weight: bold">Github Pages</a></p>
 
 

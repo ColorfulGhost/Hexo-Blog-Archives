@@ -274,16 +274,6 @@
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-plan">
-          <a href="/plan" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar-check-o"></i> <br>
-            
-            计划
-          </a>
-        </li>
-      
 
       
     </ul>
@@ -304,6 +294,283 @@
             
 
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2019/07/24/VSCode工作区配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大黄猫の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/07/24/VSCode工作区配置/" itemprop="url">
+                  VSCode工作区配置
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-24T21:21:05+08:00">
+                2019-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/07/24/VSCode工作区配置/" class="leancloud_visitors" data-flag-title="VSCode工作区配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 				<span class="post-meta-divider">|</span>
+<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 204</span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>个人用的比较舒服的VSCode工作区配置 ，记录下在换其他平台也能随手复制使用。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"workbench.activityBar.visible"</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="attr">"workbench.colorTheme"</span>: <span class="string">"Dark++ Regular"</span>,</span><br><span class="line">	<span class="attr">"workbench.iconTheme"</span>: <span class="string">"vscode-great-icons"</span>,</span><br><span class="line">	<span class="attr">"workbench.startupEditor"</span>: <span class="string">"newUntitledFile"</span>,</span><br><span class="line">	<span class="attr">"git.path"</span>: <span class="string">"C:\\Program Files\\Git\\cmd\\git.exe"</span>,</span><br><span class="line">	// 基础设置</span><br><span class="line">	"editor.tabSize": 2,</span><br><span class="line">	"editor.quickSuggestions": &#123;</span><br><span class="line">		"strings": true</span><br><span class="line">	&#125;,</span><br><span class="line">	// vue设置</span><br><span class="line">	"emmet.syntaxProfiles": &#123;</span><br><span class="line">		"vue-html": "html",</span><br><span class="line">		"vue": "html"</span><br><span class="line">	&#125;,</span><br><span class="line">	"files.associations": &#123;</span><br><span class="line">		"*.vue": "vue"</span><br><span class="line">	&#125;,</span><br><span class="line">	// vetur设置</span><br><span class="line">	"vetur.format.defaultFormatter.html": "js-beautify-html",</span><br><span class="line">	"vetur.format.defaultFormatter.js": "vscode-typescript",</span><br><span class="line">	// eslint设置</span><br><span class="line">	"eslint.autoFixOnSave": true,</span><br><span class="line">	"eslint.validate": [</span><br><span class="line">		"javascript",</span><br><span class="line">		"javascriptreact",</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="attr">"language"</span>: <span class="string">"html"</span>,</span><br><span class="line">			<span class="attr">"autoFix"</span>: <span class="literal">true</span></span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="attr">"language"</span>: <span class="string">"vue"</span>,</span><br><span class="line">			<span class="attr">"autoFix"</span>: <span class="literal">true</span></span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">	// format设置</span><br><span class="line">	"javascript.format.insertSpaceBeforeFunctionParenthesis": false,</span><br><span class="line">	"prettier.singleQuote": true,</span><br><span class="line">	"prettier.semi": false,</span><br><span class="line">	"prettier.useTabs": true,</span><br><span class="line">	// git设置</span><br><span class="line">	"gitlens.advanced.messages": &#123;</span><br><span class="line">		"suppressCommitHasNoPreviousCommitWarning": false,</span><br><span class="line">		"suppressCommitNotFoundWarning": false,</span><br><span class="line">		"suppressFileNotUnderSourceControlWarning": false,</span><br><span class="line">		"suppressGitVersionWarning": false,</span><br><span class="line">		"suppressLineUncommittedWarning": false,</span><br><span class="line">		"suppressNoRepositoryWarning": false,</span><br><span class="line">		"suppressUpdateNotice": false,</span><br><span class="line">		"suppressWelcomeNotice": true</span><br><span class="line">	&#125;,</span><br><span class="line">	"terminal.explorerKind": "external",</span><br><span class="line">	"terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",</span><br><span class="line">	"[javascript]": &#123;</span><br><span class="line">		"editor.defaultFormatter": "esbenp.prettier-vscode"</span><br><span class="line">	&#125;,</span><br><span class="line">	"explorer.confirmDelete": false,</span><br><span class="line">	"svn.enableProposedApi": "argument",</span><br><span class="line">	"search.location": "panel",</span><br><span class="line">	"workbench.statusBar.visible": false,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+	  
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2019/03/11/使用crontab定时备份MySQL数据库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大黄猫の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/03/11/使用crontab定时备份MySQL数据库/" itemprop="url">
+                  使用crontab定时备份MySQL数据库
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-11T19:47:42+08:00">
+                2019-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/03/11/使用crontab定时备份MySQL数据库/" class="leancloud_visitors" data-flag-title="使用crontab定时备份MySQL数据库">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 				<span class="post-meta-divider">|</span>
+<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 117</span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="定时备份"><a href="#定时备份" class="headerlink" title="定时备份"></a>定时备份</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">mysqldump --opt -Q -uroot -ppassword --default-character-set=utf8mb4 $(datatable) &gt; /$(pwd)/$(file_name)_$(date "+%Y%m%d_%H:%M").sql</span><br></pre></td></tr></table></figure>
+<h3 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h3><ol>
+<li><strong>–opt</strong>起到优化的作用，和–add-drop-table, –add-locks, –create-options, –skip-opt作用相似。</li>
+<li><strong>-Q</strong>将表名和列名使用 <code></code>包裹。以防他们是关键字时报错。</li>
+<li><strong>–default-character-set</strong> 设置导出的字符集</li>
+</ol>
+<h2 id="删除沉余备份"><a href="#删除沉余备份" class="headerlink" title="删除沉余备份"></a>删除沉余备份</h2><p>删除30天前备份的沉余数据</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">find /$(pwd) -name '*.sql' -mtime +30 -exec rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+	  
     
       
 
@@ -416,157 +683,6 @@
 <p>然后在方法内部 输入 add-&gt;Tab键  就可以生成javadoc了。</p>
 <h2 id="懒人set生成工具"><a href="#懒人set生成工具" class="headerlink" title="懒人set生成工具"></a>懒人set生成工具</h2><p>顺便福利一个懒人set生成工具。  <a href="IDEA设置更好的Java注释\generate-set.jar">generate-set.jar</a> </p>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-	  
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2019/02/18/Minecraft Sponge性能调优/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Colorful_Ghost">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="大黄猫の博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/02/18/Minecraft Sponge性能调优/" itemprop="url">
-                  Minecraft Sponge性能调优
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-18T09:35:24+08:00">
-                2019-02-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/02/18/Minecraft Sponge性能调优/" class="leancloud_visitors" data-flag-title="Minecraft Sponge性能调优">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-				 				<span class="post-meta-divider">|</span>
-<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 311</span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>Sponge 官方性能调优文档：<a href="https://docs.spongepowered.org/stable/zh-CN/server/management/performance-tweaks.html" target="_blank" rel="noopener">https://docs.spongepowered.org/stable/zh-CN/server/management/performance-tweaks.html</a></li>
-<li>MCBBS论坛 Sponge性能优化集合：<a href="http://www.mcbbs.net/thread-781507-1-1.html" target="_blank" rel="noopener">http://www.mcbbs.net/thread-781507-1-1.html</a></li>
-<li>Sponge JVM 性能调优 ：<a href="https://forums.spongepowered.org/t/optimized-startup-flags-for-consistent-garbage-collection/13239" target="_blank" rel="noopener">https://forums.spongepowered.org/t/optimized-startup-flags-for-consistent-garbage-collection/13239</a></li>
-</ol>
-<p>还有如果遇到了一些线程阻塞或者TPS太低的问题，可以使用阿里巴巴的<a href="https://github.com/alibaba/arthas" target="_blank" rel="noopener">Arthas</a>的Java诊断工具进行排查。</p>
-<p>如果经过以上优化和问题定位没有办法解决，这时候请从服务器和游戏内进行排查。</p>
-<p>分析：</p>
-<p><img src="/2019/02/18/Minecraft Sponge性能调优/多线程围观.png" alt="多线程围观"></p>
-<p>Minecraft非常吃单核性能（现况：10核20线程 就一个线程跑满其他围观），如果有很多运算量比较大的（物品、实体、快速区块加载）在游戏里运作，卡顿会非常严重。</p>
-<p>解决方案：</p>
-<ol>
-<li>推荐更换主频较高的CPU，会缓解卡顿。</li>
-<li>从游戏内部解决，禁止某项物品、实体或减少区块加载范围，会明显减少卡顿，但是会削弱游戏体验。</li>
-<li>bungeecord 分布式云服，多服务端可以把运算鸭梨解耦掉，但是维护成本比较高。</li>
-</ol>
-<p> 祝大家开服顺利。</p>
-<div><h1>文章推荐です</h1><ul><li><a href="https://blog.vimc.cc/2018/12/17/Java用lambda分页List里的数据/">Java用lambda分页List里的数据</a></li><li><a href="http://www.buildupchao.cn/2018/04/21/你真的懂得Java-OOP吗？/">你真的懂得Java-OOP吗？</a></li></ul></div>
           
         
       
@@ -779,174 +895,6 @@
 
 	  
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2018/12/26/使用Docker部署MySQL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Colorful_Ghost">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="大黄猫の博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/12/26/使用Docker部署MySQL/" itemprop="url">
-                  使用Docker部署MySQL
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-26T15:01:59+08:00">
-                2018-12-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/12/26/使用Docker部署MySQL/" class="leancloud_visitors" data-flag-title="使用Docker部署MySQL">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-				 				<span class="post-meta-divider">|</span>
-<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 713</span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="卸载旧版本Docker（如果没有安装过跳过）"><a href="#卸载旧版本Docker（如果没有安装过跳过）" class="headerlink" title="卸载旧版本Docker（如果没有安装过跳过）"></a>卸载旧版本Docker（如果没有安装过跳过）</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo yum remove docker \</span></span><br><span class="line">                  docker-client \</span><br><span class="line">                  docker-client-latest \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-latest \</span><br><span class="line">                  docker-latest-logrotate \</span><br><span class="line">                  docker-logrotate \</span><br><span class="line">                  docker-selinux \</span><br><span class="line">                  docker-engine-selinux \</span><br><span class="line">                  docker-engine</span><br></pre></td></tr></table></figure>
-<h2 id="安装Docker-CE"><a href="#安装Docker-CE" class="headerlink" title="安装Docker CE"></a>安装Docker CE</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> step 1: 安装必要的一些系统工具</span></span><br><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"><span class="meta">#</span><span class="bash"> Step 2: 添加软件源信息 这里推荐国内阿里的镜像</span></span><br><span class="line">sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line"><span class="meta">#</span><span class="bash"> Step 3: 更新并安装 Docker-CE</span></span><br><span class="line">sudo yum makecache fast</span><br><span class="line">sudo yum -y install docker-ce</span><br><span class="line"><span class="meta">#</span><span class="bash"> Step 4: 开启Docker服务</span></span><br><span class="line">sudo service docker start</span><br></pre></td></tr></table></figure>
-<h2 id="获取MySQL的Docker镜像"><a href="#获取MySQL的Docker镜像" class="headerlink" title="获取MySQL的Docker镜像"></a>获取MySQL的Docker镜像</h2><h3 id="找到MySQL的镜像仓库"><a href="#找到MySQL的镜像仓库" class="headerlink" title="找到MySQL的镜像仓库"></a>找到MySQL的镜像仓库</h3><p>MySQL镜像仓库：<a href="https://hub.docker.com/_/mysql" target="_blank" rel="noopener">https://hub.docker.com/_/mysql</a></p>
-<h2 id="创建MySQL容器"><a href="#创建MySQL容器" class="headerlink" title="创建MySQL容器"></a>创建MySQL容器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -p 把宿主机器的端口桥接到容器内的端口内 </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -- name 指的是你的docker container name</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -v 把宿主机器的文件挂载到容器内达到容器内容的数据能持久化到宿主机器上</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 关于-v参数Docker Volume 可以查看这篇文章  http://dockone.io/article/128</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -e 配置参数</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="variable">$PWD</span> 你持久化文件路径地址</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -d --detach=<span class="literal">false</span>  指定容器运行于前台还是后台，默认为<span class="literal">false</span>   </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> docker run 命令常见参数参考https://blog.csdn.net/kunloz520/article/details/53839237</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mysql:latest mysql镜像:版本 会指定从镜像仓库拉取5.7版本为基础的镜像后运行容器</span></span><br><span class="line">docker run -p 3306:3306 --name mysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7</span><br></pre></td></tr></table></figure>
-<h2 id="查看Docker运行状态"><a href="#查看Docker运行状态" class="headerlink" title="查看Docker运行状态"></a>查看Docker运行状态</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@middlehomework-no docker-mysql]# docker ps -a</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                               NAMES</span><br><span class="line">b2291bf42076        mysql:5.7           "docker-entrypoint.s…"   5 minutes ago       Up 5 minutes        0.0.0.0:3306-&gt;3306/tcp, 33060/tcp   mysql</span><br></pre></td></tr></table></figure>
-<h2 id="检查端口是否正常开放"><a href="#检查端口是否正常开放" class="headerlink" title="检查端口是否正常开放"></a>检查端口是否正常开放</h2><p>iptables配置：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -L</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果没有则开通端口</span></span><br><span class="line">iptables -A INPUT -p tcp --dport 3306 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p tcp --sport 3306 -j ACCEPT</span><br></pre></td></tr></table></figure>
-<p>CentOS7用户firewalld配置:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看所有打开的端口</span></span><br><span class="line">firewall-cmd --zone=public --list-ports</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果没有3306端口则开通端口</span></span><br><span class="line">firewall-cmd --zone=public --add-port=3306/tcp --permanent</span><br></pre></td></tr></table></figure>
-<h2 id="意外情况"><a href="#意外情况" class="headerlink" title="意外情况"></a>意外情况</h2><h3 id="Docker-容器被意外关闭"><a href="#Docker-容器被意外关闭" class="headerlink" title="Docker 容器被意外关闭"></a>Docker 容器被意外关闭</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> restart 重启 stop 停止 容器</span></span><br><span class="line">docker start &lt;CONTAINER ID&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="修改MySQL密码"><a href="#修改MySQL密码" class="headerlink" title="修改MySQL密码"></a>修改MySQL密码</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker stop &lt;CONTAINER ID&gt;</span><br><span class="line">docker rm &lt;CONTAINER ID&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 因为mysql的重要数据和配置文件都已经持久化在宿主机器上，如果容器内的其他文件配置也需要持久化加-v</span></span><br><span class="line">docker run -p 3306:3306 --name mysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=你修改后的密码 -d mysql:5.7</span><br></pre></td></tr></table></figure>
-<p>因为Docker本身是无状态容器，有状态即有多个功能不同的实例，有依赖和启动先后关系，需要做数据持久化。无状态即实例间互相不依赖，它的请求包含了响应端需求的全部信息，比较好伸缩 ，所以在Docker做数据持久化就会稍微麻烦一些。</p>
-<div><h1>文章推荐です</h1><ul><li><a href="http://www.huweihuang.com/article/docker/install-docker/">[Docker] 安装Docker</a></li></ul></div>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-	  
-    
   </section>
 
   
@@ -994,7 +942,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1005,7 +953,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1114,7 +1062,7 @@
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1134,7 +1082,7 @@
   </a>
 
 </div>
-      <span class="post-count"> | 博客字数统计：<b>20.4k</b></span>
+      <span class="post-count"> | 博客字数统计：<b>21k</b></span>
   <p>Hosted by <a href="https://pages.github.com/" style="font-weight: bold">Github Pages</a></p>
 
 

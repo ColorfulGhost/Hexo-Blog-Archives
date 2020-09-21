@@ -278,6 +278,210 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2020/09/21/让家庭宽带使用ipv4的80端口/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大黄猫の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/09/21/让家庭宽带使用ipv4的80端口/" itemprop="url">
+                  让家庭网络使用ipv4的80端口
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-21T10:30:26+08:00">
+                2020-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/教程/" itemprop="url" rel="index">
+                    <span itemprop="name">教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/09/21/让家庭宽带使用ipv4的80端口/" class="leancloud_visitors" data-flag-title="让家庭网络使用ipv4的80端口">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 				<span class="post-meta-divider">|</span>
+<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 1k</span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前提摘要"><a href="#前提摘要" class="headerlink" title="前提摘要"></a>前提摘要</h2><p>​    众所周知各大运营商（移动、电信、联通）封杀了很多端口，比如80、443、445、139。导致无法搭建一些利于自己的服务。本篇教程就教你如何通过域名代理，绕过运营商来访问本地端口的策略。另外，如果是内网，运营商没有分配给你公网ip地址，首先打电话询问是否可以转换公网ip(你可以套路客服别问的太直接)，不行的话或者就再搭建个内网穿透FRP啥的这里不做细说。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li><p>Openwrt系统路由器</p>
+</li>
+<li><p>一台服务器或其他主机 ngnix服务等Web应用</p>
+</li>
+<li><p>购买域名并且设置DNS服务器为cloudflare进行解析</p>
+</li>
+<li><p><a href="http://he.net/" target="_blank" rel="noopener">he.net</a>的<a href="https://tunnelbroker.net/" target="_blank" rel="noopener">tunnelbroker</a>服务注册</p>
+</li>
+<li><p>保证WAN口ipv4的稳定性：给运营商打电话(“啊呀！我这么网络又掉线了！我看我ip变了，拨号太频繁了吧！！@#￥%……&amp;”)</p>
+<p>运营商在给你创建宽带的时候会默认带一个隐藏服务就是每隔24小时内会给你重新拨号释放ip地址，投诉给客服取消掉。</p>
+</li>
+</ol>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="openwrt配置"><a href="#openwrt配置" class="headerlink" title="openwrt配置"></a>openwrt配置</h3><p>首先你必须拥有openwrt系统的路由或者软路由，软件包里安装了6in4这个包，如果没有可以如下 进入路由器里面输入命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install 6in4</span><br></pre></td></tr></table></figure>
+<p>或者在路由个GUI界面中 ：系统-&gt;软件包去安装，</p>
+<p>安装可能会遇到墙的问题，或者替换opkg的源，或者上代理这个就不细说了。</p>
+<p>安装完成后到：网络-&gt;接口 ：添加新的接口，在接口协议中查看有没有ipv6-in-ipv4这个选项，</p>
+<p>如果有就代表安装成功，切换这个协议后创建提交，然后准备其他工作。</p>
+<h3 id="tunnelBroker配置创建公网ipv6"><a href="#tunnelBroker配置创建公网ipv6" class="headerlink" title="tunnelBroker配置创建公网ipv6"></a>tunnelBroker配置创建公网ipv6</h3><p>去注册<a href="https://tunnelbroker.net/" target="_blank" rel="noopener">tunnelbroker</a>服务，找到<a href="https://tunnelbroker.net/new_tunnel.php" target="_blank" rel="noopener">Create Regular Tunnel</a>。</p>
+<p>填写 IPv4 Endpoint (Your side)：你自己的运营商分配给你的IP地址（推荐乱填一个可用的）</p>
+<p>接下来很重要的一步就是找到可用的隧道节点，朋友告诉我当前可用的隧道ip为：64.62.134.130 (Ctrl+F找更快) ，我当前就是使用的这个隧道，其他的时间充裕您可以自己测试没问题的话告诉我哈。</p>
+<p>然后点击 Create Tunnel 按钮进入下一步，点击Example Configurations，选择OpenWRT</p>
+<p><img src="http://ww1.sinaimg.cn/large/be659b6cly1giy3k67g8tj20i60e6wfi.jpg" alt="tb1.png"></p>
+<p>把以上资料填入刚刚Openwrt 6in4接口配置中入下图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/be659b6cly1giy3md2wazj20oj0i8jse.jpg" alt="tb2.png"></p>
+<p>创建成功后到接口列表中查看自己的ipv4地址，和6in4是否正常运作，上面勾选了动态隧道，所以你的Ipv4地址会把刚刚一开始创建 IPv4 Endpoint胡乱填的地址给覆盖掉，打开tunnelbroker -&gt; ipv6 tunnel  -&gt; IPv6 Tunnel Endpoints -&gt;Client IPv4 Address 如果覆盖掉就代表创建成功了。</p>
+<p>成功如下图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/be659b6cly1giy3v2t56wj20ql0k976w.jpg" alt="tb3.png"></p>
+<h2 id="域名与解析配置"><a href="#域名与解析配置" class="headerlink" title="域名与解析配置"></a>域名与解析配置</h2><p>我域名都是在gandi上购买的，阿里云万网还要实名认证 身份证啥的 懂得都懂:smile: ….</p>
+<p> gandi上DNS设置在 <a href="https://admin.gandi.net/domain/68942900-2a44-11e7-8195-00163e61ef31/iacg.moe/nameservers" target="_blank" rel="noopener">名称伺服器</a> 里设置 cloudflare的DNS地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fiona.ns.cloudflare.com</span><br><span class="line">theo.ns.cloudflare.com</span><br></pre></td></tr></table></figure>
+<p>打开<a href="https://dash.cloudflare.com/" target="_blank" rel="noopener">cloudflare</a> 添加站点 输入你注册的域名 选择免费套餐 扫描你的解析</p>
+<p>然后进入DNS，把你需要解析的域名添加aaaa记录并且打开代理如：</p>
+<p><img src="http://ww1.sinaimg.cn/large/be659b6cly1giy4bjpic0j20ss017glg.jpg" alt="CF.png"></p>
+<p>这里的ipv6是你在he.net申请的路由器下发的完整地址下面服务器配置里会说明这个ipv6填的内容</p>
+<h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><p>输入命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig -a</span><br></pre></td></tr></table></figure>
+<p>会得到你的服务器接口和分配的ip地址</p>
+<p>查看打开tunnelbroker -&gt; ipv6 tunnel  -&gt; IPv6 Tunnel Endpoints -&gt;Client IPv6 Address</p>
+<p>对比刚刚ifcofnig -a里的结果前缀相同完整ipv6 prefixlen 64 地址给复制出来填入上面域名解析</p>
+<p>在ngnix里配置</p>
+<pre><code>listen [::]:443 ssl http2;
+listen [::]:80;
+server_name www.iacg.moe;
+</code></pre><p>现在你的Web或者其他服务，就可以通过cloudflare的ipv6代理的域名访问家庭内的任何机器的ipv6了:smiley:</p>
+<h2 id="感谢OwO"><a href="#感谢OwO" class="headerlink" title="感谢OwO"></a>感谢OwO</h2><p>这里感谢阿夜提供给我的知识与技术</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+	  
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2020/03/14/Minecraft服务端卡顿问题排查分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -787,168 +991,6 @@
 
 	  
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2019/07/25/Python深度学习入门笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Colorful_Ghost">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="大黄猫の博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/07/25/Python深度学习入门笔记/" itemprop="url">
-                  Python深度学习入门笔记
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-25T21:32:36+08:00">
-                2019-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/07/25/Python深度学习入门笔记/" class="leancloud_visitors" data-flag-title="Python深度学习入门笔记">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-				 				<span class="post-meta-divider">|</span>
-<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 1.9k</span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Numy使用笔记"><a href="#Numy使用笔记" class="headerlink" title="Numy使用笔记"></a>Numy使用笔记</h2><p>NumPy 数组( np.array )可以生成 N 维数组,即可以生成一维数组、<br>二维数组、三维数组等任意维数的数组。数学上将一维数组称为向量,<br>将二维数组称为矩阵。另外,可以将一般化之后的向量或矩阵等统<br>称为张量 (tensor)。本书基本上将二维数组称为“矩阵”,将三维数<br>组及三维以上的数组称为“张量”或“多维数组”。</p>
-<h3 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h3><p>NumPy 中,形状不同的数组之间也可以进行运算。之前的例子中,在<br>2×2 的矩阵 A 和标量 10 之间进行了乘法运算。在这个过程中,如图 1-1 所示,<br>标量 10 被扩展成了 2 × 2 的形状,然后再与矩阵 A 进行乘法运算。这个巧妙<br>的功能称为广播 (broadcast)。</p>
-<h2 id="matplotlib的使用笔记"><a href="#matplotlib的使用笔记" class="headerlink" title="matplotlib的使用笔记"></a>matplotlib的使用笔记</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="comment"># 生成数据</span></span><br><span class="line">x = np.arange(<span class="number">0</span>, <span class="number">6</span>, <span class="number">0.1</span>) <span class="comment"># 以 0.1 为单位,生成 0 到 6 的数据</span></span><br><span class="line">y = np.sin(x)</span><br><span class="line"><span class="comment"># 绘制图形1.6</span></span><br><span class="line">Matplotlib</span><br><span class="line"><span class="number">17</span></span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<h2 id="感知机"><a href="#感知机" class="headerlink" title="感知机"></a>感知机</h2><p>感知机接收多个输入信号,输出一个信号。<br>x 1 、x 2 是输入信号,<br>y 是 输 出 信 号,w 1 、w 2 是 权 重(w 是 weight 的 首 字 母)。图 中 的 ○ 称 为“神<br>经元”或者“节点”。输入信号被送往神经元时,会被分别乘以固定的权重(w 1 x 1 、w 2 x 2 )<br>。神经元会计算传送过来的信号的总和,只有当这个总和超过<br>了某个界限值时,才会输出 1。这也称为“神经元被激活” 。这里将这个界<br>限值称为阈值,用符号 θ 表示。</p>
-<p>未激活神经元</p>
-<p>y = 0 = (w1x1+w2x2)&lt;=θ</p>
-<p>激活神经元</p>
-<p>y = 1 = (w1x1+w2x2)&gt;θ</p>
-<p>权重相当于电流里所说的电阻。电阻是决定电流流动难度的参数,<br>电阻越低,通过的电流就越大。而感知机的权重则是值越大,通过<br>的信号就越大。不管是电阻还是权重,在控制信号流动难度(或者流<br>动容易度)这一点上的作用都是一样的。</p>
-<h3 id="偏置与权重的说明"><a href="#偏置与权重的说明" class="headerlink" title="偏置与权重的说明"></a>偏置与权重的说明</h3><p>这里把−θ命名为偏置b，但是请注意，偏置和权重w1、w2的作用是不一样的。具体地说，w1和w2是控制输入信号的重要性的参数，而偏置是调整神经元被激活的容易程度（输出信号为1的程度）的参数。比如，若b为−0.1，则只要输入信号的加权总和超过0.1，神经元就会被激活。但是如果b为−20.0，则输入信号的加权总和必须超过20.0，神经元才会被激活。像这样，偏置的值决定了神经元被激活的容易程度。另外，这里我们将w1和w2称为权重，将b称为偏置，但是根据上下文，有时也会将b、w1、w2这些参数统称为权重。</p>
-<h3 id="线性与非线性"><a href="#线性与非线性" class="headerlink" title="线性与非线性"></a>线性与非线性</h3><p>感知机的局限性就在于它只能表示由一条直线分割的空间。图2-8这样弯曲的曲线无法用感知机表示。另外，由图2-8这样的曲线分割而成的空间称为非线性空间，由直线分割而成的空间称为线性空间。线性、非线性这两个术语在机器学习领域很常见，可以将其想象成图2-6和图2-8所示的直线和曲线。</p>
-<h3 id="感知机的局限性"><a href="#感知机的局限性" class="headerlink" title="感知机的局限性"></a>感知机的局限性</h3><p>节讲到的感知机的局限性，严格地讲，应该是“单层感知机无法表示异或门”或者“单层感知机无法分离非线性空间”。</p>
-<p>实际上，与门、或门是单层感知机，而异或门是2层感知机。叠加了多层的感知机也称为多层感知机（multi-layered perceptron）。</p>
-<h3 id="感知机小结"><a href="#感知机小结" class="headerlink" title="感知机小结"></a>感知机小结</h3><p>• 感知机是具有输入和输出的算法。给定一个输入后，将输出一个既定的值。• 感知机将权重和偏置设定为参数。• 使用感知机可以表示与门和或门等逻辑电路。• 异或门无法通过单层感知机来表示。• 使用2层感知机可以表示异或门。• 单层感知机只能表示线性空间，而多层感知机可以表示非线性空间。• 多层感知机（在理论上）可以表示计算机。</p>
-<h2 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h2><h3 id="阶跃函数与sigmoid函数"><a href="#阶跃函数与sigmoid函数" class="headerlink" title="阶跃函数与sigmoid函数"></a>阶跃函数与sigmoid函数</h3><p>如果把这两个函数与水联系起来，则阶跃函数可以比作“竹筒敲石”A，sigmoid函数可以比作“水车”。阶跃函数就像竹筒敲石一样，只做是否传送水（0或1）两个动作，而sigmoid函数就像水车一样，根据流过来的水量相应地调整传送出去的水量。</p>
-<p>阶跃函数和sigmoid函数还有其他共同点，就是两者均为非线性函数。sigmoid函数是一条曲线，阶跃函数是一条像阶梯一样的折线，两者都属于非线性的函数。</p>
-<h2 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def relu(x):</span><br><span class="line"> return np.maximum(0, x)</span><br></pre></td></tr></table></figure>
-<p>maximum函数会从输入的数值中选择较大的那个值进行输出。</p>
-<h2 id="矩阵的乘积的计算方法"><a href="#矩阵的乘积的计算方法" class="headerlink" title="矩阵的乘积的计算方法"></a>矩阵的乘积的计算方法</h2><p>矩阵A和矩阵B的对应维度的元素个数必须保持一致。</p>
-<p>就是运算结果的矩阵C的形状是由矩阵A的行数和矩阵B的列数构成的。</p>
-<p>A是二维矩阵、B是一维数组时，也要保持对应维度的元素个数一致。</p>
-<h2 id="输出层函数"><a href="#输出层函数" class="headerlink" title="输出层函数"></a>输出层函数</h2><p>输出层所用的激活函数，要根据求解问题的性质决定。一般地，回归问题可以使用恒等函数，二元分类问题可以使用 sigmoid函数，多元分类问题可以使用 softmax函数。</p>
-<h2 id="恒等函数"><a href="#恒等函数" class="headerlink" title="恒等函数"></a>恒等函数</h2><p>恒等函数会将输入按原样输出。</p>
-<h2 id="softmax函数"><a href="#softmax函数" class="headerlink" title="softmax函数"></a>softmax函数</h2><p>在进行softmax的指数函数的运算时，加上（或者减去）某个常数并不会改变运算的结果。可以使用任何值，但是为了防止溢出，一般会使用输入信号中的最大值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def softmax(a):</span><br><span class="line">    max = np.max(a) # 为了解决溢出问题</span><br><span class="line">    exp_a = np.exp(a- max)</span><br><span class="line">    return exp_a / np.sum(exp_a)</span><br></pre></td></tr></table></figure>
-<p>softmax函数的输出是0.0到1.0之间的实数。并且，softmax函数的输出值的总和是1。输出总和为1是softmax函数的一个重要性质。正因为有了这个性质，我们才可以把softmax函数的输出解释为“概率</p>
-<h2 id="机器学习的分类"><a href="#机器学习的分类" class="headerlink" title="机器学习的分类"></a>机器学习的分类</h2><p>机器学习的问题大致可以分为分类问题和回归问题。分类问题是数据属于哪一个类别的问题。比如，区分图像中的人是男性还是女性的问题就是分类问题。而回归问题是根据某个输入预测一个（连续的）数值的问题。比如，根据一个人的图像预测这个人的体重的问题就是回归问题（类似“57.4kg”这样的预测）。</p>
-<h2 id="学习与推理"><a href="#学习与推理" class="headerlink" title="学习与推理"></a>学习与推理</h2><p>求解机器学习问题的步骤可以分为“学习”A 和“推理”两个阶段。首先，在学习阶段进行模型的学习B，然后，在推理阶段，用学到的模型对未知的数据进行推理（分类）。如前所述，推理阶段一般会省略输出层的 softmax函数。在输出层使用 softmax函数是因为它和神经网络的学习有关系</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-	  
-    
   </section>
 
   
@@ -996,7 +1038,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1018,7 +1060,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1136,7 +1178,7 @@
   </a>
 
 </div>
-      <span class="post-count"> | 博客字数统计：<b>21k</b></span>
+      <span class="post-count"> | 博客字数统计：<b>22.1k</b></span>
   <p>Hosted by <a href="https://pages.github.com/" style="font-weight: bold">Github Pages</a></p>
 
 

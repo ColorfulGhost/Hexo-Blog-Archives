@@ -278,6 +278,168 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2019/07/25/Python深度学习入门笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Colorful_Ghost">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大黄猫の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/07/25/Python深度学习入门笔记/" itemprop="url">
+                  Python深度学习入门笔记
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-25T21:32:36+08:00">
+                2019-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/07/25/Python深度学习入门笔记/" class="leancloud_visitors" data-flag-title="Python深度学习入门笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+				 				<span class="post-meta-divider">|</span>
+<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 1.9k</span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Numy使用笔记"><a href="#Numy使用笔记" class="headerlink" title="Numy使用笔记"></a>Numy使用笔记</h2><p>NumPy 数组( np.array )可以生成 N 维数组,即可以生成一维数组、<br>二维数组、三维数组等任意维数的数组。数学上将一维数组称为向量,<br>将二维数组称为矩阵。另外,可以将一般化之后的向量或矩阵等统<br>称为张量 (tensor)。本书基本上将二维数组称为“矩阵”,将三维数<br>组及三维以上的数组称为“张量”或“多维数组”。</p>
+<h3 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h3><p>NumPy 中,形状不同的数组之间也可以进行运算。之前的例子中,在<br>2×2 的矩阵 A 和标量 10 之间进行了乘法运算。在这个过程中,如图 1-1 所示,<br>标量 10 被扩展成了 2 × 2 的形状,然后再与矩阵 A 进行乘法运算。这个巧妙<br>的功能称为广播 (broadcast)。</p>
+<h2 id="matplotlib的使用笔记"><a href="#matplotlib的使用笔记" class="headerlink" title="matplotlib的使用笔记"></a>matplotlib的使用笔记</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="comment"># 生成数据</span></span><br><span class="line">x = np.arange(<span class="number">0</span>, <span class="number">6</span>, <span class="number">0.1</span>) <span class="comment"># 以 0.1 为单位,生成 0 到 6 的数据</span></span><br><span class="line">y = np.sin(x)</span><br><span class="line"><span class="comment"># 绘制图形1.6</span></span><br><span class="line">Matplotlib</span><br><span class="line"><span class="number">17</span></span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="感知机"><a href="#感知机" class="headerlink" title="感知机"></a>感知机</h2><p>感知机接收多个输入信号,输出一个信号。<br>x 1 、x 2 是输入信号,<br>y 是 输 出 信 号,w 1 、w 2 是 权 重(w 是 weight 的 首 字 母)。图 中 的 ○ 称 为“神<br>经元”或者“节点”。输入信号被送往神经元时,会被分别乘以固定的权重(w 1 x 1 、w 2 x 2 )<br>。神经元会计算传送过来的信号的总和,只有当这个总和超过<br>了某个界限值时,才会输出 1。这也称为“神经元被激活” 。这里将这个界<br>限值称为阈值,用符号 θ 表示。</p>
+<p>未激活神经元</p>
+<p>y = 0 = (w1x1+w2x2)&lt;=θ</p>
+<p>激活神经元</p>
+<p>y = 1 = (w1x1+w2x2)&gt;θ</p>
+<p>权重相当于电流里所说的电阻。电阻是决定电流流动难度的参数,<br>电阻越低,通过的电流就越大。而感知机的权重则是值越大,通过<br>的信号就越大。不管是电阻还是权重,在控制信号流动难度(或者流<br>动容易度)这一点上的作用都是一样的。</p>
+<h3 id="偏置与权重的说明"><a href="#偏置与权重的说明" class="headerlink" title="偏置与权重的说明"></a>偏置与权重的说明</h3><p>这里把−θ命名为偏置b，但是请注意，偏置和权重w1、w2的作用是不一样的。具体地说，w1和w2是控制输入信号的重要性的参数，而偏置是调整神经元被激活的容易程度（输出信号为1的程度）的参数。比如，若b为−0.1，则只要输入信号的加权总和超过0.1，神经元就会被激活。但是如果b为−20.0，则输入信号的加权总和必须超过20.0，神经元才会被激活。像这样，偏置的值决定了神经元被激活的容易程度。另外，这里我们将w1和w2称为权重，将b称为偏置，但是根据上下文，有时也会将b、w1、w2这些参数统称为权重。</p>
+<h3 id="线性与非线性"><a href="#线性与非线性" class="headerlink" title="线性与非线性"></a>线性与非线性</h3><p>感知机的局限性就在于它只能表示由一条直线分割的空间。图2-8这样弯曲的曲线无法用感知机表示。另外，由图2-8这样的曲线分割而成的空间称为非线性空间，由直线分割而成的空间称为线性空间。线性、非线性这两个术语在机器学习领域很常见，可以将其想象成图2-6和图2-8所示的直线和曲线。</p>
+<h3 id="感知机的局限性"><a href="#感知机的局限性" class="headerlink" title="感知机的局限性"></a>感知机的局限性</h3><p>节讲到的感知机的局限性，严格地讲，应该是“单层感知机无法表示异或门”或者“单层感知机无法分离非线性空间”。</p>
+<p>实际上，与门、或门是单层感知机，而异或门是2层感知机。叠加了多层的感知机也称为多层感知机（multi-layered perceptron）。</p>
+<h3 id="感知机小结"><a href="#感知机小结" class="headerlink" title="感知机小结"></a>感知机小结</h3><p>• 感知机是具有输入和输出的算法。给定一个输入后，将输出一个既定的值。• 感知机将权重和偏置设定为参数。• 使用感知机可以表示与门和或门等逻辑电路。• 异或门无法通过单层感知机来表示。• 使用2层感知机可以表示异或门。• 单层感知机只能表示线性空间，而多层感知机可以表示非线性空间。• 多层感知机（在理论上）可以表示计算机。</p>
+<h2 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h2><h3 id="阶跃函数与sigmoid函数"><a href="#阶跃函数与sigmoid函数" class="headerlink" title="阶跃函数与sigmoid函数"></a>阶跃函数与sigmoid函数</h3><p>如果把这两个函数与水联系起来，则阶跃函数可以比作“竹筒敲石”A，sigmoid函数可以比作“水车”。阶跃函数就像竹筒敲石一样，只做是否传送水（0或1）两个动作，而sigmoid函数就像水车一样，根据流过来的水量相应地调整传送出去的水量。</p>
+<p>阶跃函数和sigmoid函数还有其他共同点，就是两者均为非线性函数。sigmoid函数是一条曲线，阶跃函数是一条像阶梯一样的折线，两者都属于非线性的函数。</p>
+<h2 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def relu(x):</span><br><span class="line"> return np.maximum(0, x)</span><br></pre></td></tr></table></figure>
+<p>maximum函数会从输入的数值中选择较大的那个值进行输出。</p>
+<h2 id="矩阵的乘积的计算方法"><a href="#矩阵的乘积的计算方法" class="headerlink" title="矩阵的乘积的计算方法"></a>矩阵的乘积的计算方法</h2><p>矩阵A和矩阵B的对应维度的元素个数必须保持一致。</p>
+<p>就是运算结果的矩阵C的形状是由矩阵A的行数和矩阵B的列数构成的。</p>
+<p>A是二维矩阵、B是一维数组时，也要保持对应维度的元素个数一致。</p>
+<h2 id="输出层函数"><a href="#输出层函数" class="headerlink" title="输出层函数"></a>输出层函数</h2><p>输出层所用的激活函数，要根据求解问题的性质决定。一般地，回归问题可以使用恒等函数，二元分类问题可以使用 sigmoid函数，多元分类问题可以使用 softmax函数。</p>
+<h2 id="恒等函数"><a href="#恒等函数" class="headerlink" title="恒等函数"></a>恒等函数</h2><p>恒等函数会将输入按原样输出。</p>
+<h2 id="softmax函数"><a href="#softmax函数" class="headerlink" title="softmax函数"></a>softmax函数</h2><p>在进行softmax的指数函数的运算时，加上（或者减去）某个常数并不会改变运算的结果。可以使用任何值，但是为了防止溢出，一般会使用输入信号中的最大值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def softmax(a):</span><br><span class="line">    max = np.max(a) # 为了解决溢出问题</span><br><span class="line">    exp_a = np.exp(a- max)</span><br><span class="line">    return exp_a / np.sum(exp_a)</span><br></pre></td></tr></table></figure>
+<p>softmax函数的输出是0.0到1.0之间的实数。并且，softmax函数的输出值的总和是1。输出总和为1是softmax函数的一个重要性质。正因为有了这个性质，我们才可以把softmax函数的输出解释为“概率</p>
+<h2 id="机器学习的分类"><a href="#机器学习的分类" class="headerlink" title="机器学习的分类"></a>机器学习的分类</h2><p>机器学习的问题大致可以分为分类问题和回归问题。分类问题是数据属于哪一个类别的问题。比如，区分图像中的人是男性还是女性的问题就是分类问题。而回归问题是根据某个输入预测一个（连续的）数值的问题。比如，根据一个人的图像预测这个人的体重的问题就是回归问题（类似“57.4kg”这样的预测）。</p>
+<h2 id="学习与推理"><a href="#学习与推理" class="headerlink" title="学习与推理"></a>学习与推理</h2><p>求解机器学习问题的步骤可以分为“学习”A 和“推理”两个阶段。首先，在学习阶段进行模型的学习B，然后，在推理阶段，用学到的模型对未知的数据进行推理（分类）。如前所述，推理阶段一般会省略输出层的 softmax函数。在输出层使用 softmax函数是因为它和神经网络的学习有关系</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+	  
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2019/07/24/VSCode工作区配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -691,184 +853,6 @@
 
 	  
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://blog.vimc.cc/2019/01/18/YApi管理平台搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Colorful_Ghost">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="大黄猫の博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/01/18/YApi管理平台搭建/" itemprop="url">
-                  YApi管理平台搭建
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T12:14:39+08:00">
-                2019-01-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/01/18/YApi管理平台搭建/" class="leancloud_visitors" data-flag-title="YApi管理平台搭建">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-				 				<span class="post-meta-divider">|</span>
-<span title="字数统计"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 462</span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="YApi-管理平台搭建"><a href="#YApi-管理平台搭建" class="headerlink" title="YApi 管理平台搭建"></a>YApi 管理平台搭建</h1><p>YApi是我在github上逛了一圈感觉还不错API管理平台，就是功能比较复杂使用的学习成本比较高。</p>
-<p>以下操作是在CentOS上进行搭建。</p>
-<h2 id="Nodejs环境搭建"><a href="#Nodejs环境搭建" class="headerlink" title="Nodejs环境搭建"></a>Nodejs环境搭建</h2><p><strong>注意：国内第一个方案可能不能使用</strong></p>
-<h3 id="第一个方案"><a href="#第一个方案" class="headerlink" title="第一个方案"></a>第一个方案</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sL https://rpm.nodesource.com/setup_11.x | sudo bash -</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install nodejs</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node --version</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出 v11.1.0</span></span><br></pre></td></tr></table></figure>
-<p>​    由于国内大墙，在使用yum安装最新的Nodejs会遇到一些坑。 本应该是这样 ，但是rpm.nodesource.com必须挂代理才能正常连接，所以我换了个更好的方案。</p>
-<h3 id="第二个方案：NVM（Node-Version-Manager）安装"><a href="#第二个方案：NVM（Node-Version-Manager）安装" class="headerlink" title="第二个方案：NVM（Node Version Manager）安装"></a>第二个方案：NVM（Node Version Manager）安装</h3><p>项目地址：<a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">https://github.com/creationix/nvm</a></p>
-<ol>
-<li>安装脚本：</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash</span><br></pre></td></tr></table></figure>
-<p>出现以下内容<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Close and reopen your terminal to start using nvm</span><br></pre></td></tr></table></figure></p>
-<ol start="2">
-<li>运行如下命令</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>验证安装</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm --version</span><br></pre></td></tr></table></figure>
-<h2 id="MongoDB-4-0安装"><a href="#MongoDB-4-0安装" class="headerlink" title="MongoDB 4.0安装"></a>MongoDB 4.0安装</h2><p>本来我是按照<a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/" target="_blank" rel="noopener">官方教程</a>走的但是国内大墙我实在是佩服（时间都浪费在找镜像上）….最后找到了阿里的镜像….</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
-<li><p>添加yum</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/yum.repos.d/mongodb-org-4.0.repo</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>新增如下配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[mngodb-org]</span><br><span class="line">name=MongoDB Repository</span><br><span class="line">baseurl=http://mirrors.aliyun.com/mongodb/yum/redhat/7Server/mongodb-org/4.0/x86_64/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>3.更新安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum -y install mongodb-org</span><br></pre></td></tr></table></figure>
-<p>4.查看mongo安装位置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">whereis mongod</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出</span></span><br><span class="line">mongod: /usr/bin/mongod /etc/mongod.conf /usr/share/man/man1/mongod.1</span><br></pre></td></tr></table></figure>
-<p>5.修改配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/mongod.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改如下内容</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bindIp: 172.0.0.1  改为 bindIp: 0.0.0.0</span></span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li>启动MongoDB<br>启动mongodb ：systemctl start mongod.service<br>停止mongodb ：systemctl stop mongod.service<br>查看mongodb的状态：systemctl status mongod.service</li>
-</ol>
-<h2 id="API管理平台搭建"><a href="#API管理平台搭建" class="headerlink" title="API管理平台搭建"></a>API管理平台搭建</h2><p>项目地址：<a href="https://github.com/YMFE/yapi" target="_blank" rel="noopener">https://github.com/YMFE/yapi</a></p>
-<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g yapi-cli --registry https://registry.npm.taobao.org</span><br><span class="line">yapi server</span><br></pre></td></tr></table></figure>
-<p>然后到安装目录下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvm install node</span><br><span class="line">node vendors/server/app.js</span><br></pre></td></tr></table></figure>
-<p>然后在浏览器打开 <a href="http://127.0.0.1:3000" target="_blank" rel="noopener">http://127.0.0.1:3000</a> 访问</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-	  
-    
   </section>
 
   
@@ -916,7 +900,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -938,7 +922,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1056,7 +1040,7 @@
   </a>
 
 </div>
-      <span class="post-count"> | 博客字数统计：<b>21k</b></span>
+      <span class="post-count"> | 博客字数统计：<b>22.1k</b></span>
   <p>Hosted by <a href="https://pages.github.com/" style="font-weight: bold">Github Pages</a></p>
 
 

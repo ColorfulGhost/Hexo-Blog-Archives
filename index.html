@@ -394,7 +394,7 @@
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
 <li><p>Openwrt系统路由器</p>
 </li>
-<li><p>一台服务器或其他主机 ngnix服务等Web应用</p>
+<li><p>一台服务器或其他主机 nginx服务等Web应用</p>
 </li>
 <li><p>购买域名并且设置DNS服务器为cloudflare进行解析</p>
 </li>
@@ -414,30 +414,30 @@
 <p>填写 IPv4 Endpoint (Your side)：你自己的运营商分配给你的IP地址（推荐乱填一个可用的）</p>
 <p>接下来很重要的一步就是找到可用的隧道节点，朋友告诉我当前可用的隧道ip为：64.62.134.130 (Ctrl+F找更快) ，我当前就是使用的这个隧道，其他的时间充裕您可以自己测试没问题的话告诉我哈。</p>
 <p>然后点击 Create Tunnel 按钮进入下一步，点击Example Configurations，选择OpenWRT</p>
-<p><img src="http://ww1.sinaimg.cn/large/be659b6cly1giy3k67g8tj20i60e6wfi.jpg" alt="tb1.png"></p>
+<p><img src="/2020/09/21/让家庭宽带使用ipv4的80端口/tb1.png" alt="tb1.png"></p>
 <p>把以上资料填入刚刚Openwrt 6in4接口配置中入下图：</p>
-<p><img src="http://ww1.sinaimg.cn/large/be659b6cly1giy3md2wazj20oj0i8jse.jpg" alt="tb2.png"></p>
+<p><img src="/2020/09/21/让家庭宽带使用ipv4的80端口/tb2.png" alt="tb2.png"></p>
 <p>创建成功后到接口列表中查看自己的ipv4地址，和6in4是否正常运作，上面勾选了动态隧道，所以你的Ipv4地址会把刚刚一开始创建 IPv4 Endpoint胡乱填的地址给覆盖掉，打开tunnelbroker -&gt; ipv6 tunnel  -&gt; IPv6 Tunnel Endpoints -&gt;Client IPv4 Address 如果覆盖掉就代表创建成功了。</p>
 <p>成功如下图：</p>
-<p><img src="http://ww1.sinaimg.cn/large/be659b6cly1giy3v2t56wj20ql0k976w.jpg" alt="tb3.png"></p>
+<p><img src="/2020/09/21/让家庭宽带使用ipv4的80端口/tb3.png" alt="tb3.png"></p>
 <h2 id="域名与解析配置"><a href="#域名与解析配置" class="headerlink" title="域名与解析配置"></a>域名与解析配置</h2><p>我域名都是在gandi上购买的，阿里云万网还要实名认证 身份证啥的 懂得都懂:smile: ….</p>
 <p> gandi上DNS设置在 <a href="https://admin.gandi.net/domain/68942900-2a44-11e7-8195-00163e61ef31/iacg.moe/nameservers" target="_blank" rel="noopener">名称伺服器</a> 里设置 cloudflare的DNS地址：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fiona.ns.cloudflare.com</span><br><span class="line">theo.ns.cloudflare.com</span><br></pre></td></tr></table></figure>
 <p>打开<a href="https://dash.cloudflare.com/" target="_blank" rel="noopener">cloudflare</a> 添加站点 输入你注册的域名 选择免费套餐 扫描你的解析</p>
 <p>然后进入DNS，把你需要解析的域名添加aaaa记录并且打开代理如：</p>
-<p><img src="http://ww1.sinaimg.cn/large/be659b6cly1giy4bjpic0j20ss017glg.jpg" alt="CF.png"></p>
+<p><img src="/2020/09/21/让家庭宽带使用ipv4的80端口/CF.png" alt="CF.png"></p>
 <p>这里的ipv6是你在he.net申请的路由器下发的完整地址下面服务器配置里会说明这个ipv6填的内容</p>
 <h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><p>输入命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig -a</span><br></pre></td></tr></table></figure>
 <p>会得到你的服务器接口和分配的ip地址</p>
 <p>查看打开tunnelbroker -&gt; ipv6 tunnel  -&gt; IPv6 Tunnel Endpoints -&gt;Client IPv6 Address</p>
 <p>对比刚刚ifcofnig -a里的结果前缀相同完整ipv6 prefixlen 64 地址给复制出来填入上面域名解析</p>
-<p>在ngnix里配置</p>
+<p>在ngin里配置 重载即可</p>
 <pre><code>listen [::]:443 ssl http2;
 listen [::]:80;
 server_name www.iacg.moe;
 </code></pre><p>现在你的Web或者其他服务，就可以通过cloudflare的ipv6代理的域名访问家庭内的任何机器的ipv6了:smiley:</p>
-<h2 id="感谢OwO"><a href="#感谢OwO" class="headerlink" title="感谢OwO"></a>感谢OwO</h2><p>这里感谢阿夜提供给我的知识与技术</p>
+<h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><p>这里感谢阿夜提供给我的知识与技术支持OwO</p>
 
           
         
